@@ -1,0 +1,138 @@
+.BlogCard {
+  margin: 0.7em;
+  margin-top: 30px;
+  width: 350px;
+  border-radius: 10px;
+  border: solid white 2px;
+  display: flex;           
+  flex-direction: column;
+  align-items: center;      
+  justify-content: space-between; /* Distributes space between and around content items */
+  padding: 10px; /* Add padding for spacing */
+  flex: 1 1 calc(33.333% - 20px); /* 3 columns with space between */
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+
+.BlogCard a{
+  background-color: #aaa;
+}
+
+.organize {
+  padding: 10px;
+  margin-left: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;   /* Stacks children vertically */
+  align-items: center;
+}
+
+.BlogCard .title, .BlogCard .description, .BlogCard .upvotes {
+  margin: 0;
+  text-align: left;
+  color: rgb(0, 0, 0);
+}
+
+.BlogCard .title {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;          /* Adjusts the font size of the title */
+  font-weight: bold;        /* Makes the title bold */
+}
+
+.upvotes {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;         /* Adds space above the upvotes section */
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+.betButton {
+  margin-left: 20px;
+  border: 2px rgb(0, 0, 0) solid;             /* Removes button border */
+  color: inherit;           /* Inherits the text color from the parent */
+  cursor: pointer;          /* Changes the mouse cursor to pointer when hovering over the button */
+  padding: 10px;            /* Adds padding inside the button */
+  background-color: transparent; /* Makes the button background transparent */
+}
+
+.BlogCard img {
+  width: 250px; /* Adjust width as necessary */
+  height: 250px;
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+  border-radius: 10px; /* Matches the BlogCard border radius */
+  margin-bottom: 10px; /* Space between image and content */
+
+}
+
+
+.title, .preview {
+  width: 60%; /* Adjust width as necessary */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 500px;
+  text-align: left;
+  color: rgb(0, 0, 0);
+  font-size: 14px; /* Adjust font size as necessary */
+}
+
+/* This is for Create Blog Post */
+.createpost label {
+  font-size: 25px;
+  font-family: sans-serif;
+  margin: 10px 0 5px 0; /* Adjust margins for better spacing */
+}
+
+.createpost input, .createpost image {
+  font-size: 25px;
+  font-family: sans-serif;
+  margin: 5px 0; /* Adjust margins for better spacing */
+  background-color: #f8f8f8;
+  height: 20px;
+  width: 500px;
+  line-height: 1.6; 
+  font-size: 18px;
+  font-style: normal;
+  font-family:'Charter', Charter;
+  color: black;
+}
+
+
+.createpost textarea {
+  line-height: 1.6; 
+  font-size: 18px;
+  font-style: normal;
+  font-family:'Charter', Charter;
+  height: 100px;
+  color: black;
+  border-radius: 2px;
+  background-color: #f8f8f8;
+  margin: 5px 0; /* Adjust margins for better spacing */
+}
+.createpost textarea::placeholder {
+  color: #aaa; /* Lighter color for placeholder text */
+  font-style: italic; /* Italicize placeholder text */
+}
+
+
+.createpost textarea:focus {
+  border-color: #0d8090; /* Highlight border on focus */
+  box-shadow: 0 2px 5px rgba(34, 40, 41, 0.3); /* Slight shadow on focus */
+}
+
+
+@media (max-width:700px){
+  .blogpost{
+    margin: 0 auto;
+  }
+
+}

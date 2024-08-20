@@ -1,0 +1,136 @@
+.BlogPost-s {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color:#e8e8e8;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    gap: 20px;
+}
+
+
+ .BlogPost-s {
+        justify-content: flex-start;
+        margin-top: 100px;
+      }
+
+.together {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    margin: 15px 20px;
+    width: calc(100%-40px);
+  } 
+  
+.search {
+    height: 35px;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255, 50%);
+    padding-left:20px ;
+    width: 550px;
+  } 
+ 
+  .comments-i {
+    border: 1px white solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+  } 
+.organize{
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: transparent;
+    color: black;
+  }
+  
+  .preview {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
+    text-align: left;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+  }
+   
+  .sort-buttons{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 10px;
+    gap:10px;
+  }
+  .sort-buttons button {
+    background-color: #296770;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 40px;
+  }
+  /* Styles for the BlogPost-s container */
+
+  
+  .BlogPost-s h1{
+    margin-right: 40%;
+  }
+  .search {
+    background-color:#dffbff;
+    display: flex;
+    justify-content: flex-start;
+    width: 400px;
+  }
+  .sort-buttons{
+    font-size: 1rem;
+  }
+  @media (min-width: 2000px) {
+
+    .search {
+      background-color:#dffbff;
+      width: 500px;
+    }
+    .sort-buttons{
+      font-size: 18px;
+    }
+  }
+  
+  
+  @media (max-width: 1400px) {
+
+    .search {
+      background-color:#dffbff;
+      width: 550px;
+    }
+    .sort-buttons{
+      display: flex;
+      flex-wrap: wrap;
+      width: 70%;
+    }
+    .sort-buttons button{
+      width: 175px;
+      margin:5px;
+    }
+  }
+  
+  @media (max-width: 700px) {
+    .sort-buttons{
+      width: 50%;
+    }
+    .sort-buttons{
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        padding: 10px;
+        gap:10px;
+    }
+
+
+  }
+  
