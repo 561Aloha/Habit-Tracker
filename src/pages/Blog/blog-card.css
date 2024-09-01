@@ -1,5 +1,4 @@
 .BlogCard {
-  margin: 0.7em;
   margin-top: 30px;
   width: 350px;
   border-radius: 10px;
@@ -16,9 +15,8 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+}
   
-
 .BlogCard a{
   background-color: #aaa;
 }
@@ -35,7 +33,7 @@
 }
 
 .BlogCard .title, .BlogCard .description, .BlogCard .upvotes {
-  margin: 0;
+  margin: 0 auto;
   text-align: left;
   color: rgb(0, 0, 0);
 }
@@ -70,9 +68,7 @@
   object-fit: cover; /* Ensures the image covers the area without distortion */
   border-radius: 10px; /* Matches the BlogCard border radius */
   margin-bottom: 10px; /* Space between image and content */
-
 }
-
 
 .title, .preview {
   width: 60%; /* Adjust width as necessary */
@@ -85,17 +81,16 @@
   font-size: 14px; /* Adjust font size as necessary */
 }
 
-/* This is for Create Blog Post */
 .createpost label {
   font-size: 25px;
   font-family: sans-serif;
-  margin: 10px 0 5px 0; /* Adjust margins for better spacing */
+  margin: 10px 0 5px 0;
 }
 
 .createpost input, .createpost image {
   font-size: 25px;
   font-family: sans-serif;
-  margin: 5px 0; /* Adjust margins for better spacing */
+  margin: 5px 0; 
   background-color: #f8f8f8;
   height: 20px;
   width: 500px;
@@ -106,7 +101,6 @@
   color: black;
 }
 
-
 .createpost textarea {
   line-height: 1.6; 
   font-size: 18px;
@@ -116,23 +110,26 @@
   color: black;
   border-radius: 2px;
   background-color: #f8f8f8;
-  margin: 5px 0; /* Adjust margins for better spacing */
+  margin: 5px 0; 
 }
+
 .createpost textarea::placeholder {
-  color: #aaa; /* Lighter color for placeholder text */
+  color: #aaa; 
   font-style: italic; /* Italicize placeholder text */
 }
 
+.BlogPost-s{
+  margin: auto 0;
+}
+
+.blogpost{
+  margin: 0 auto;
+}
 
 .createpost textarea:focus {
   border-color: #0d8090; /* Highlight border on focus */
   box-shadow: 0 2px 5px rgba(34, 40, 41, 0.3); /* Slight shadow on focus */
 }
 
+  
 
-@media (max-width:700px){
-  .blogpost{
-    margin: 0 auto;
-  }
-
-}

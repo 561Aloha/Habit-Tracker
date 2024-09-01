@@ -26,37 +26,40 @@
   margin-right:10%;
 }
 .nav-bar {
-  background-color: #5C5FFF;
+  background-color: rgb(92, 95, 255);
   color: white;
   display: flex;
-  height: 80px;
+  height: 60px;
   justify-content: space-between;
   align-items: center;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
 }
-
-.menu-items{
-  margin-right: 40px;
-
+.menu-items {
+  margin-left: auto; /* This pushes the menu items to the far right */
+  margin-right: 60px;
+  display: flex;
+  gap: 20px; /* Adjust gap as needed for spacing between menu items */
 }
-.menu-items a{
+
+
+.menu-items a {
   text-decoration: none;
-  color:white;
+  color: white;
   font-size: 18px;
   padding: 5px 10px;
-  gap: 20px;
   transition: background-color 0.3s ease;
 }
 
-.menu-items a:hover{
+.menu-items a:hover {
   color: beige;
   border: 1px solid white;
 }
+
 .container{
   display:flex;
   flex-direction:column;
@@ -68,8 +71,6 @@
   margin-top: 100px;
   background-color: blue;
 }
-
-
 .header{
   display: flex;
   align-items: center;
@@ -84,8 +85,15 @@
   display:flex;
   gap: 20px;
 } 
+.cta-buttons button:hover{
+  background-color: rgba(34, 34, 34, 0.573);
+  border: 1px solid white;
+}
+.header-content h1{
+  font-size: 2rem;
+}
 .header-content h4{
-  width: 50%;
+  margin: auto 0;
 }
 .banner-img{
   width: 50vw;
@@ -130,88 +138,178 @@
   max-width: 300px;
 } 
 
-.menu-items {
-  margin-right: 10rem;
-}
 .nav-bar h1 {
   font-size: clamp(1.5rem, 3vw, 30px);
   font-weight: bold;
   color: white;
   margin: 0;
+  margin-left: 15px;
 }
-
-
-/* 
-@media (max-width: 900px) {
-  .logo-title-container h1{
-    font-size: 4vw;
-    margin-left:20px;
-  }
-  .logo-title-container{
-    margin-left: 10px;
-  }
-  .header h1{
-    font-size: 30px;
-  }
-  .header h4{
-    font-size: 15px;
-    width: 400px;
-    margin-bottom: 30%;
-  }
-  .menu-items {
-    margin-right: 2rem;
-  }
-  .adv-img{
-    height: 130px;
-  }
-
-
-} 
- */
-
- @media (max-width: 1100px){
-  .menu-items {
-    margin-right: 3rem;
-  }
-  .adv-img{
-    height: 200px;
-  }
-  .logo-title-container h1{
-    margin-left: 20px;
-  }
-  .header-content h1{
-    font-size: 25px;
-  }
-  .header-content h4{
+@media (max-width: 700px) {
+  .container {
     width: 100%;
   }
-  .banner-img{
-    height: 40vh;
-    width: 50vw;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: transparent;
   }
- }
-
-
- @media (max-width:700px){
-  .header{
-  background-color: rgb(103, 36, 36);}
-  .container{
+  
+  .banner-img {
     width: 100%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
   }
-  .banner-img{
-    height: 200px;
-    width: 250px;
-    margin-left: 20px;
+
+  .container {
+    background-color: rgba(92, 95, 255, 0.70);
+    width: 90%;
   }
-  .cta-buttons{
-    height: 60px;
-    width: 325px;
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
     margin-top: 30px;
   }
-  .header-content h1{
-    font-size: 20px;
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-  .header-content h4{
-    font-size: 14px;
+
+  .space {
+    margin: 10px auto;
+    max-width: 300px;
+  }
+
+  .adv-img {
+    height: 400px;
+    width: auto;
+  }
+
+  .logo-title-container img {
+    height: 42px;
+    width: 48px;
+  }
+
+  .logo-title-container {
+    margin-right: 5%;
+  }
+
+  .logo-title-container h1 {
+    margin-left: 10px;
+  }
+
+  .menu-items {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+   /* Add padding to create space between the links and edges */
+  }
+
+  .menu-items a {
+    font-size: 0.9rem; /* Adjust the font size as needed */
+    display: block;
+    text-align: center;
+    flex: 1; /* Allow the links to equally share the available space */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+
+  
+}
+
+@media (max-width: 700px) {
+  .container {
+    width: 100%;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: transparent;
+  }
+  
+  .banner-img {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .container {
+    background-color: rgba(92, 95, 255, 0.70);
+    width: 90%;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .space {
+    margin: 10px auto;
+    max-width: 300px;
+  }
+
+  .adv-img {
+    height: 400px;
+    width: auto;
+  }
+
+  .logo-title-container img {
+    height: 38px;
+    width: 42px;
+  }
+
+  .logo-title-container {
+    margin-right: 5%;
+  }
+
+  .logo-title-container h1 {
+    margin-left: 10px;
+  }
+
+  .menu-items {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 5px; /* Reduce the gap between menu items */
+    padding: 0; /* Remove padding to reduce overall spacing */
+  }
+
+  .menu-items a {
+    font-size: 0.9rem; /* Adjust the font size as needed */
+    display: block;
+    text-align: center;
+    flex: 1; /* Allow the links to equally share the available space */
+    white-space: nowrap; /* Prevent text wrapping */
+    padding: 5px; /* Adjust padding for a more compact look */
+    margin: 0; /* Remove any additional margin */
   }
 }
+
+
