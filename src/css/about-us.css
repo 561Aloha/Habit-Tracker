@@ -40,7 +40,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 200px;
   }
+
   .image{
     width: 500px;
     height: 300px;
@@ -51,10 +53,9 @@
     padding-right: 15px;
     padding-bottom: 30px;
     background-color: rgb(75, 69, 238, .5);
-
     width: 900px;
     text-align: center;
-    margin-top: 100px;
+
   }
   /* Styling for the chart container within Goals page */
   .chart {

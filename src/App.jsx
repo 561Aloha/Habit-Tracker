@@ -8,7 +8,7 @@ import NotFound from './pages/NotFound.jsx';
 import ReadPosts from './pages/Blog/ReadPosts.jsx';
 import PostPage from './pages/PostPage.jsx';
 import EditPosts from './pages/Blog/EditPosts.jsx';
-import CreateHabit from './pages/CreateHabit.jsx';
+import CreateHabit from './components/CreateHabit.jsx';
 import CreatePost from './pages/Blog/CreatePosts.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Blog from './pages/Blog/Blog.jsx';
@@ -22,8 +22,8 @@ function App() {
     // {path: "/the-posts", element: <ReadPosts data={posts}/>}, //wont know this yet
     {path: "/post-page", element: <PostPage />},
     // {path: "/edit-post", element: <EditPosts data={posts} />},
-    {path: "/create-habit", element: <CreateHabit />},
-    // {path: "/create-post", element: <CreatePosts data={posts} />},
+    {path: "/habit", element: <CreateHabit />},
+    //{path: "/create-post", element: <CreatePosts data={posts} />},
     {path: "/about-us", element: <AboutUs  />},
     {path: "/blog", element: <Blog  />},
     {path: "/goal", element: <Goal  />},
