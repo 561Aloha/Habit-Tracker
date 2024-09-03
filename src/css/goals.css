@@ -8,6 +8,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    margin-top: 75px;
   }
   
   .about-us-container{
@@ -56,11 +58,7 @@
   
   }
   
-  
- .Chart {
-    padding: 20px;
-    text-align: center;
-}
+
 
 .chartjs-render-monitor {
     border-radius: 10px !important;
@@ -192,7 +190,7 @@
   } 
   
 .chart {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 .habits-container button{
     border: none;
@@ -309,14 +307,11 @@
 
   /*My Changes */
 @media (max-width: 700px) {
-  .arrow.left-arrow {
-    margin-right: 10px;
-    height: 18px;
-  }
-  
-  .arrow.right-arrow {
-    height: 18px;
-  }
+  .arrow.left-arrow, .arrow.right-arrow{
+
+    height: 15px;
+}
+
   .day-label {
     font-size: .65rem;
   }
@@ -401,13 +396,15 @@
       font-size: .65rem;
       text-align: left;
       width: auto;
+      
+      background-color:white;
       flex-grow: 1; /* Make this cell grow to fill available space */
       white-space: nowrap; /* Prevent the text from wrapping */
     }
     
     .habit_name td {
       text-align: center;
-      background-color: cadetblue;
+      background-color:rgb(212, 209, 255);
       width: 1%; /* Make other cells narrower */
     }
 }

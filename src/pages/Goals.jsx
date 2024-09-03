@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import MyChart from '../components/MyChart.jsx';
 import { supabase } from '../client';
 import { Link } from 'react-router-dom';
+
 import arrow from './../assets/arrow.png';
 import { format } from 'date-fns';
 import Planner from "../components/planner.jsx";
@@ -214,7 +215,7 @@ function Goals() {
           <div className="list">
             {filteredHabitsForSelectedDay.map(habit => (
               <div key={habit.habit_id} className={`habit ${habit.is_completed ? 'completed' : ''}`}>
-                <span>{habit.habit_name}</span>
+                <p>{habit.habit_name}</p>
                 <button onClick={() => markHabitComplete(habit.habit_id)}>
                   {habit.is_completed ? 'Done ✓' : '○'}
                 </button>
@@ -234,7 +235,7 @@ function Goals() {
         <Planner />
         </div>
       <p>
-        This page is still being worked on as of 7/19/24. <br />
+        This page is still being worked on as of 9/2/24. <br />
         The goal is to create a habit tracker so that a specific user can create, remove, <br />
         and interact with each of their 'habits' by marking it complete or not complete. <br />
         Users can also toggle between views for the week, month, and year to see their progress. <br />

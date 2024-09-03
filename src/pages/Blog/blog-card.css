@@ -118,9 +118,7 @@
   font-style: italic; /* Italicize placeholder text */
 }
 
-.BlogPost-s{
-  margin: auto 0;
-}
+
 
 .blogpost{
   margin: 0 auto;
@@ -130,6 +128,3 @@
   border-color: #0d8090; /* Highlight border on focus */
   box-shadow: 0 2px 5px rgba(34, 40, 41, 0.3); /* Slight shadow on focus */
 }
-
-  
-

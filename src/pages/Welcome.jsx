@@ -3,6 +3,9 @@ import '../App.css';
 import {Link} from 'react-router-dom';
 import myImage from '../assets/wellness.jpeg';
 import splash from '../assets/splash.avif';
+import first from '../assets/298.png';
+import second from '../assets/299.png';
+import third from '../assets/300.png';
 
 const Welcome = () => {
     return(
@@ -24,21 +27,45 @@ const Welcome = () => {
         </div>
     </div>
 
-    <div className='adv-comp'>
+    {/* <div className='adv-comp'>
           <h1 className='advantages'>Advantages</h1>
           <div className='box'>
             <div className='space'>
               <img className='adv-img' src={splash} alt="Photo Credits: MUTI" />
+
               <h4>Customized Habit Tracking</h4>
               <p>Tailor your journey to fit your unique goals and preferences. We will help you adapt to your needs</p>
             </div>
             <div className='space'>
               <img className='adv-img' src={splash} alt="Photo Credits: MUTI" />
+
               <h4>Progress Monitoring</h4>
               <p>Visualize your progress and celebrate your achievements with intuitive tracking tools</p>
             </div>
             <div className='space'>
               <img className='adv-img' src={splash} alt="Photo Credits: MUTI" />
+
+              <h4>Convenience and Accessibility</h4>
+              <p>Our user-friendly platform seamlessly fits your busy lifestyle</p>
+            </div>
+          </div>
+      </div> */}
+
+      <div className='adv-comp'>
+          <h1 className='advantages'>Advantages</h1>
+          <div className='box-sm'>
+            <div className='space'>
+              <img className='adv-img-sm' src={first} />
+              <h4>Customized Habit Tracking</h4>
+              <p>Tailor your journey to fit your unique goals and preferences. We will help you adapt to your needs</p>
+            </div>
+            <div className='space'>
+              <img className='adv-img-sm' src={second} />
+              <h4>Progress Monitoring</h4>
+              <p>Visualize your progress and celebrate your achievements with intuitive tracking tools</p>
+            </div>
+            <div className='space'>
+              <img className='adv-img-sm' src={third} />
               <h4>Convenience and Accessibility</h4>
               <p>Our user-friendly platform seamlessly fits your busy lifestyle</p>
             </div>

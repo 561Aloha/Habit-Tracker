@@ -54,12 +54,6 @@ const Blog = () => {
   
   return (
     <div className="BlogPost-s">
-      <input
-          className='search'
-          type="text"
-          placeholder="🔍 Search posts..."
-          value={searchInput}
-          onChange={handleSearch}/>
       <div className='sort-buttons'>
       <h1>Blog</h1>
       <p>Your go-to place for tips, stories, and insights on building better habits and achieving your goals. Join our community, get inspired, and start transforming your life today.</p>
@@ -68,6 +62,12 @@ const Blog = () => {
           <button className='organize' onClick={sortByUpvotes}>Sort by Upvotes</button>
           <Link to="/create-post"><button className='organize'>Create New Post</button></Link></div>
       </div>
+      <input
+          className='search'
+          type="text"
+          placeholder="🔍 Search posts..."
+          value={searchInput}
+          onChange={handleSearch}/>
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <BlogCard key={post.id} {...post} />

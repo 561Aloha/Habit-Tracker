@@ -94,18 +94,7 @@
     margin-bottom: 20px;
 }
 
-/* .chart-container {
-    flex: 1;
-    padding: 20px;
-    background-color: rgb(212, 209, 255);
-    border-radius: 10px;
-    color: rgb(0, 0, 0);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    overflow-y: auto;
-} */
+
 
 .streaks-tracker {
     text-align: center;
@@ -117,6 +106,12 @@
     justify-content: center;
     align-items: center;
     background-color: white;
+}
+
+
+.arrow.left-arrow, .arrow.right-arrow{
+
+    height: 15px;
 }
 
 /* Responsive adjustments */
@@ -154,8 +149,14 @@
         padding: 10px 20px;
         margin: 0 10px;
         font-size: .75rem;
+        height: 30px;
         border: none;
         border-radius: 5px;
+        margin-bottom: 5px;
         cursor: pointer;
+    }
+    .Chart h2{
+        font-size: 1.5rem;
+        margin-bottom: 0px;
     }
 }

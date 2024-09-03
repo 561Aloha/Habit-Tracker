@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 //import './createhabit.css';
 
 const CreateHabit = () => {
+    const userId = 1; 
     const [newHabit, setNewHabit] = useState({ category: '', habit_name: '', frequency: [], repetition: '' });
 
     const handleChange = (event) => {
@@ -29,6 +30,7 @@ const CreateHabit = () => {
             const { data, error } = await supabase
                 .from('Habits')
                 .insert([{
+                    userid: userId,
                     category: newHabit.category,
                     habit_name: newHabit.habit_name,
                     frequency: newHabit.frequency,
@@ -38,7 +40,7 @@ const CreateHabit = () => {
                 .eq('userid', userId);
             if (error) throw error;
             console.log('Habit created:', data); // Debug log
-            window.location = '/goals';
+            window.location = '/goal';
         } catch (error) {
             console.error('Error creating habit:', error.message);
             alert('Error creating habit. Please try again.');

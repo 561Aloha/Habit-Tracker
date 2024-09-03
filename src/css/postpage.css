@@ -1,3 +1,94 @@
-.h6{
-  width: 100vh;
+.postpage-f {
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  color: #333;
+  width: 80%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.postpage-f h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  flex: 4;
+}
+
+
+.description {
+  background-color: #e0e0e0;
+  padding: 20px;
+
+  border-radius: 5px;
+  font-size: 1.25rem;
+  margin: 20px 0;
+}
+
+.postpage-f p {
+  margin: 10px 0;
+}
+
+.post-img {
+  width: 40%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.comments {
+  margin-top: 30px;
+
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+form input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: black;
+  font-size: 18px;
+}
+
+form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #555;
+}
+
+
+
+
+.comments-i {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #d8d8d8;
+  color: rgb(40, 40, 40);
+  
+  padding: 5px;
+  font-size: 1.1rem;
+  margin: 20px 0;
 }
