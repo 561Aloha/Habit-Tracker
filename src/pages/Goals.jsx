@@ -14,7 +14,7 @@ function Goals() {
     datasets: [
       {
         label: 'Habits Filled',
-        data: [2, 4, 3, 9, 2, 1, 3],
+        data: [0, 0, 0, 0, 0, 0, 0],
         backgroundColor: '#8884d8',
         borderWidth: 1,
       },
@@ -61,7 +61,9 @@ function Goals() {
   const [habits, setHabits] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getCurrentWeek());
-  const [selectedDay, setSelectedDay] = useState(new Date().getDay());
+  const[selectedDay, setSelectedDay] = useState(new Date().getDay());
+  const [calendarOffset, setCalendarOffset] = useState(0);
+
 
   const fetchHabits = async () => {
     const userId = 1; // Assuming the user ID is 1
@@ -91,7 +93,53 @@ function Goals() {
       console.error('Error fetching habits:', error.message);
     }
   };
-
+  const updateChartData = () => {
+    const weeklyData = Array(7).fill(0); // Initialize an array with 7 zeros for each day of the week
+    const dailyHabitCounts = Array(7).fill(0); // Track total habits for each day
+  
+    // Match day names format in chartData labels (e.g., full day names: 'Sunday', 'Monday', etc.)
+    const dayNameMap = {
+      Sun: 'Sunday',
+      Mon: 'Monday',
+      Tue: 'Tuesday',
+      Wed: 'Wednesday',
+      Thu: 'Thursday',
+      Fri: 'Friday',
+      Sat: 'Saturday',
+    };
+  
+    // Count completed habits and total habits for each day
+    habits.forEach((habit) => {
+      (habit.frequency || []).forEach(day => {
+        // Map to full day name if needed (e.g., convert "Sun" to "Sunday")
+        const fullDayName = dayNameMap[day] || day;
+  
+        const dayIndex = chartData.labels.indexOf(fullDayName);
+        if (dayIndex !== -1) { // Only process if dayIndex is valid
+          dailyHabitCounts[dayIndex] += 1; // Increment the total count of habits for this day
+          if (habit.is_completed) {
+            weeklyData[dayIndex] += 1; // Increment the count of completed habits
+          }
+        }
+      });
+    });
+  
+    // Calculate percentage for each day
+    const weeklyCompletionPercentages = weeklyData.map((completed, index) =>
+      dailyHabitCounts[index] ? Math.round((completed / dailyHabitCounts[index]) * 100) : 0
+    );
+  
+    setChartData((prev) => ({
+      ...prev,
+      datasets: [
+        {
+          ...prev.datasets[0],
+          data: weeklyCompletionPercentages,
+        },
+      ],
+    }));
+  };
+  
   const markHabitComplete = async (habitId) => {
     const habit = habits.find(habit => habit.habit_id === habitId);
     const isCompleted = !habit.is_completed; 
@@ -125,18 +173,27 @@ function Goals() {
     fetchHabits();
   }, [selectedDate]);
 
+  useEffect(() => {
+    updateChartData();
+  }, [habits]);
+
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const data = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+
   const handlePrevClick = () => {
-    setCurrentIndex(currentIndex === 0 ? data.length - 1 : currentIndex - 1);
-    updateWeek(-1);
+    setCalendarOffset(calendarOffset - 1); // Update calendar navigation state
   };
 
   const handleNextClick = () => {
-    setCurrentIndex(currentIndex === data.length - 1 ? 0 : currentIndex + 1);
-    updateWeek(1);
+    setCalendarOffset(calendarOffset + 1); // Update calendar navigation state
   };
+
+  useEffect(() => {
+    // Update the week whenever calendarOffset changes
+    updateWeek(calendarOffset);
+  }, [calendarOffset]);
 
   function getCurrentWeek() {
     const current = new Date();
@@ -146,14 +203,14 @@ function Goals() {
       const first = current.getDate() - current.getDay() + i;
       const day = new Date(current.setDate(first));
       const dayOfWeek = day.toLocaleDateString('en-US', { weekday: 'long' });
-      const date = day.getDate(); // Only get the day of the month
+      const date = day.getDate(); 
       week.push({ dayOfWeek, date, fullDate: day });
     }
     return week;
   }
 
   function updateWeek(offset) {
-    const updatedWeek = currentWeek.map(item => {
+    const updatedWeek = getCurrentWeek().map(item => {
       const newDate = new Date(new Date().setDate(item.date + 7 * offset));
       const dayOfWeek = newDate.toLocaleDateString('en-US', { weekday: 'long' });
       const date = newDate.getDate(); 
@@ -162,28 +219,25 @@ function Goals() {
 
     setCurrentWeek(updatedWeek);
   }
-  
+
   const handleDayClick = (index) => {
-    setSelectedDay(index);
-    setSelectedDate(currentWeek[index].fullDate);
+    setSelectedDate(currentWeek[index].fullDate); // Only update selected date without affecting calendar offset
   };
 
   const handleViewChange = (view) => {
     setView(view);
     if (view === 'Week') {
       setChartData(weekData);
-    } else if (view === 'Month') {
-      setChartData(monthData);
-    } else if (view === 'Year') {
-      setChartData(yearData);
     }
   };
 
   const filteredHabitsForSelectedDay = habits.filter(habit => {
     const frequencyArray = habit.frequency || [];
-    return frequencyArray.includes(data[selectedDay]);
+    return frequencyArray.includes(format(selectedDate, 'EEEE'));
   });
 
+
+  
   return (
     <div className="goals-page">
       <h2>The Habit Tracker</h2>
@@ -234,15 +288,7 @@ function Goals() {
         <div className='planner-container'>
         <Planner />
         </div>
-      <p>
-        This page is still being worked on as of 9/2/24. <br />
-        The goal is to create a habit tracker so that a specific user can create, remove, <br />
-        and interact with each of their 'habits' by marking it complete or not complete. <br />
-        Users can also toggle between views for the week, month, and year to see their progress. <br />
-        I am working on connecting the two screens together after syncing the date with the list. <br />
-        I am also working on updating the UI to something more user friend and usingg supabase to <br />
-        allow account creation and log in<br />
-      </p>
+
     </div>
   );
 }

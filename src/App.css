@@ -239,7 +239,10 @@
   
 }
 
-@media (max-width: 700px) {
+howitworks-img{
+  width: fit-content;
+}
+@media (max-width: 900px) {
   .container {
     width: 100%;
   }
@@ -254,7 +257,7 @@
   }
   
   .banner-img {
-    width: 100%;
+    width: 80%;
     height: auto;
     margin: 0 auto;
     margin-top: 20px;
@@ -334,4 +337,44 @@
   }
 }
 
+
+
+
+@media (min-width: 900px) {
+  .header-content h1{
+    width: 350px;
+  }
+  .header-content h4{
+
+    width: 350px;
+  }
+  .banner-img{
+      width: 400px;
+  }
+  .cta-buttons{
+      width: 350px;
+      margin-top: 80px;
+  }
+  .box-sm{
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+
+
+
+
+@media (min-width: 1200px) {
+  .header-content h1{
+    width: 400px;
+  }
+  .header-content h4{
+    width: 400px;
+  }
+  .banner-img{
+    margin-left: 50px;
+
+}
+}
 

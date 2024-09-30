@@ -61,13 +61,14 @@ const Blog = () => {
           <button className='organize' onClick={sortByDate}>Sort by Date</button>
           <button className='organize' onClick={sortByUpvotes}>Sort by Upvotes</button>
           <Link to="/create-post"><button className='organize'>Create New Post</button></Link></div>
-      </div>
-      <input
+          <input
           className='search'
           type="text"
           placeholder="🔍 Search posts..."
           value={searchInput}
           onChange={handleSearch}/>
+      </div>
+
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <BlogCard key={post.id} {...post} />

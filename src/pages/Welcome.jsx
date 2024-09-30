@@ -6,6 +6,7 @@ import splash from '../assets/splash.avif';
 import first from '../assets/298.png';
 import second from '../assets/299.png';
 import third from '../assets/300.png';
+import howitworks from '../assets/Frame13.png';
 
 const Welcome = () => {
     return(
@@ -71,6 +72,7 @@ const Welcome = () => {
             </div>
           </div>
       </div>
+      <img className='howitworks-img' src={howitworks} />
     </div>
 
     

@@ -38,7 +38,7 @@ function App() {
     { path: "/not-found", element: <NotFound /> },
     { path: "/the-posts", element: <ReadPosts data={posts}/> }, 
     { path: "/post/:id", element: <PostPage /> }, // Dynamic route to handle post IDs
-    // {path: "/edit-post", element: <EditPosts data={posts} />},
+     {path: "/edit-post", element: <EditPosts data={posts} />},
     { path: "/habit", element: <CreateHabit /> },
     { path: "/create-post", element: <CreatePost data={posts} /> },
     { path: "/about-us", element: <AboutUs  /> },

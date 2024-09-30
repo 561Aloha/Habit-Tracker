@@ -75,8 +75,9 @@
 }
     
 .search {
-  width: 70%; /* Adjust the width as needed for larger screens */
+  width: 700px; /* Adjust the width as needed for larger screens */
   margin-bottom: 10px; /* Add some space between the search bar and buttons */
+  margin: 0 auto;
 }
     
 .sort-buttons .button-container {
@@ -88,7 +89,8 @@
     
 .sort-buttons .button-container button {
   width: auto; /* Let the buttons take their natural width */
-  margin: 5px; /* Add margin around buttons for spacing */
+  margin: 15px;
+  margin-bottom: 30px;
 }
 
 
@@ -113,6 +115,9 @@
   } 
 
   @media (max-width: 700px) {
+    .blogpost {
+      grid-template-columns: 1fr; /* 1 card per row on small screens */
+    }
     .BlogPost-s{
       width: 90%;
     }
