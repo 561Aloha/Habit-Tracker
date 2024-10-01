@@ -50,15 +50,15 @@ const MyChart = ({ chartData, onViewChange }) => {
         const startOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
         const endOfWeek = new Date(startOfWeek);
         endOfWeek.setDate(endOfWeek.getDate() + 6);
-
+    
         const options = { month: 'long', day: 'numeric' };
         return {
-            start: startOfWeek,
-            end: endOfWeek,
-            display: `${startOfWeek.toLocaleDateString('en-US', options)} - ${endOfWeek.toLocaleDateString('en-US', options)}`
+          start: startOfWeek,
+          end: endOfWeek,
+          display: `${startOfWeek.toLocaleDateString('en-US', options)} - ${endOfWeek.toLocaleDateString('en-US', options)}`
         };
-    }
-
+      }
+      
     function updateWeek(offset) {
         const newStartDate = new Date(currentWeek.start);
         newStartDate.setDate(newStartDate.getDate() + offset * 7);

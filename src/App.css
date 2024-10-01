@@ -238,9 +238,14 @@
 
   
 }
+.howitworks{
+  background-color: rgba(92, 146, 255, 0.7);
+  width: 100%;
 
-howitworks-img{
-  width: fit-content;
+}
+.howitworks-img{
+  width: 100%;
+  
 }
 @media (max-width: 900px) {
   .container {
