@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from './../client';  // Ensure this points to your correct supabase client setup
 import { Link } from 'react-router-dom';
-//import './createhabit.css';
+import './createhabit.css';
 
 const CreateHabit = () => {
     const userId = 1; 
@@ -95,7 +95,7 @@ const CreateHabit = () => {
                 </div>
 
 
-                <button type="submit">Create Habit</button>
+                <button type="submit" className='createhabit-btn'>Create Habit</button>
                 <Link to="/goals"><button type="button">Go back</button></Link>
             </form>
         </div>

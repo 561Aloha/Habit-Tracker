@@ -8,7 +8,6 @@ import { format } from 'date-fns';
 import Planner from "../components/planner.jsx";
 
 function Goals() {
-  // State to manage chart data
   const [chartData, setChartData] = useState({
     labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     datasets: [
@@ -26,12 +25,26 @@ function Goals() {
     datasets: [
       {
         label: 'Habits Filled',
-        data: [40, 15, 25, 30, 1, 23],
+        data: [0, 0, 0, 30, 0, 0],
         backgroundColor: '#4272f5',
         borderWidth: 1,
       },
     ],
   };
+
+  const monthData = {
+    labels: ['Jan','Feb','Mar','Apr','May','June',"July"],
+    datasets: [
+      {
+        label: 'Habits Filled',
+        data: [0, 0, 0, 0, 0, 0,0],
+        backgroundColor: '#4272f5',
+        borderWidth: 1,
+      },
+    ],
+  };
+  
+
 
   const [view, setView] = useState('Week');
   const [habits, setHabits] = useState([]);
@@ -207,13 +220,13 @@ function Goals() {
       <h2>The Habit Tracker</h2>
       <div className="goals-container">
         <div className="habits-container">
-          <h3>Habits for {format(selectedDate, 'EEEE, MMMM d')}</h3>
+          <h2>Habits for {format(selectedDate, 'EEEE, MMMM d')}</h2>
           <div className="calendar">
             <div className="calendar-header">
               <img className="arrow left-arrow" src={arrow} style={{ transform: 'rotate(180deg)' }} onClick={handlePrevClick} />
               {currentWeek.map((item, index) => (
                 <div key={index} className={`day-label ${selectedDate.getDay() === index ? 'selected' : ''}`} onClick={() => handleDayClick(index)}>
-                  <div>{item.dayOfWeek.slice(0, 3).toUpperCase()}</div>
+                  <div className='selected-d'>{item.dayOfWeek.slice(0, 3).toUpperCase()}</div>
                   <div>{item.date}</div>
                 </div>
               ))}

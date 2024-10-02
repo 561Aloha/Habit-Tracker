@@ -302,15 +302,18 @@
   color: black;
 }
 
-
-
+.day-label.selected {
+  border-radius: 10px;
+  padding: 20px;
+  border: 2px solid #ffffff; /* Optional: Add a border for emphasis */
+}
 
   /*My Changes */
 @media (max-width: 700px) {
   .arrow.left-arrow, .arrow.right-arrow{
-
     height: 15px;
-}
+  }
+
 
   .day-label {
     font-size: .65rem;
