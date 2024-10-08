@@ -245,8 +245,6 @@
   
   }
   
-
-  
   .goals-container {
     display: flex;
     justify-content: space-between;
@@ -272,7 +270,6 @@
     content: attr(data-full); /* Default to full day names */
     text-transform: capitalize;
 }
-
 
 /* General styles for the planner table  */
 .planner-container {

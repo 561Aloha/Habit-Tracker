@@ -315,7 +315,6 @@
   .container{
     width: 75%;
     }
-    
   
   .header-content h1{
     width: 400px;
@@ -329,7 +328,7 @@
 
 }
 }
-
+/* 
 
 @media (min-width: 900px) {
   .header-content h1{
@@ -351,4 +350,4 @@
     width: 80%;
     margin: 0 auto;
   }
-}
+} */
