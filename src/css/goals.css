@@ -8,7 +8,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     margin-top: 75px;
   }
   
@@ -71,7 +70,7 @@
     align-items: stretch; 
     padding: 10px;
     margin-top: 30px;
-    width:100vh;
+    width:80vh;
     box-sizing: border-box;
     color: rgb(0, 0, 0);
     height: 90%; 
@@ -191,6 +190,11 @@
 .chart {
     margin-bottom: 20px;
 }
+.habits-container{
+  width: 90%;
+}
+  
+
 .habits-container button{
     border: none;
 }
@@ -198,12 +202,17 @@
     background-color: rgba(34, 34, 34, 0.573);
   }
 
-.goals-page{
-    background-color: #f8f8f8;
-    width: 100vh;
+    
+  .goals-page {
+    background-color:rgba(92, 95, 255, 0.70);
+    width: 100%;
     color: black;
-    padding: 20px;
+    margin: 0 auto ;
+    margin-top: 70px;
+    padding: 10px;
+    border-radius: 10px;
   }
+
   .goals-page h2{
     font-size: 30px;
   }
@@ -236,15 +245,7 @@
   
   }
   
-  
-  .goals-page {
-    background-color:rgba(92, 95, 255, 0.70);
-    width: 95%;
-    color: black;
-    margin: 0 auto ;
-    margin-top: 70px;
-    border-radius: 10px;
-  }
+
   
   .goals-container {
     display: flex;
@@ -252,10 +253,11 @@
     align-items: stretch; 
     padding: 10px;
     margin-top: 30px;
-    width: 100%;
+    width: 95%;
     box-sizing: border-box;
     color: rgb(0, 0, 0);
     height: 90%;
+    margin: 0 auto;
   }
   
   .additional-component {
@@ -313,8 +315,6 @@
   .arrow.left-arrow, .arrow.right-arrow{
     height: 15px;
   }
-
-
   .day-label {
     font-size: .65rem;
   }
@@ -336,7 +336,7 @@
   
   .goals-page{
         margin-top: 75px;
-        width:90%;
+        width:95%;
         display:flex;
         align-items: center;
         flex-direction: column;
@@ -350,12 +350,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: 95%;
   }
 
-    .habits-container{
-        width: 95%;
-    }
-        
+
     .habits-container button{
         margin: 0 10px 10px;
         font-size: .75rem;
@@ -370,7 +368,8 @@
       text-align: left;
     }
     .planner-container{
-      border-radius: 4px;
+      border-radius: 10px;
+      width: 100%;
     }
     .plannertable tbody{
       padding: 5px;
@@ -393,14 +392,13 @@
 
     .habit_name td {
       text-align: center;
-      width: 10%; /* Set a smaller width for the other cells */
+      width: 1%; /* Set a smaller width for the other cells */
     }
     
     .habit_name td:first-child {
       font-size: .65rem;
       text-align: left;
       width: auto;
-      
       background-color:white;
       flex-grow: 1; /* Make this cell grow to fill available space */
       white-space: nowrap; /* Prevent the text from wrapping */
