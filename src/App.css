@@ -7,8 +7,6 @@
 
 .logo{
   width: 40px;
-
-  background-color: pink;
   height: auto;
   will-change: filter;
   transition: filter 300ms;
@@ -63,15 +61,12 @@
   display:flex;
   flex-direction:column;
   align-items: center;
-  width: 95%;
   height: 100%;
   padding: 20px;
   border-radius: 10px;
   margin: 0 auto;
   margin-top: 75px;
   background-color: rgba(92, 95, 255, 0.70);
-
-
 }
 .header{
   display: flex;
@@ -152,7 +147,6 @@
   flex: 1;
   margin: 10px;
 
-  background-color: pink;
   max-width: 300px;
 } 
 
@@ -173,7 +167,6 @@
 .howitworks h2{
   padding-top: 20px;
 
-  background-color: pink;
 }
 .howitworks-img{
   width: 100%;
@@ -186,22 +179,12 @@
   margin-bottom: 10px;
 }
 
-@media (max-width: 900px) {
-  .container {
-    width: 95%;
-    background-color: rgba(92, 95, 255, 0.90);
-    border-radius: 10px;
-  }
 
-  .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    background-color: transparent;
+
+@media (max-width: 900px) {
+  .logo-title-container {
+    margin-left: 10px;
   }
-  
   .banner-img {
     width: 80%;
     height: auto;
@@ -211,7 +194,17 @@
 
   .container {
     background-color: rgba(92, 95, 255, 0.70);
-    width: 95%;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: transparent;
+  }
+  .header-content {
+    width: 90%;
   }
 
   .cta-buttons {
@@ -267,7 +260,7 @@
   .menu-items {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 90%;
     gap: 5px; /* Reduce the gap between menu items */
     padding: 0; /* Remove padding to reduce overall spacing */
   }
@@ -285,6 +278,7 @@
 
 @media (min-width: 900px) {
   .header-content h1{
+    
     width: 350px;
   }
   .header-content h4{
@@ -302,15 +296,18 @@
     width: 80%;
     margin: 0 auto;
   }
+
 }
 
 @media (min-width: 1200px) {
   .container{
-    width:900px;
-     }
+    width: 75%;
+    }
+    
   
   .header-content h1{
     width: 400px;
+    
   }
   .header-content h4{
     width: 400px;
@@ -322,93 +319,24 @@
 }
 
 
+@media (min-width: 900px) {
+  .header-content h1{
+    width: 350px;
+  }
+  .header-content h4{
 
-@media (max-width: 700px) {
-  .container {
-    width: 95%;
+    width: 350px;
+  }
 
+  .banner-img{
+      width: 400px;
   }
-  .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    background-color: transparent;
+  .cta-buttons{
+      width: 350px;
+      margin-top: 80px;
   }
-  .header-content{
-    width: 90%;
-  }
-  .banner-img {
-    width: 90%;
-    height: auto;
-    border-radius: 10px;
+  .box-sm{
+    width: 80%;
     margin: 0 auto;
-    margin-top: 20px;
   }
-
-  .container {
-    background-color: rgba(92, 95, 255, 0.90);
-    width: 95%;
-  }
-  .cta-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    width: 100%;
-    margin-top: 30px;
-  }
-  .box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .space {
-    margin: 10px auto;
-    max-width: 300px;
-  }
-
-  .adv-img {
-    height: 400px;
-    width: auto;
-    
-  }
-
-  .logo-title-container img {
-    height: 42px;
-    width: 48px;
-  }
-
-  .logo-title-container {
-    margin-right: 5%;
-  }
-
-  .logo-title-container h1 {
-    margin-left: 10px;
-  }
-
-  .menu-items {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .menu-items a {
-    font-size: 0.9rem; /* Adjust the font size as needed */
-    display: block;
-    text-align: center;
-    flex: 1; /* Allow the links to equally share the available space */
-    white-space: nowrap; /* Prevent text wrapping */
-  }
-  .menu-items {
-    margin-left: auto; /* This pushes the menu items to the far right */
-    margin-right: 60px;
-    display: flex;
-    gap: 20px; /* Adjust gap as needed for spacing between menu items */
-  }
-
-  
 }

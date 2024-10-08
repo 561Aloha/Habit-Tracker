@@ -411,3 +411,18 @@
     }
 }
 
+
+
+
+@media (max-width: 900px) {
+  .habits-container h2 {
+    font-size: 25px;
+    margin: 0 auto;
+  }
+  .habit-buttons button{
+    font-size: 15px;
+    width: 175px;
+    height: 40px;
+  }
+
+}
