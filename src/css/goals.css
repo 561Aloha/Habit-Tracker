@@ -416,9 +416,9 @@
 @media (max-width: 430px) {
 
   .goals-page{
-    width: 100vh;
+    width: 100%;
   }
   .goals-container{
-    width: 90vh;
+    width: 90%;
   }
 }
