@@ -414,7 +414,9 @@
 }
 
 @media (max-width: 430px) {
-
+  .container{
+    width: 100vh;
+  }
   .header-content{
     width: 50%;
   }
