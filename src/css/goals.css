@@ -411,14 +411,3 @@
     }
 }
 
-
-
-@media (max-width: 430px) {
-
-  .goals-page{
-    width: 100%;
-  }
-  .goals-container{
-    width: 90%;
-  }
-}
