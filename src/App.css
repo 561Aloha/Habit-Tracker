@@ -329,10 +329,10 @@
   .header-content{
     width: 90%;
   }
-  
   .banner-img {
     width: 90%;
     height: auto;
+    border-radius: 10px;
     margin: 0 auto;
     margin-top: 20px;
   }
@@ -380,9 +380,9 @@
   }
 
   .menu-items {
+    display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 10px;
   }
 
   .menu-items a {
@@ -392,8 +392,12 @@
     flex: 1; /* Allow the links to equally share the available space */
     white-space: nowrap; /* Prevent text wrapping */
   }
-
-  
+  .menu-items {
+    margin-left: auto; /* This pushes the menu items to the far right */
+    margin-right: 60px;
+    display: flex;
+    gap: 20px; /* Adjust gap as needed for spacing between menu items */
+  }
 
   
 }
