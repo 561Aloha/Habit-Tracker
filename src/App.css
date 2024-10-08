@@ -7,6 +7,8 @@
 
 .logo{
   width: 40px;
+
+  background-color: pink;
   height: auto;
   will-change: filter;
   transition: filter 300ms;
@@ -68,6 +70,8 @@
   margin: 0 auto;
   margin-top: 75px;
   background-color: rgba(92, 95, 255, 0.70);
+
+
 }
 .header{
   display: flex;
@@ -132,6 +136,7 @@
   display:flex;
   justify-content: space-between;
   gap: 20px;
+  
   flex-wrap: wrap;
 }
 .box h4{
@@ -146,6 +151,8 @@
 .space{
   flex: 1;
   margin: 10px;
+
+  background-color: pink;
   max-width: 300px;
 } 
 
@@ -165,6 +172,8 @@
 }
 .howitworks h2{
   padding-top: 20px;
+
+  background-color: pink;
 }
 .howitworks-img{
   width: 100%;
@@ -317,6 +326,7 @@
 @media (max-width: 700px) {
   .container {
     width: 95%;
+
   }
   .header {
     display: flex;
@@ -364,6 +374,7 @@
   .adv-img {
     height: 400px;
     width: auto;
+    
   }
 
   .logo-title-container img {
