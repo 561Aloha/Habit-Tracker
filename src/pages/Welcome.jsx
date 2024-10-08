@@ -46,8 +46,8 @@ const Welcome = () => {
             </div>
           </div>
         <div className='howitworks'>
-      <h2>How it Works</h2>
-      <img className='howitworks-img' src={howitworks} /></div>
+          <h2>How it Works</h2>
+          <img className='howitworks-img' src={howitworks} /></div>
       </div>
 
     </div>

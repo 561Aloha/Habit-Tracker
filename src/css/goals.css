@@ -73,7 +73,6 @@
     margin-top: 30px;
     width:100vh;
     box-sizing: border-box;
-    background-color:#f7f7f7;
     color: rgb(0, 0, 0);
     height: 90%; 
   }
@@ -239,10 +238,12 @@
   
   
   .goals-page {
-    background-color: #f8f8f8;
-    width: 100%;
+    background-color:rgba(92, 95, 255, 0.70);
+    width: 95%;
     color: black;
-    padding: 20px;
+    margin: 0 auto ;
+    margin-top: 70px;
+    border-radius: 10px;
   }
   
   .goals-container {
@@ -253,7 +254,6 @@
     margin-top: 30px;
     width: 100%;
     box-sizing: border-box;
-    background-color: #f7f7f7;
     color: rgb(0, 0, 0);
     height: 90%;
   }
@@ -333,12 +333,14 @@
     border-radius: 10px;
     margin: 0 auto;
   }
+  
   .goals-page{
         margin-top: 75px;
-        width:90%;
+        width:0%;
         display:flex;
         align-items: center;
         flex-direction: column;
+
     }
   .goals-page h2{
         margin-bottom: 10px;}
@@ -387,7 +389,6 @@
       padding: 5px;
       margin: 5px;
       font-size: .6rem;
-      
     }
 
     .habit_name td {
