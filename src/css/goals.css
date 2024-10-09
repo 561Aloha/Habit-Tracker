@@ -58,7 +58,6 @@
   }
   
 
-
 .chartjs-render-monitor {
     border-radius: 10px !important;
 }
@@ -315,6 +314,10 @@
   .day-label {
     font-size: .65rem;
   }
+  .container{
+    width: 60%;
+    background-color: aqua;
+  }
   .plannertable th.day-label[data-full="Monday"]::before { content: "MON"; }
   .plannertable th.day-label[data-full="Tuesday"]::before { content: "TUE"; }
   .plannertable th.day-label[data-full="Wednesday"]::before { content: "WED"; }
@@ -381,6 +384,8 @@
       text-transform: uppercase;
 
     }
+
+    
     .checkmate{
       padding: 5px;
       margin: 5px;
@@ -421,5 +426,6 @@
     width: 175px;
     height: 40px;
   }
+
 
 }
