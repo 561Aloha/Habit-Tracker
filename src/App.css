@@ -146,7 +146,6 @@
 .space{
   flex: 1;
   margin: 10px;
-
   max-width: 300px;
 } 
 
@@ -206,12 +205,6 @@
   .header-content {
     width: 90%;
   }
-    .header-content h1 {
-      width: 90%; /* Adjust width */
-    }
-    .header-content h4 {
-      width: 90%; /* Adjust width */
-    }
     .header {
       width: 100%; /* Make the header fit within the container */
     }
@@ -284,17 +277,28 @@
     padding: 5px; 
     margin: 0; /* Remove any additional margin */
   }
+
+
+  .header-content h4,.header-content h1 .cta-buttons{
+    width: 350px;
+  }
+  .banner-img{
+      width: 400px;
+  }
+  .cta-buttons{
+      margin-top: 80px;
+  }
+  .box-sm{
+    width: 80%;
+    margin: 0 auto;
+  }
 }
 
 @media (min-width: 900px) {
-  .header-content h1{
-    
+  .header-content h1 , .header-content h4{
     width: 350px;
   }
-  .header-content h4{
 
-    width: 350px;
-  }
   .banner-img{
       width: 400px;
   }
@@ -314,12 +318,9 @@
     width: 75%;
     }
   
-  .header-content h1{
+  .header-content h1, h4{
     width: 400px;
     
-  }
-  .header-content h4{
-    width: 400px;
   }
   .banner-img{
     margin-left: 50px;
@@ -327,26 +328,3 @@
 }
 }
 
-/* 
-
-@media (min-width: 900px) {
-  .header-content h1{
-    width: 350px;
-  }
-  .header-content h4{
-
-    width: 350px;
-  }
-
-  .banner-img{
-      width: 400px;
-  }
-  .cta-buttons{
-      width: 350px;
-      margin-top: 80px;
-  }
-  .box-sm{
-    width: 80%;
-    margin: 0 auto;
-  }
-} */
