@@ -206,8 +206,6 @@
   .header-content {
     width: 90%;
   }
-
-
     .header-content h1 {
       width: 90%; /* Adjust width */
     }
@@ -328,6 +326,7 @@
 
 }
 }
+
 /* 
 
 @media (min-width: 900px) {
