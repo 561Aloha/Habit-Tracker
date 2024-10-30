@@ -57,7 +57,12 @@
   color: beige;
   border: 1px solid white;
 }
-.container{
+.adv-comp {
+  background-color: rgba(97, 92, 255, 0.7);
+
+}
+
+.containerr{
   display:flex;
   flex-direction:column;
   align-items: center;
@@ -173,10 +178,6 @@
   padding-bottom: 20px;
   
 }
-.adv-comp{
-  background-color: rgba(97, 92, 255, 0.7);
-  margin-bottom: 10px;
-}
 
 
 
@@ -277,8 +278,6 @@
     padding: 5px; 
     margin: 0; /* Remove any additional margin */
   }
-
-
   .header-content h4,.header-content h1 .cta-buttons{
     width: 350px;
   }
@@ -292,39 +291,90 @@
     width: 80%;
     margin: 0 auto;
   }
+
 }
 
 @media (min-width: 900px) {
-  .header-content h1 , .header-content h4{
-    width: 350px;
+  .header-content{
+    color: blue;
   }
-
-  .banner-img{
-      width: 400px;
+  .adv-comp{
+    background-color: rgba(97, 92, 255, 0.7);
+    margin-bottom: 10px;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensures space is balanced between elements */
+    box-sizing: border-box;
+    position: relative;
+    text-align: left;
+    margin: 0 auto;
+    max-width: 100%; /* Limits width to container boundaries */
+    flex-wrap: wrap; /* Allows elements to wrap within container */
   }
   .cta-buttons{
-      width: 350px;
-      margin-top: 80px;
+    width: 375px;
+    height: 40px;
   }
-  .box-sm{
+  .header-content {
+    max-width: 50%; /* Sets a limit on the header content width */
+  }
+  
+  .banner-img {
+    width: 350px;
+    max-width: 100%;
+    height: 300px;
+    margin-left: 20px;
+    border-radius: 5px;
+  }
+}
+
+@media (min-width: 900px) {
+  .header-content {
+    max-width: 400px; /* Sets a max width to limit growth */
+    color: blue;
+    margin: 0 auto; /* Centers the content */
+  }
+  .adv-comp {
+    background-color: rgba(97, 92, 255, 0.7);
+    margin-bottom: 10px;
+
+  }
+  .header {
+    display: flex;
+    max-width: 600px;
+    align-items: center;
+    justify-content: center; /* Centers content within header */
+    box-sizing: border-box;
+    position: relative;
+    text-align: left;
+    margin: 0 auto;
+    max-width: 1200px; /* Limits the width of the header itself */
+    flex-wrap: wrap;
+  }
+  .cta-buttons {
+    width: 375px;
+    height: 40px;
+    margin-top: 60px;
+  }
+
+  .banner-img {
+    width: 375px;
+ /* Prevents the image from growing too large */
+    height: auto;
+    margin-left: 20px;
+    border-radius: 5px;
+  }
+  .adv-box{
     width: 80%;
     margin: 0 auto;
   }
 
 }
 
-@media (min-width: 1200px) {
-  .container{
-    width: 75%;
-    }
-  
-  .header-content h1, h4{
-    width: 400px;
-    
+@media (min-width: 1200px){
+  .header-content{
+    color: pink;
   }
-  .banner-img{
-    margin-left: 50px;
-
 }
-}
-

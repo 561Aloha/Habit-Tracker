@@ -8,7 +8,7 @@ import howitworks from '../assets/Frame13.png';
 
 const Welcome = () => {
     return(
-    <div className='container'>
+    <div className='containerr'>
     <div className='header-banner'>
         <div className='header'>
             <div className='header-content'>
@@ -27,6 +27,7 @@ const Welcome = () => {
     </div>
 
       <div className='adv-comp'>
+        <div className='adv-box'>
           <h1 className='advantages'>Advantages</h1>
           <div className='box-sm'>
             <div className='space'>
@@ -44,6 +45,7 @@ const Welcome = () => {
               <h4>Convenience and Accessibility</h4>
               <p>Our user-friendly platform seamlessly fits your busy lifestyle</p>
             </div>
+          </div>
           </div>
         <div className='howitworks'>
           <h2>How it Works</h2>
