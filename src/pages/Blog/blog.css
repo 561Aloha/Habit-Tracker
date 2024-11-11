@@ -1,15 +1,20 @@
-.BlogPost-s {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    background-color:#e8e8e8;
-    color: rgb(0, 0, 0);
-    padding: 20px;
-    gap: 20px;
-    justify-content: flex-start;
-    margin-top: 75px;
 
-}
+.BlogPost-s {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color:#e8e8e8;
+  color: rgb(0, 0, 0);
+  padding: 20px;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 75px;
+
+} 
+
+
+
+
 
 .together {
     display: flex;
@@ -46,73 +51,57 @@
     font-size: 18px;
     margin: 0 auto;}
       
-.search {
-  height: 40px;
-  width: 800px;
-  font-size: 18px;
-  color: rgb(0, 0, 0);
-  border-radius: 5px;
-  background-color: rgba(27, 27, 27, 0.5);
-  padding-left:20px;
-    border: none;
-    margin: 0 auto; 
-  } 
- 
+
 .sort-buttons button:hover{
   background-color: rgba(34, 34, 34, 0.573);
   border: 1px solid white;}
 
-.sort-buttons button{
-  margin: 10px;
-}
 
-.sort-buttons {
-  display: flex;
-  flex-direction: column; /* Stack the search bar and buttons vertically */
-  align-items: center; /* Center the content horizontally */
-  margin: 0 auto;
-  width: 100%;
-}
+
+
     
 .search {
   width: 700px; /* Adjust the width as needed for larger screens */
   margin-bottom: 10px; /* Add some space between the search bar and buttons */
   margin: 0 auto;
+  height: 40px;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  background-color: rgba(27, 27, 27, 0.5);
+  padding-left:20px;
+  border: none;
+
 }
     
 .sort-buttons .button-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* Center the buttons horizontally */
-  width: 100%; /* Make sure the buttons container takes the full width */
+  margin: 0 auto;
 }
     
+.sort-buttons {
+  flex-direction: column; /* Stack the search bar and buttons vertically */
+  align-items: center; /* Center the content horizontally */
+}
 .sort-buttons .button-container button {
   width: auto; /* Let the buttons take their natural width */
-  margin: 15px;
-  margin-bottom: 30px;
+  margin: 10px;
+
 }
 
 
- @media (min-width: 2000px) {
-    .sort-buttons{
-      font-size: 18px;
-      
-    }
-  }
-   
-@media (max-width: 1400px) {
-    .search {
-      background-color:#dffbff;
-      width: 550px;}
-    .sort-buttons{
-      display: flex;
-      flex-wrap: wrap;
-      width: 70%; }
-    .sort-buttons button{
-      width: 175px;
-      margin:5px; }
-  } 
+.BlogPost-s{
+  background-color: aqua;
+  border-radius: 10px;
+}
+
+.button-container, .search{
+  background-color: blanchedalmond;
+   width: 100%;
+   padding: 0;
+}
 
   @media (max-width: 700px) {
     .blogpost {
@@ -125,20 +114,43 @@
       margin-left: 1;
     }
 
-    .sort-buttons{
+    /* .sort-buttons{
       margin: 0 auto;
       width: 90%;
-    }
+    } */
     .search {
       width: 100%; /* Make the search bar take up the full width *//* Center the search bar horizontally */
       display: block; /* Ensure the search bar behaves like a block element */
-      
     }
     .sort-buttons button {
       width: 100%;
       margin: 0 auto;
       margin-top: 10px;
     }
+
   }
   
   
+
+
+  @media (min-width: 900px) {
+    .search{
+      background-color: rgb(0, 106, 255);
+      width: 800px;
+    }
+    .button-container{
+      width: fit-content;
+      background-color: aquamarine;
+    }
+
+    .sort-buttons button {
+      width: 70%;
+      margin: 0 auto;
+      margin-top: 10px;
+    }
+    .BlogPost-s{
+      margin: 0 auto;
+      margin-top: 75px;
+    }
+  }
+

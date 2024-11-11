@@ -18,15 +18,13 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-  
+.blogpost{
+  margin: 0 auto;
+}
 .BlogCard a{
   background-color: #aaa;
 }
 
-.organize {
-  padding: 10px;
-  margin-left: auto;
-}
 
 .content {
   display: flex;
@@ -62,7 +60,9 @@
   cursor: pointer;          /* Changes the mouse cursor to pointer when hovering over the button */
   padding: 10px;            /* Adds padding inside the button */
   background-color: transparent; /* Makes the button background transparent */
+  width:auto;
 }
+
 
 .BlogCard img {
   width: 250px; /* Adjust width as necessary */
@@ -118,13 +118,6 @@
 .createpost textarea::placeholder {
   color: #aaa; 
   font-style: italic; /* Italicize placeholder text */
-}
-
-
-
-.blogpost{
-  margin: 0 auto;
-
 }
 
 .createpost textarea:focus {

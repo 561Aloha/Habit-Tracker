@@ -60,7 +60,7 @@ const Blog = () => {
           <div className='button-container'>
           <button className='organize' onClick={sortByDate}>Sort by Date</button>
           <button className='organize' onClick={sortByUpvotes}>Sort by Upvotes</button>
-          <Link to="/create-post"><button className='organize'>Create New Post</button></Link></div>
+          <Link to="/create-post"><button className='create-btn'>Create New Post</button></Link></div>
           <input
           className='search'
           type="text"
