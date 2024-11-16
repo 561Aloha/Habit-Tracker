@@ -4,7 +4,9 @@ import myImage from '../assets/wellness.jpeg';
 import first from '../assets/298.png';
 import second from '../assets/299.png';
 import third from '../assets/300.png';
-import howitworks from '../assets/Frame13.png';
+// import howitworks from '../assets/Frame13.png';
+
+import howitworks from '../assets/howitworks.png';
 
 const Welcome = () => {
     return(
@@ -48,7 +50,6 @@ const Welcome = () => {
           </div>
           </div>
         <div className='howitworks'>
-          <h2>How it Works</h2>
           <img className='howitworks-img' src={howitworks} /></div>
       </div>
 

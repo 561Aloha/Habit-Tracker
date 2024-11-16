@@ -30,7 +30,8 @@ const CreatePosts = () => {
     };
     
     return (
-        <div className='container'>
+        <div className='create-container'>
+            <h1>Create a Post</h1>
             <form onSubmit={createPost} className='createpost'>
                 <div>
                 <label htmlFor="title">Title</label><br />

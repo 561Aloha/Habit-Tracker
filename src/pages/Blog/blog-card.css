@@ -124,3 +124,11 @@
   border-color: #0d8090; /* Highlight border on focus */
   box-shadow: 0 2px 5px rgba(34, 40, 41, 0.3); /* Slight shadow on focus */
 }
+
+.create-container{
+  background-color: #949494;
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 70px;
+}

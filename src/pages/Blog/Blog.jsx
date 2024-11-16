@@ -68,22 +68,14 @@ const Blog = () => {
           value={searchInput}
           onChange={handleSearch}/>
       </div>
-
+      <div className='container-blogcard'>
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <BlogCard key={post.id} {...post} />
           ))
         ) : (
           <h2>No Blog posts found 😞</h2>
-        )}
-        <p>
-        This page is still being worked on as of 7/19/24. <br />
-        The goal is to create blog component where users can create new posts, remove or edit old posts, <br />
-        You are able to vote, to trigger the counter, sort based on date and 'upvotes' <br />
-        Users can press on a post to see more information about it <br />
-        I am making changes to the expanded view of posts in order for it to <br />
-        have more of a look to a real blog<br />
-      </p>
+        )}</div>
 
     </div>
   );
