@@ -141,8 +141,6 @@ function Goals() {
   //   }));
   // };
 
-
-  
   const markHabitComplete = async (habitId) => {
     const habit = habits.find(habit => habit.habit_id === habitId);
     const habitDateKey = format(selectedDate, 'yyyy-MM-dd');
@@ -231,14 +229,15 @@ function Goals() {
   useEffect(() => {
     updateChartData();
   }, [habits,currentWeek]);
-  
-
-  const handlePrevClick = () => setCalendarOffset(calendarOffset - 1);
-  const handleNextClick = () => setCalendarOffset(calendarOffset + 1);
 
   useEffect(() => {
     updateWeek(calendarOffset);
   }, [calendarOffset]);
+
+
+  const handlePrevClick = () => setCalendarOffset(calendarOffset - 1);
+  const handleNextClick = () => setCalendarOffset(calendarOffset + 1);
+
 
   function getCurrentWeek() {
     const current = new Date();
@@ -335,7 +334,7 @@ function Goals() {
                 <div key={`${habit.habit_id}-${habitDateKey}`} className={`habit ${isCompleted ? 'completed' : ''}`}>
                   <p>{habit.habit_name}</p>
                   {/* Display the appropriate button text based on completion status */}
-                  <button onClick={() => markHabitComplete(habit.habit_id)}>
+                  <button className="habit-toggle" onClick={() => markHabitComplete(habit.habit_id)}>
                     {isCompleted ? 'Done ✓' : '○'}
                   </button>
                 </div>

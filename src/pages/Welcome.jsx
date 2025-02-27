@@ -10,8 +10,7 @@ import howitworks from '../assets/howitworks.png';
 
 const Welcome = () => {
     return(
-    <div className='containerr'>
-    <div className='header-banner'>
+    <div >
         <div className='header'>
             <div className='header-content'>
                 <h1>Habit Tracking Made Easier</h1>
@@ -19,16 +18,38 @@ const Welcome = () => {
                 to stay on track and keep you motivated.
                 </h4>
                 <div className='cta-buttons'>
-                    <button>Start a Free Trial</button>
                     <button>Explore Features</button>
                 </div>
              </div>
-             <img className='banner-img' src={myImage} alt='photo credits:MUTI'/>
+             {/* <img className='banner-img' src={myImage} alt='photo credits:MUTI'/> */}
 
         </div>
-    </div>
+      <div className='newpage'>
 
-      <div className='adv-comp'>
+        <h1> How it works</h1>
+        <h4> Welcome to Habit Tracker, where your journey to self-improvement begins! Our platform is designed to help you establish, track, and maintain your habits to achieve your personal 
+        and professional goals. Here’s how you can get started:</h4>
+    
+        <div className='space-containers'>
+            <div className='space'>
+              <img className='adv-img-sm' src={third} />
+              <h4>Convenience and Accessibility</h4>
+              <p>Our user-friendly platform seamlessly fits your busy lifestyle</p>
+            </div>
+            <div className='space'>
+              <img className='adv-img-sm' src={third} />
+              <h4>Convenience and Accessibility</h4>
+              <p>Our user-friendly platform seamlessly fits your busy lifestyle</p>
+            </div>
+            <div className='space'>
+              <img className='adv-img-sm' src={third} />
+              <h4>Convenience and Accessibility</h4>
+              <p>Our user-friendly platform seamlessly fits your busy lifestyle</p>
+            </div></div>
+
+      </div>
+      
+      {/* <div className='adv-comp'>
         <div className='adv-box'>
           <h1 className='advantages'>Advantages</h1>
           <div className='box-sm'>
@@ -47,11 +68,13 @@ const Welcome = () => {
               <h4>Convenience and Accessibility</h4>
               <p>Our user-friendly platform seamlessly fits your busy lifestyle</p>
             </div>
+
+
           </div>
           </div>
         <div className='howitworks'>
           <img className='howitworks-img' src={howitworks} /></div>
-      </div>
+      </div>  */}
 
     </div>
 

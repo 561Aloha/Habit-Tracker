@@ -6,7 +6,7 @@ import './../pages/chart.css';
 
 const MyChart = ({ chartData, onWeekChange, currentWeek, onViewChange }) => {
   // Remove local state for `currentWeek` to avoid conflicts
-
+  
   // Chart configuration options
   const options = {
     responsive: true,

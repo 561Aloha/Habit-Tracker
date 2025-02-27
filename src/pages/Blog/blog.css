@@ -152,12 +152,13 @@
 
 @media (min-width: 1200px){
   .BlogPost-s{
-    width: 80%;
+    width: 70%;
     padding: 20px;
+
+
 
   }
   .sort-buttons{
-    background-color: aqua;
     margin: 0 auto;
   }
   .sort-buttons p{
@@ -166,7 +167,7 @@
     margin: 0 auto;
   }
   .container-blogcard{
-    background-color: aqua;
+
     display: flex;
     flex-wrap: wrap;
     width: 80%;

@@ -65,7 +65,7 @@
 /* Styling for the chart container within Goals page */
 .chart {
     border: 1px solid white; /* Visible border for debugging, remove if not needed */
-    width: 900px; /* Adjust width as necessary */
+
     display: flex;
     padding: 10px;
     flex-direction: column;
@@ -95,7 +95,6 @@
 }
 
 
-
 .streaks-tracker {
     text-align: center;
     margin-top: 20px;
@@ -115,9 +114,9 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 700px) {
+@media (max-width: 1200px){
     .btn-bar{
-        width: 95%;
+        width: 90%;
         margin: 0 auto;
        }
     .new {
@@ -126,6 +125,9 @@
     }
     .chart {
         margin-top: 20px;
+        margin: 0 auto;
+        padding:0;
+        width: 90%;
         }
     .streaks-tracker {
         width: 50%;
@@ -143,7 +145,10 @@
         margin-bottom: .5px;
     }
     .chart-container {
-        width: 95%;
+        width: 90%;  
+
+  
+        
     }
     .btn-bar button {
         padding: 10px 20px;

@@ -4,8 +4,6 @@ import './blog-card.css';
 
 const CreatePosts = () => {
     const [post, setPost] = useState({ title: '', author: '', description: '', image:'' });
-    
-
     const handleChange = (event) => {
         const { name, value } = event.target;
         setPost(prev => ({ ...prev, [name]: value }));

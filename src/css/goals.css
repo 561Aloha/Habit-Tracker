@@ -306,6 +306,9 @@
   border: 2px solid #ffffff; /* Optional: Add a border for emphasis */
 }
 
+.goals-page{
+  width: 70%;
+}
   /*My Changes */
 @media (max-width: 700px) {
   .arrow.left-arrow, .arrow.right-arrow{
@@ -361,6 +364,7 @@
         cursor: pointer;
         width: 150px;
         height: 30px;
+        
     }
 
     .habit_name td:first-child{
@@ -414,9 +418,22 @@
 }
 
 
+.habit-toggle {
+  width: 110px; /* Adjust width as needed */
+  min-width: 40px; /* Prevent it from stretching */
+  padding: 5px 10px; /* Adjust padding for better fit */
+  font-size: 14px; /* Reduce font size */
+  margin-right: 10px;
+}
+
+.habit p{
+  font-size: 1.2rem;
+
+}
 
 
-@media (max-width: 900px) {
+
+@media (max-width: 1200px) {
   .habits-container h2 {
     font-size: 25px;
     margin: 0 auto;
@@ -426,10 +443,19 @@
     width: 175px;
     height: 40px;
   }
+  .goals-page{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .goals-container{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
 
-
-}
-
-.goals-page{
-  width: 70%;
 }

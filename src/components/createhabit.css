@@ -2,3 +2,328 @@ button{
   width:250px;
   margin: 0 auto;
 }
+.habitname{
+ /* Adjust the width as needed for larger screens */
+    margin-bottom: 10px; /* Add some space between the search bar and buttons */
+    margin: 0 auto;
+    height: 40px;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    padding-left:20px;
+    border: none;
+    width: 70vw;
+    max-width: 600px;
+    background-color: #f8f8f8;
+}
+
+.create-habit{
+  padding: 40px;
+  margin: 0 auto;
+  max-width: 800px;
+  width: 70vw;
+  border-radius: 20px;
+  margin-top: 80px;
+  background-color: rgb(255, 255, 255, .5);
+}
+
+
+
+
+.check:checked + label::before {
+  opacity: 1; /* Show checkmark when checked */
+}
+
+.nav-btns{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 0 auto;
+}
+.nav-btns button{
+  width: 150px;
+  border-radius: 20px;
+}
+.nav-btns button:last-child{
+  border: 2px black solid;
+  color: black;
+  background-color: transparent;
+}
+
+.category-button {
+  border: 2px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 175px;
+  cursor: pointer;
+  margin: 5px;
+  border: none;
+  background-color: #f0f0f0;
+  height: 175px;
+  transition: background-color 0.3s;
+}
+
+
+.category-button.selected {
+  background-color: #e4ffde; 
+}
+
+.category-button.selected {
+  border-color: blue; /* Highlight the selected category */
+}
+
+
+.category-button span {
+  font-size: 15px;
+color: #333;
+}
+
+.category-button img {
+  width: 100px; /* Fixed size for images */
+  height: 100px;
+margin-bottom: 10px;
+}
+
+.category-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px; 
+  padding: 10px; /* Padding inside each category button */
+  background-color: white; /* Background color for buttons */
+}
+
+.more-button {
+  grid-column: 1 / -1; /* Spans the button across all columns */
+  padding: 10px 20px;
+  text-align: center;
+  background-color: #444; /* Darker background for the 'More...' button */
+  color: white;
+  border-radius: 20px; /* Makes it pill-shaped */
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px; /* Adds some space above the button */
+}
+
+/* .categories{
+  background-color: #333;
+  padding: 10px;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 2fr));
+  justify-content: center;
+  gap: 10px;
+}  */
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates three columns */
+  grid-template-rows: repeat(2, 1fr); /* Creates two rows */
+  gap: 10px; /* Space between grid items */
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 0 auto;
+  max-width: 600px; /* Adjust based on your container size */
+  background-color: #333;
+  margin: 0 auto;
+  width: 70vw;
+}
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above all other content */
+}
+
+.modal-content{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.modal-content {
+  position: relative; /* Add this line if not already present */
+    height: 650px;
+    background: rgb(165, 114, 114);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin-top: 50px;
+    overflow-y: auto; /* Adds scroll to the modal content if needed */
+}
+.modal-content {
+  grid-template-columns: repeat(3, 1fr); /* Creates three columns */
+  grid-template-rows: repeat(2, 1fr); /* Creates two rows */
+
+  background-color: #bababa;
+ justify-content: center;
+}
+.close {
+    position:absolute;
+    right: 10px; /* Adjust right to 0px */
+    top: 0px; /* Adjust top to 0px */
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+
+
+.check {
+    margin-right: 5px;
+}
+
+.nav-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.createhabit-btn {
+    background-color: #442fe4; /* Example button color */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.select-menu {
+  color: black; /* Text color */
+}
+
+.select-menu option :hover{
+  color:black;
+  background-color: aqua;
+}
+
+
+
+@media (max-width: 1000px) {
+  .categories{
+    background-color: #442fe4;
+    gap: 1%;
+
+
+    grid-template-columns: repeat(2, 1fr); /* Creates three columns */
+    grid-template-rows: repeat(3, 1fr); /* Creates two rows */
+  }
+
+}
+
+/* .wrap {
+  grid-template-columns: repeat(4, 125px); 
+  margin: auto 0;
+  justify-content: center;
+  color: #000;
+  gap: 40px;
+  padding: 0;
+  align-items: center;
+} */
+
+.wrap div {
+  width: 125px; /* Width for each day button */
+  height: 70px; /* Height for each day button */
+  background-color: #fff; /* Background color for each button */
+  border-radius: 10px; /* Rounded corners for each button */
+  padding: 15px; /* Padding within each button */
+  display: flex; /* Enables flexbox layout within each button */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  position: relative; /* Allows positioning of pseudo-elements relative to this div */
+  cursor: pointer; /* Change cursor to pointer to indicate clickable area */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+  color: #333;
+}
+
+/* .wrap input[type="checkbox"] {
+  display: none; 
+}
+
+
+.wrap input[type="checkbox"]:checked + label {
+  background-color: #b9f3bb; 
+  height: 100%;
+  width: 100%;
+  color: #000;
+} */
+.wrap {
+  display: grid;
+  grid-template-columns: repeat(4, 125px); /* Adjust number of columns if needed */
+  justify-content: center;
+  align-items: center;
+  gap: 40px; /* Adjust or remove if spacing is too large */
+  padding: 0;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  padding-top: 0px;
+  width: 100%;
+  border: 2px solid black; /* Border around the grid */
+}
+/* .wrap {
+  border: 2px solid black;
+  width: 100%;
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+  grid-gap: 10px;
+} */
+
+/* 
+.wrap {
+  display: flex;
+  flex-wrap: wrap; 
+} */
+
+
+
+.wrap div {
+  width: 125px;
+  height: 70px;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0; /* Ensure there's no additional margin */
+  padding: 0; /* Remove padding to prevent any internal spacing */
+  color: #333;
+}
+
+
+.wrap input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Ensure checkbox is clickable */
+  cursor: pointer;
+}
+
+.wrap input[type="checkbox"]:checked + label {
+  background-color: #b9f3bb;
+  width: 100%;
+  color: #000;
+  padding: 25px;
+  border-radius: 10px;
+}
