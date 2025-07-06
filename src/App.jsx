@@ -8,7 +8,6 @@ import ReadPosts from './pages/Blog/ReadPosts.jsx';
 import PostPage from './pages/Blog/PostPage.jsx';
 import EditPosts from './pages/Blog/EditPosts.jsx';
 import CreateHabit from './components/createhabit.jsx';
-
 import CreatePost from './pages/Blog/CreatePosts.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Blog from './pages/Blog/Blog.jsx';
