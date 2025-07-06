@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../../client';
 
-import more from './more.png';
+import more from './more.svg';
 import '../../css/about-us.css'; 
 import '../../css/postpage.css'; 
 

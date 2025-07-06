@@ -1,12 +1,10 @@
 import React from 'react';
 import '../App.css';
 import myImage from '../assets/wellness.jpeg';
-import first from '../assets/298.png';
-import second from '../assets/299.png';
-import third from '../assets/300.png';
-// import howitworks from '../assets/Frame13.png';
-
-import howitworks from '../assets/howitworks.png';
+import first from '../assets/298.jpeg';
+import second from '../assets/298.jpeg';
+import third from '../assets/298.jpeg';
+import howitworks from '../assets/298.jpeg';
 
 const Welcome = () => {
     return(

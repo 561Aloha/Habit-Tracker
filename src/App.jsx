@@ -51,7 +51,6 @@ function App() {
       <div>
         <div className='nav-bar'>
           <div className='logo-title-container'>
-            {/* <img className='logo' src={logo} alt="Logo" /> */}
             <h2>HabitHab</h2>
           </div>
           <h4 className='hidden'>Menu</h4>

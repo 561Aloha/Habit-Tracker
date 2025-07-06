@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import MyChart from '../components/MyChart.jsx';
 import { supabase } from '../client'; // Ensure the correct path to the supabase client
 import { Link } from 'react-router-dom';
-import arrow from './../assets/arrow.png';
+import arrow from './../assets/arrow.svg';
 import { format } from 'date-fns';
 import Planner from "../components/planner.jsx";
 

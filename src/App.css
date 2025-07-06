@@ -223,198 +223,29 @@
   }
 
 
-/* @media (min-width: 900px) {
-  .header-content{
-    color: blue;
-  }
-  .adv-comp{
-    background-color: rgba(97, 92, 255, 0.7);
-    margin-bottom: 10px;
-  }
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-    position: relative;
-    text-align: left;
-    margin: 0 auto;
-    max-width: 100%; 
-    flex-wrap: wrap; 
-  }
-  .cta-buttons{
-    width: 375px;
-    height: 40px;
-  }
-  .header-content {
-    max-width: 50%; 
-  }
-  
-  .banner-img {
-    width: 500px;
-    max-width: 100%;
-    height: 300px;
-    margin-left: 20px;
-    border-radius: 5px;
-  }
-}  */
-
-/* 
-
-
-
-
-
-
-
-.adv-comp {
-  background-color: rgba(97, 92, 255, 0.7);
-
-}
-
-
-
-
-
-
-.adv-comp{
-  width: 100%;
-  padding:20px;
-  text-align:center;
-  margin-top:40px;
-}
-.adv-img{
-  width:100%;
-  height: 40vh;
-  border-radius: 5px;
-}
 .adv-img-sm{
-  width:auto;
-  height: 80px;
-  border-radius: 5px;
-}
-.box-sm{
-  display:flex;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.advantages{
-  font-size:2rem;
-  margin-bottom:30px;
-  padding:10px;
-}
-
-.box{
-  display:flex;
-  justify-content: space-between;
-  gap: 20px;
-  
-  flex-wrap: wrap;
-}
-.box h4{
-  margin-top:20px;
-  font-size: 1.25rem;
-}
-.box p{
-  margin-top:5px;
-  font-size: 1rem;
-  line-height: 1.5;
+  width: 100%;
 }
 .space{
-  flex: 1;
-  margin: 10px;
-  max-width: 300px;
-} 
+  padding: 20px;
+}
+.space-containers{
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+}
 
-
-.howitworks{
+.nav-bar{
   width: 100%;
-  border-radius: 20px;
+  padding: 0;
+}
+
+.newpage, .header{
+  width:100%;
+  padding:0;
 
 }
-.howitworks h2{
-  padding-top: 20px;
-
-}
-.howitworks-img{
-  width: 100%;
-  border-radius: 10px;
-  padding-bottom: 20px;
-  
-} */
-
-
-
-/* @media (min-width: 400px) {
-  .header-content {
-    max-width: 400px; 
-    color: blue;
-    margin: 0 auto;
-  }
-  .adv-comp {
-    background-color: rgba(97, 92, 255, 0.7);
-    margin-bottom: 10px;
-
-  }
-  .header {
-    display: flex;
-    max-width: 600px;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    position: relative;
-    text-align: left;
-    margin: 0 auto;
-    max-width: 1200px; 
-    flex-wrap: wrap;
-  }
-  .cta-buttons {
-    width: 375px;
-    height: 40px;
-    margin-top: 60px;
-  }
-
-  .banner-img {
-    width: 500px;
-    height: auto;
-    margin-left: 20px;
-    border-radius: 5px;
-  }
-  .adv-box{
-    width: 80%;
-    margin: 0 auto;
-  }
-
-
-} */
-
-
 /* 
-@media (min-width: 1200px){
-  .header-content{
-    width: 60%;
-  }
-
-  .howitworks-img{
-    width: 700px;
-    height: auto;
-  }
-
-  .containerr{
-    display:flex;
-    flex-direction:column;
-    align-items: center;
-    height: 100%;
-    padding: 20px;
-    border-radius: 10px;
-    margin: 0 auto;
-    margin-top: 75px;
-    width: 70%;
-  }
-  .menu-items {   
-     margin-right: 500px;
-    gap: 30px; 
-  }
-} */
+https://coursera.org/share/4d73a4c9cacd645b8b3edbd8426ec815
+https://coursera.org/share/7e121dd253138aae8c2ed406e28aa058 */

@@ -1,13 +1,11 @@
 import React from "react";
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
-import arrow from './../assets/arrow.png';
+import arrow from './../assets/arrow.svg';
 import './../pages/chart.css';
 
 const MyChart = ({ chartData, onWeekChange, currentWeek, onViewChange }) => {
-  // Remove local state for `currentWeek` to avoid conflicts
-  
-  // Chart configuration options
+
   const options = {
     responsive: true,
     plugins: {

@@ -17,7 +17,7 @@ const Planner = () => {
       const { data, error } = await supabase
         .from('Habits')
         .select('*')
-        .eq('userid', userId);
+        .eq('userId', userId);
 
       if (error) {
         throw error;
@@ -35,7 +35,7 @@ const Planner = () => {
       const { data, error } = await supabase
         .from('Habit_Completion')
         .select('*')
-        .eq('userid', userId);
+        .eq('userId', userId);
 
       if (error) {
         throw error;
