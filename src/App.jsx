@@ -7,7 +7,6 @@ import NotFound from './pages/NotFound.jsx';
 import ReadPosts from './pages/Blog/ReadPosts.jsx';
 import PostPage from './pages/Blog/PostPage.jsx';
 import EditPosts from './pages/Blog/EditPosts.jsx';
-import CreateHabit from './components/createhabit.jsx';
 import CreatePost from './pages/Blog/CreatePosts.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Blog from './pages/Blog/Blog.jsx';
@@ -38,7 +37,6 @@ function App() {
     { path: "/the-posts", element: <ReadPosts data={posts}/> }, 
     { path: "/post/:id", element: <PostPage /> }, // Dynamic route to handle post IDs
      {path: "/edit-post", element: <EditPosts data={posts} />},
-    { path: "/habit", element: <CreateHabit /> },
     { path: "/create-post", element: <CreatePost data={posts} /> },
     { path: "/about-us", element: <AboutUs  /> },
     { path: "/blog", element: <Blog  /> },
