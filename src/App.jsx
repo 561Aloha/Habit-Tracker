@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useRoutes } from 'react-router-dom';
 import './App.css';
+import { supabase } from './client'; // update the path if needed
 
 import Welcome from './pages/Welcome.jsx';
 import NotFound from './pages/NotFound.jsx';
 import ReadPosts from './pages/Blog/ReadPosts.jsx';
 import PostPage from './pages/Blog/PostPage.jsx';
 import EditPosts from './pages/Blog/EditPosts.jsx';
+import CreateHabit from './components/createhabit.jsx';
+import LoginWithGoogle from './components/LoginWithGoogle';
+import EmailLogin from './components/EmailLogin';
+
 import CreatePost from './pages/Blog/CreatePosts.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Blog from './pages/Blog/Blog.jsx';
@@ -14,6 +19,17 @@ import Goal from './pages/Goals.jsx';
 
 function App() {
   const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        console.log('User signed in:', session.user);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -37,6 +53,7 @@ function App() {
     { path: "/the-posts", element: <ReadPosts data={posts}/> }, 
     { path: "/post/:id", element: <PostPage /> }, // Dynamic route to handle post IDs
      {path: "/edit-post", element: <EditPosts data={posts} />},
+    { path: "/habit", element: <CreateHabit /> },
     { path: "/create-post", element: <CreatePost data={posts} /> },
     { path: "/about-us", element: <AboutUs  /> },
     { path: "/blog", element: <Blog  /> },
@@ -57,8 +74,10 @@ function App() {
             <Link to='/blog'>Blog</Link>
             <Link to='/about-us'>About Us</Link>
           </div>
-        <button className='signin'>Sign in</button>
-
+        <div className='signin-container'>
+    
+          <LoginWithGoogle />
+        </div>
         </div>
         {element}
       </div>
