@@ -1,5 +1,6 @@
 import React from 'react';
-import { supabase } from '../client'; // update the path if needed
+import { supabase } from '../client';
+
 
 const LoginWithGoogle = () => {
   const handleGoogleLogin = async () => {
@@ -7,7 +8,7 @@ const LoginWithGoogle = () => {
       provider: 'google',
     });
     if (error) console.error('Google Sign-In error:', error.message);
-    // Supabase will handle the redirect
+
   };
 
   return (
