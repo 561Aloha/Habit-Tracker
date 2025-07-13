@@ -11,7 +11,7 @@ import EditPosts from './pages/Blog/EditPosts.jsx';
 import LoginWithGoogle from './components/LoginWithGoogle';
 import EmailLogin from './components/EmailLogin';
 
-import CreateHabit from './components/createhabit.jsx';
+import CreateHabit from './components/CreateHabit.jsx';
 
 import CreatePost from './pages/Blog/CreatePosts.jsx';
 import AboutUs from './pages/AboutUs.jsx';

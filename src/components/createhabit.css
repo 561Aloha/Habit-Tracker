@@ -112,16 +112,7 @@ margin-bottom: 10px;
   margin-top: 10px; /* Adds some space above the button */
 }
 
-/* .categories{
-  background-color: #333;
-  padding: 10px;
-  display: flex;
-  width: 100%;
-  margin: 0 auto;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 2fr));
-  justify-content: center;
-  gap: 10px;
-}  */
+
 
 .categories {
   display: grid;
