@@ -14,12 +14,10 @@ const CreateHabit = () => {
         { key: 'health', label: 'Health', imgSrc: './src/assets/health.png' },
         { key: 'nutrition', label: 'Nutrition', imgSrc: './src/assets/nutrition.png' },
         { key: 'artistic', label: 'Artistic', imgSrc: './src/assets/artist.png' },
-        { key: 'academics', label: 'Academics', imgSrc: './src/assets/20.png' },
-        { key: 'skills', label: 'Skills Development', imgSrc: './src/assets/skills.png' },
+        { key: 'academics', label: 'Academics', imgSrc: './src/assets/academics.png' },
+        { key: 'skills', label: 'Skills Development', imgSrc: './src/assets/skiils.png' },
         { key: 'fitness', label: 'Fitness', imgSrc: './src/assets/25.png' },
-        { key: 'mental', label: 'Mental Wellness', imgSrc: './src/assets/23.png' },
         { key: 'spiritual', label: 'Spiritual', imgSrc: './src/assets/pray.png' },
-        { key: 'personalcare', label: 'Personal Care', imgSrc: './src/assets/33.png' },
         { key: 'financial', label: 'Financial', imgSrc: './src/assets/26.png' },
     ];
 

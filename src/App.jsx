@@ -11,6 +11,8 @@ import EditPosts from './pages/Blog/EditPosts.jsx';
 import LoginWithGoogle from './components/LoginWithGoogle';
 import EmailLogin from './components/EmailLogin';
 
+import CreateHabit from './components/createhabit.jsx';
+
 import CreatePost from './pages/Blog/CreatePosts.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Blog from './pages/Blog/Blog.jsx';
@@ -51,10 +53,11 @@ function App() {
     { path: "/not-found", element: <NotFound /> },
     { path: "/the-posts", element: <ReadPosts data={posts}/> }, 
     { path: "/post/:id", element: <PostPage /> }, // Dynamic route to handle post IDs
-     {path: "/edit-post", element: <EditPosts data={posts} />},
-    { path: "/habit", element: <CreateHabit /> },
+    {path: "/edit-post", element: <EditPosts data={posts} />},
     { path: "/create-post", element: <CreatePost data={posts} /> },
     { path: "/about-us", element: <AboutUs  /> },
+
+    { path: "/test", element: <CreateHabit /> },
     { path: "/blog", element: <Blog  /> },
     { path: "/goal", element: <Goal  /> },
   ]);
@@ -74,7 +77,6 @@ function App() {
             <Link to='/about-us'>About Us</Link>
           </div>
         <div className='signin-container'>
-    
           <LoginWithGoogle />
         </div>
         </div>
