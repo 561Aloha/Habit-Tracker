@@ -5,7 +5,6 @@ import arrow from './../assets/arrow.svg';
 import './../pages/chart.css';
 
 const MyChart = ({ chartData, onWeekChange, currentWeek, onViewChange }) => {
-
   const options = {
     responsive: true,
     plugins: {
@@ -42,24 +41,37 @@ const MyChart = ({ chartData, onWeekChange, currentWeek, onViewChange }) => {
     },
   };
 
-
-  // Handle navigation to the next week
   const handleNextClick = () => {
     const newWeek = currentWeek.map(day => ({
       ...day,
       fullDate: new Date(day.fullDate.setDate(day.fullDate.getDate() + 7)),
     }));
-    onWeekChange(newWeek);  // Notify the parent component (`Goals`) of the updated week
+    onWeekChange(newWeek);  
   };
 
-  // Handle navigation to the previous week
   const handlePrevClick = () => {
     const newWeek = currentWeek.map(day => ({
       ...day,
       fullDate: new Date(day.fullDate.setDate(day.fullDate.getDate() - 7)),
     }));
-    onWeekChange(newWeek);  // Notify the parent component (`Goals`) of the updated week
+    onWeekChange(newWeek);
   };
+
+  const safeData =
+  chartData &&
+  chartData.datasets &&
+  chartData.datasets[0] &&
+  Array.isArray(chartData.datasets[0].data)
+    ? chartData.datasets[0].data
+    : [];
+
+const safeLabels = chartData && Array.isArray(chartData.labels)
+    ? chartData.labels
+    : [];
+
+if (!safeLabels.length || !safeData.length) {
+  return <div style={{ textAlign: 'center', margin: '2rem 0' }}>No chart data available.</div>;
+}
 
   return (
     <div className="Chart">
@@ -73,7 +85,6 @@ const MyChart = ({ chartData, onWeekChange, currentWeek, onViewChange }) => {
           onClick={handlePrevClick}
           alt="previous week"
         />
-        {/* Display days of the current week */}
         <p>
           {currentWeek[0].dayOfWeek}, {currentWeek[0].fullDate.toLocaleDateString()} - {currentWeek[6].dayOfWeek}, {currentWeek[6].fullDate.toLocaleDateString()}
         </p>

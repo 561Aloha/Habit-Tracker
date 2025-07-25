@@ -1,0 +1,40 @@
+.new {
+    background-color: rgb(0, 0, 0);
+    padding-bottom: 50px;
+    padding-top: 50px;
+    width: 1500px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 75px;
+  }
+.about-us-container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image{
+    width: 700px;
+    height: 500px;
+  }
+  
+.about-us{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 30px;
+    background-color: antiquewhite;
+    border:solid white 2px;
+    width: 900px;
+    text-align: center;
+  }
+ 
+.additional-component {
+    background-color: rgb(212, 209, 255);
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    width: 92%;
+    margin: 0 auto;
+  }

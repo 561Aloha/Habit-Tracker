@@ -1,10 +1,12 @@
 import './../css/goals.css';
+import './../css/todo.css';
 import React, { useState, useEffect } from "react";
 import MyChart from '../components/MyChart.jsx';
 import { supabase } from '../client'; // Ensure the correct path to the supabase client
 import { Link } from 'react-router-dom';
 import arrow from './../assets/arrow.svg';
 import { format } from 'date-fns';
+
 import Planner from "../components/planner.jsx";
 
 function Goals() {
@@ -31,7 +33,6 @@ function Goals() {
       },
     ],
   };
-  
 
   const monthData = {
     labels: ['Jan','Feb','Mar','Apr','May','June',"July"],
@@ -50,15 +51,24 @@ function Goals() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getCurrentWeek());
   const [calendarOffset, setCalendarOffset] = useState(0);
+  const [user, setUser] = useState(null);
 
-  // Fetch habits from Supabase
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    getUser();
+  }, []);
+
   const fetchHabits = async () => {
-    const userId = 1; // Assuming a hardcoded user ID for now
+    if (!user) return; // Wait for user to be loaded!
     try {
       const { data, error } = await supabase
         .from('Habits')
         .select(`
           habit_id,
+          category,
           habit_name,
           frequency,
           Habit_Completion (
@@ -66,15 +76,13 @@ function Goals() {
             is_completed
           )
         `)
-        .eq('userid', userId);  
+        .eq('user_id', user.id);  
       if (error) throw error;
 
-      // Check if data is valid and is an array
       if (!data || !Array.isArray(data)) {
         console.warn('No valid data received from Supabase');
         return;
       }
-
       const updatedHabits = data.map(habit => {
         const completions = Array.isArray(habit.Habit_Completion) ? habit.Habit_Completion : [];
         const completionMap = completions.reduce((map, completion) => {
@@ -85,80 +93,27 @@ function Goals() {
         return { ...habit, completionMap };
       });
 
-    setHabits(updatedHabits);
-  } catch (error) {
-    console.error('Error fetching habits:', error.message);
-  }
-};
-  // Update chart data based on habits
-  // const updateChartData = () => {
-  //   // Initialize data arrays
+      setHabits(updatedHabits);
+            console.log('Habits fetched:', data);
 
-
-  //   const weeklyData = Array(7).fill(0);
-  //   const dailyHabitCounts = Array(7).fill(0);
-  
-  //   // Map weekday names to indices for easier lookup
-  //   const dayNameMap = {
-  //     Sun: 'Sunday',
-  //     Mon: 'Monday',
-  //     Tue: 'Tuesday',
-  //     Wed: 'Wednesday',
-  //     Thu: 'Thursday',
-  //     Fri: 'Friday',
-  //     Sat: 'Saturday',
-  //   };
-  
-  //   // Calculate weekly completion percentages based on habits state
-  //   habits.forEach(habit => {
-  //     (habit.frequency || []).forEach(day => {
-  //       const fullDayName = dayNameMap[day] || day;
-  //       const dayIndex = chartData.labels.indexOf(fullDayName);
-  
-  //       if (dayIndex !== -1) {
-  //         dailyHabitCounts[dayIndex] += 1;
-  //         if (habit.completionMap && habit.completionMap[format(selectedDate, 'yyyy-MM-dd')]) {
-  //           weeklyData[dayIndex] += 1;
-  //         }
-  //       }
-  //     });
-  //   });
-  
-  //   // Calculate percentage of completion for each day of the week
-  //   const weeklyCompletionPercentages = weeklyData.map((completed, index) =>
-  //     dailyHabitCounts[index] ? Math.round((completed / dailyHabitCounts[index]) * 100) : 0
-  //   );
-  
-  //   // Update chart data dynamically
-  //   setChartData(prev => ({
-  //     ...prev,
-  //     datasets: [
-  //       {
-  //         ...prev.datasets[0],
-  //         data: weeklyCompletionPercentages,
-  //       },
-  //     ],
-  //   }));
-  // };
+    } catch (error) {
+      console.error('Error fetching habits:', error.message);
+    }
+  };
 
   const markHabitComplete = async (habitId) => {
+    if (!user) return;
     const habit = habits.find(habit => habit.habit_id === habitId);
     const habitDateKey = format(selectedDate, 'yyyy-MM-dd');
-  
-    // Toggle the completion status for the selected date
     const isCompleted = !(habit.completionMap && habit.completionMap[habitDateKey]);
-  
-    // Update local state for immediate feedback
     const updatedHabits = habits.map(habit =>
       habit.habit_id === habitId
         ? { ...habit, completionMap: { ...habit.completionMap, [habitDateKey]: isCompleted } }
         : habit
     );
     
-    // Set updated habits state (async)
     setHabits(updatedHabits);
-  
-    // Update in Supabase
+
     try {
       const { data, error } = await supabase
         .from('Habit_Completion')
@@ -166,25 +121,25 @@ function Goals() {
           habit_id: habitId,
           completion_date: habitDateKey,
           is_completed: isCompleted,
-          userid: 1,  // Replace with dynamic user ID if needed
-        }, { onConflict: ['habit_id', 'completion_date', 'userid'] });
-  
+          user_id: user.id, 
+        }, { onConflict: ['habit_id', 'completion_date', 'user_id'] });
+
       if (error) throw error;
-  
-      console.log('Habit completion status updated:', data);
-  
+
+      // Add this line to re-fetch Planner data after marking complete
+      // Option 1: If you control Planner from Goals
+      fetchHabits(); // This will re-fetch and re-render
+      // Option 2: If Planner is fetching independently, trigger its fetch (using a prop/callback or context)
+
     } catch (error) {
       console.error('Error updating habit completion status:', error.message);
     }
   };
-  
-  // Use useEffect to update chart data when habits change
+
   useEffect(() => {
     updateChartData();
   }, [habits]);
   
-
-
   const updateChartData = () => {
     const weekDays = getCurrentWeek();
     const weeklyData = Array(7).fill(0);
@@ -219,9 +174,7 @@ function Goals() {
       ],
     });
   };
-
-
-  // Update chart when habits or date changes
+  
   useEffect(() => {
     fetchHabits();
   }, [selectedDate]);
@@ -234,10 +187,8 @@ function Goals() {
     updateWeek(calendarOffset);
   }, [calendarOffset]);
 
-
   const handlePrevClick = () => setCalendarOffset(calendarOffset - 1);
   const handleNextClick = () => setCalendarOffset(calendarOffset + 1);
-
 
   function getCurrentWeek() {
     const current = new Date();
@@ -259,7 +210,6 @@ function Goals() {
       const date = newDate.getDate();
       return { dayOfWeek, date, fullDate: newDate };
     });
-
     setCurrentWeek(updatedWeek);
   }
   const handleDayClick = (index) => {
@@ -275,7 +225,6 @@ function Goals() {
 
   const filteredHabitsForSelectedDay = habits.filter(habit => {
     const dayName = format(selectedDate, 'EEEE');
-    //const frequencyArray = habit.frequency || [];
     return habit.frequency.includes(dayName);
   });
   const handleWeekChange = (newWeek) => {
@@ -283,15 +232,12 @@ function Goals() {
     updateChartData(newWeek);
   };
 
-
-
   return (
     <div className="goals-page">
       <h2>The Habit Tracker</h2>
       <div className="goals-container">
         <div className="habits-container">
           <h2>Habits for {format(selectedDate, 'EEEE, MMMM d')}</h2>
-          {/* Calendar Section */}
           <div className="calendar">
             <div className="calendar-header">
               <img
@@ -320,8 +266,6 @@ function Goals() {
               />
             </div>
           </div>
-  
-          {/* Display the list of habits for the selected day */}
           <div className="list">
             {filteredHabitsForSelectedDay.map(habit => {
               // Create a unique key for each habit and date combination
@@ -341,8 +285,6 @@ function Goals() {
               );
             })}
           </div>
-  
-          {/* Additional habit management buttons */}
           <div className="habit-buttons">
             <Link to="/habit">
               <button className="organize">Add a new Habit</button>
@@ -350,20 +292,17 @@ function Goals() {
             <button className="remove">Remove</button>
           </div>
         </div>
-  
-        {/* Chart Display Section */}
-        <div className="chart-container">
-        <MyChart
-          chartData={chartData}
-          onWeekChange={setCurrentWeek}
-          currentWeek={currentWeek}
-          onViewChange={setView}
-        />
-      </div>
-    </div>
-      {/* Planner Component Section */}
-      <div className="planner-container">
-        <Planner />
+        <div className='right-container'>
+          <Planner/>    
+          <div className="chart-container">
+          <MyChart
+            chartData={chartData}
+            onWeekChange={setCurrentWeek}
+            currentWeek={currentWeek}
+            onViewChange={setView}
+          />
+        </div>
+        </div>
       </div>
     </div>
   );

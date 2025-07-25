@@ -1,0 +1,105 @@
+.checkmate{
+  color:rgb(0, 0, 0);
+  font-size: 22px;
+  padding: 10px;
+  padding: 5px;
+  margin: 5px;
+  font-size: .6rem;
+}
+
+tbody td:first-child {
+  width: 150px; 
+  text-align: left;
+  padding-left: 20px;
+  font-weight: normal;
+}
+
+.habit_name td:first-child{
+  font-size: .50rem;
+  text-align: left;
+}
+
+.planner-modern {
+  margin: 0 auto;
+  height: 30%;
+  padding-bottom: 30px;;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 24px 0 rgba(30,34,90,0.07);
+  width: 90%;
+  overflow-x: auto;
+}
+
+.planner-modern th, .planner-modern td {
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.planner-modern th {
+  font-size: 1.2rem;
+  color: #222;
+  background: #fff;
+}
+
+.planner-modern tr td:first-child {
+  font-weight: 300;
+}
+
+.habit-cell {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #3c3c3c;
+  border-radius: 6px;
+  background: #f7fdf8;
+  line-height: 32px;
+  text-align: center;
+  font-size: 1.3rem;
+  color: #222;
+  transition: background .2s, border .2s;
+}
+
+.habit-cell.checked {
+  background: #e4faea;
+  color: #27a464;
+}
+
+.habit-cell.failed {
+  background: #fce3e3;
+  color: #e13b3b;
+}
+
+@media (max-width: 700px) {
+  
+    .plannertable th.day-label[data-full="Monday"]::before { content: "MON"; }
+    .plannertable th.day-label[data-full="Tuesday"]::before { content: "TUE"; }
+    .plannertable th.day-label[data-full="Wednesday"]::before { content: "WED"; }
+    .plannertable th.day-label[data-full="Thursday"]::before { content: "THU"; }
+    .plannertable th.day-label[data-full="Friday"]::before { content: "FRI"; }
+    .plannertable th.day-label[data-full="Saturday"]::before { content: "SAT"; }
+    .plannertable th.day-label[data-full="Sunday"]::before { content: "SUN"; }
+
+    .day-label {
+        font-size: 12px;
+    }
+    .habit_name td {
+      text-align: center;
+    }
+    
+    .habit_name td:first-child {
+      font-size: .65rem;
+      text-align: left;
+      width: auto;
+      background-color:white;
+      flex-grow: 1; /* Make this cell grow to fill available space */
+      white-space: nowrap; /* Prevent the text from wrapping */
+    }
+    
+    .habit_name td {
+      text-align: center;
+    }
+    .planner-modern {
+      width: 100%;
+      margin-top: 20px;
+    }
+}

@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { supabase } from '../client';
 import { Link } from 'react-router-dom';
 import './createhabit.css';
 import Select from 'react-select';
 
 const CreateHabit = () => {
-    const userId = 1; 
     const [newHabit, setNewHabit] = useState({ category: '', habit_name: '', frequency: [], repetition: '' });
     const [selectedCategory, setSelectedCategory] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const getUser = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            setUser(user);
+        };
+        getUser();
+    }, []);
+
 
     const categories = [
         { key: 'health', label: 'Health', imgSrc: './src/assets/health.png' },
@@ -20,7 +29,6 @@ const CreateHabit = () => {
         { key: 'spiritual', label: 'Spiritual', imgSrc: './src/assets/pray.png' },
         { key: 'financial', label: 'Financial', imgSrc: './src/assets/26.png' },
     ];
-
     const repetitionOptions = [
         { value: 'every week', label: 'Every week' },
         { value: 'every other week', label: 'Every other week' }
@@ -88,7 +96,7 @@ const CreateHabit = () => {
     const createHabit = async (event) => {
         event.preventDefault();
         const habitData = {
-            userid: userId,
+            user_id: user.id,
             category: selectedCategory,
             habit_name: newHabit.habit_name,
             frequency: newHabit.frequency,
@@ -114,7 +122,9 @@ const CreateHabit = () => {
                     <label htmlFor="habit_name"></label>
                     <input className='habitname' placeholder='Habit Name' type="text" id="habit_name" name="habit_name" onChange={handleChange} />
                 </div>
+                <h3>Select Category</h3>
                 <div className="form-group categories">
+         
                     {displayedCategories.map(category => (
                         <button
                             key={category.key}
@@ -155,8 +165,6 @@ const CreateHabit = () => {
                         styles={customStyles} // Assuming you have defined styles as per previous discussions
                         placeholder="Select repetition pattern"
                     />
-
-
                 </div>
                 <div className="form-group-freq">
                     <label>Frequency</label><br />

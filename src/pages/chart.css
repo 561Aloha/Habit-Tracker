@@ -1,11 +1,4 @@
 /* Button bar styling */
-.btn-bar {
-    padding: 10px;
-    width: 100%; /* Take full width of its parent */
-    display: flex;
-    justify-content: center; /* Center the buttons */
-}
-
 .streaks-tracker-container {
     display: flex;
     justify-content: space-around;
@@ -15,7 +8,6 @@
 .streaks-tracker {
     border: 1px solid #ccc;
     padding: 10px;
-    border-radius: 10px;
     width: 150px;
     text-align: center;
 }
@@ -27,17 +19,6 @@
     height: 125px;
     display: inline-block;
     margin: 5px;
-}
-
-.new {
-    background-color: rgb(0, 0, 0);
-    padding-bottom: 50px;
-    padding-top: 50px;
-    width: 1500px;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .about-us-container {
@@ -65,7 +46,6 @@
 /* Styling for the chart container within Goals page */
 .chart {
     border: 1px solid white; /* Visible border for debugging, remove if not needed */
-
     display: flex;
     padding: 10px;
     flex-direction: column;
@@ -91,9 +71,11 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 60px;
 }
-
 
 .streaks-tracker {
     text-align: center;
@@ -106,14 +88,10 @@
     align-items: center;
     background-color: white;
 }
-
-
 .arrow.left-arrow, .arrow.right-arrow{
-
     height: 15px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 1200px){
     .btn-bar{
         width: 90%;
@@ -144,12 +122,7 @@
         margin-top: .5px;
         margin-bottom: .5px;
     }
-    .chart-container {
-        width: 90%;  
 
-  
-        
-    }
     .btn-bar button {
         padding: 10px 20px;
         margin: 0 10px;
@@ -164,4 +137,32 @@
         font-size: 1.5rem;
         margin-bottom: 0px;
     }
+}
+  
+.chart {
+    border: 1px solid white; /* Visible border for debugging, remove if not needed */
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    background-color: black;
+    margin-bottom: 20px;
+    align-items: center; /* Center align the contents of the chart vertically */
+   }
+
+@media (max-width: 700px) {
+    .chart {
+      width: 650px; 
+      margin-top: 20px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .new{
+      width: 100%;
+      height: 100%;
+    }
+}
+
+.chartjs-render-monitor {
+    border-radius: 10px !important;
 }

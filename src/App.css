@@ -3,23 +3,72 @@
   width: 100%;
   text-align: center;
 }
-.header {
-  width: 100%;
+.header{
+  display: flex;
+  flex-direction: row;
+  margin:0 auto;
+  width: 80%;
+  padding-top: 100px;
+}
+
+.header-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  text-align: left;
   background-color: transparent;
   margin: 0 auto;
   padding-top: 100px;
+  max-width: 700px;
+  max-height: 400px;
+  padding: 40px;
   border-radius: 40px;
   background-color: rgba(0, 25, 166, 0.10) ;
   border-radius: 20px;
   background: linear-gradient(145deg, #6a2dd9, #5926b7);
-  box-shadow:  20px 20px 100px #c8acfb,
-               -20px -20px 100px #a68cd5;
+  /* box-shadow:  20px 20px 100px #c8acfb,
+               -20px -20px 100px #a68cd5; */
 }
+.banner-img-container{
+  display: flex;
+  justify-content: center;
+  max-height: 400px;;
+  align-items: center;
+  width: 50%;
+  max-width: 700px;
+}
+.banner-img-container img{
+  width: 40vw;
+  object-fit: cover;
+  height: 100%;
+  border-radius: 20px;
 
+}
+@media (max-width: 1000px) {
+  .header{
+    flex-direction: column;
+    align-items: center;
+  }
+  .header-content{
+    height: 275px;
+  }
+  .header-content h1 {
+    padding: 0;
+    font-size: 2rem;
+    margin-bottom: 4px;
+  }
+  .banner-img-container{
+    width: 100%;
+    display: none;
+    margin-top: 20px;
+
+  }
+  .banner-img-container img{
+    width: 100%;
+    padding:0;
+    margin: 0 auto;
+  }
+}
 
 /*************   NAV BAR  *********/
 .nav-bar {
@@ -96,9 +145,6 @@
   }
 }
 /*************   WELCOME  *********/
-
-
-
 .cta-buttons{
   margin-top: 40px;
   display:flex;
@@ -194,3 +240,44 @@ https://coursera.org/share/7e121dd253138aae8c2ed406e28aa058 */
 
 
 
+.blogfeature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: 40px;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: rgba(0, 25, 166, 0.10);
+}
+.blogpost img{
+  height: auto;
+  border-radius: 20px;
+  width: auto;
+  max-width: 200px;
+}
+.wrapper{
+  overflow: hidden;
+  display: flex;
+  gap: 24px;
+  flex-direction: row;
+}
+
+
+.user-info{
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  flex-direction: column;
+}
+.signout-btn {
+  font-size: 12px;
+  background-color: transparent;
+  border: none;
+  padding:0;
+  margin: 0;
+  color: black;
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useRoutes } from 'react-router-dom';
 import './App.css';
-import { supabase } from './client'; // update the path if needed
+import { supabase } from './client';
 
 import Welcome from './pages/Welcome.jsx';
 import NotFound from './pages/NotFound.jsx';
@@ -12,7 +12,7 @@ import LoginWithGoogle from './components/LoginWithGoogle';
 import EmailLogin from './components/EmailLogin';
 
 import CreateHabit from './components/CreateHabit.jsx';
-
+import SignInModal from './components/SignInModel.jsx'; 
 import CreatePost from './pages/Blog/CreatePosts.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Blog from './pages/Blog/Blog.jsx';
@@ -56,11 +56,31 @@ function App() {
     {path: "/edit-post", element: <EditPosts data={posts} />},
     { path: "/create-post", element: <CreatePost data={posts} /> },
     { path: "/about-us", element: <AboutUs  /> },
-
-    { path: "/test", element: <CreateHabit /> },
+    { path: "/habit", element: <CreateHabit /> },
     { path: "/blog", element: <Blog  /> },
     { path: "/goal", element: <Goal  /> },
   ]);
+
+  /* Nav Bar */
+  const [user, setUser] = useState(null);
+  const [showSignInModal, setShowSignInModal] = useState(false);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    getUser();
+  }, []);
+  const displayName =
+    user?.user_metadata?.full_name ||
+    user?.email ||
+    "User";
+  useEffect(() => {
+    if (user) setShowSignInModal(false);
+  }, [user]);
+
+    
 
   return (
     <>
@@ -76,9 +96,41 @@ function App() {
             <Link to='/blog'>Blog</Link>
             <Link to='/about-us'>About Us</Link>
           </div>
-        <div className='signin-container'>
-          <LoginWithGoogle />
-        </div>
+            <div className='signin-container'>
+    {user ? (
+      <div className="user-info">
+        <span className="greeting">Hi, {displayName.split(' ')[0]}</span>
+        <button
+          className="signout-btn"
+          onClick={async () => {
+            await supabase.auth.signOut();
+            setUser(null);
+          }}
+        >
+          Sign Out
+        </button>
+      </div>
+    ) : (
+      <button
+        className="auth-btn"
+        onClick={() => setShowSignInModal(true)}
+        style={{
+          background: '#2979ff',
+          color: '#fff',
+          border: 'none',
+          borderRadius: 5,
+          padding: '8px 20px',
+          fontWeight: 600,
+          cursor: 'pointer'
+        }}
+      >
+        Sign In
+      </button>
+    )}
+          </div>
+
+        <SignInModal open={showSignInModal} onClose={() => setShowSignInModal(false)} />
+
         </div>
         {element}
       </div>

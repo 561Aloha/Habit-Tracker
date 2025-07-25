@@ -3,52 +3,29 @@ button{
   margin: 0 auto;
 }
 .habitname{
- /* Adjust the width as needed for larger screens */
     margin-bottom: 10px; /* Add some space between the search bar and buttons */
     margin: 0 auto;
     height: 40px;
     font-size: 18px;
     color: rgb(0, 0, 0);
-    border-radius: 5px;
+    border-radius: 12px;
     padding-left:20px;
-    border: none;
-    width: 70vw;
-    max-width: 600px;
+    border: white;
+    min-width: 550px;
     background-color: #f8f8f8;
 }
 
 .create-habit{
   padding: 40px;
+  padding-top: 80px;
   margin: 0 auto;
   max-width: 800px;
   width: 70vw;
   border-radius: 20px;
-  margin-top: 80px;
   background-color: rgb(255, 255, 255, .5);
 }
-
-
-
-
 .check:checked + label::before {
   opacity: 1; /* Show checkmark when checked */
-}
-
-.nav-btns{
-  display:flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 20px;
-  margin: 0 auto;
-}
-.nav-btns button{
-  width: 150px;
-  border-radius: 20px;
-}
-.nav-btns button:last-child{
-  border: 2px black solid;
-  color: black;
-  background-color: transparent;
 }
 
 .category-button {
@@ -67,7 +44,6 @@ button{
   transition: background-color 0.3s;
 }
 
-
 .category-button.selected {
   background-color: #e4ffde; 
 }
@@ -76,16 +52,15 @@ button{
   border-color: blue; /* Highlight the selected category */
 }
 
-
 .category-button span {
   font-size: 15px;
-color: #333;
+  color: #333;
 }
 
 .category-button img {
   width: 100px; /* Fixed size for images */
   height: 100px;
-margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .category-button {
@@ -95,15 +70,16 @@ margin-bottom: 10px;
   justify-content: center;
   text-align: center;
   border-radius: 10px; 
-  padding: 10px; /* Padding inside each category button */
   background-color: white; /* Background color for buttons */
+}
+.category-button:hover {
+  background-color: #d9d9d9; /* Change background on hover */
 }
 
 .more-button {
   grid-column: 1 / -1; /* Spans the button across all columns */
-  padding: 10px 20px;
   text-align: center;
-  background-color: #444; /* Darker background for the 'More...' button */
+  background-color: #9a8bff; /* Darker background for the 'More...' button */
   color: white;
   border-radius: 20px; /* Makes it pill-shaped */
   border: none;
@@ -112,23 +88,18 @@ margin-bottom: 10px;
   margin-top: 10px; /* Adds some space above the button */
 }
 
-
-
 .categories {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Creates three columns */
   grid-template-rows: repeat(2, 1fr); /* Creates two rows */
-  gap: 10px; /* Space between grid items */
+  gap: 10px;
   justify-content: center;
   align-items: center;
   padding: 10px;
   margin: 0 auto;
-  max-width: 600px; /* Adjust based on your container size */
-  background-color: #333;
+  max-width: 625px; /* Adjust based on your container size */
   margin: 0 auto;
-  width: 70vw;
 }
-
 
 .modal {
     position: fixed;
@@ -162,7 +133,6 @@ margin-bottom: 10px;
 .modal-content {
   grid-template-columns: repeat(3, 1fr); /* Creates three columns */
   grid-template-rows: repeat(2, 1fr); /* Creates two rows */
-
   background-color: #bababa;
  justify-content: center;
 }
@@ -174,9 +144,6 @@ margin-bottom: 10px;
     padding: 10px;
     cursor: pointer;
 }
-
-
-
 
 .check {
     margin-right: 5px;
@@ -200,35 +167,15 @@ margin-bottom: 10px;
   color: black; /* Text color */
 }
 
-.select-menu option :hover{
-  color:black;
-  background-color: aqua;
-}
-
-
-
 @media (max-width: 1000px) {
   .categories{
     background-color: #442fe4;
     gap: 1%;
-
-
     grid-template-columns: repeat(2, 1fr); /* Creates three columns */
     grid-template-rows: repeat(3, 1fr); /* Creates two rows */
   }
 
 }
-
-/* .wrap {
-  grid-template-columns: repeat(4, 125px); 
-  margin: auto 0;
-  justify-content: center;
-  color: #000;
-  gap: 40px;
-  padding: 0;
-  align-items: center;
-} */
-
 .wrap div {
   width: 125px; /* Width for each day button */
   height: 70px; /* Height for each day button */
@@ -244,17 +191,6 @@ margin-bottom: 10px;
   color: #333;
 }
 
-/* .wrap input[type="checkbox"] {
-  display: none; 
-}
-
-
-.wrap input[type="checkbox"]:checked + label {
-  background-color: #b9f3bb; 
-  height: 100%;
-  width: 100%;
-  color: #000;
-} */
 .wrap {
   display: grid;
   grid-template-columns: repeat(4, 125px); /* Adjust number of columns if needed */
@@ -268,22 +204,6 @@ margin-bottom: 10px;
   width: 100%;
   border: 2px solid black; /* Border around the grid */
 }
-/* .wrap {
-  border: 2px solid black;
-  width: 100%;
-  display: grid;
-  margin: 0 auto;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-  grid-gap: 10px;
-} */
-
-/* 
-.wrap {
-  display: flex;
-  flex-wrap: wrap; 
-} */
-
-
 
 .wrap div {
   width: 125px;
@@ -293,7 +213,6 @@ margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-
   cursor: pointer;
   transition: background-color 0.3s;
   margin: 0; /* Ensure there's no additional margin */
@@ -301,12 +220,12 @@ margin-bottom: 10px;
   color: #333;
 }
 
-
 .wrap input[type="checkbox"] {
   opacity: 0;
   position: absolute;
   width: 100%;
   height: 100%;
+   border: none;
   z-index: 1; /* Ensure checkbox is clickable */
   cursor: pointer;
 }
@@ -314,7 +233,13 @@ margin-bottom: 10px;
 .wrap input[type="checkbox"]:checked + label {
   background-color: #b9f3bb;
   width: 100%;
-  color: #000;
   padding: 25px;
-  border-radius: 10px;
+  border: none;
+}
+
+.create-habit h3{
+  color: brown;
+  padding-bottom: 0;
+  margin: 0;
+  background-color: #9a8bff;
 }

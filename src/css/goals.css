@@ -1,121 +1,114 @@
-
-  .new {
-    background-color: rgb(0, 0, 0);
-    padding-bottom: 50px;
-    padding-top: 50px;
-    width: 1500px;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 75px;
-  }
-  
-  .about-us-container{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .image{
-    width: 700px;
-    height: 500px;
-  }
-  
-  .about-us{
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 30px;
-    background-color: antiquewhite;
-    border:solid white 2px;
-    width: 900px;
-    text-align: center;
-  }
-  /* Styling for the chart container within Goals page */
-  .chart {
-    border: 1px solid white; /* Visible border for debugging, remove if not needed */
-    width: 900px; /* Adjust width as necessary */
-    display: flex;
-    padding: 10px;
-    flex-direction: column;
-    background-color: black;
-    align-items: center; /* Center align the contents of the chart vertically */
-   }
-  
-  
-  /* Responsive adjustments */
-  @media (max-width: 700px) {
-    .new{
-      width: 100%;
-      height: 100%;
-    }
-    .chart {
-      width: 650px; 
-      margin-top: 20px;
-    }
-
-  
-  }
-  
-
-.chartjs-render-monitor {
-    border-radius: 10px !important;
-}
-
 /* Planner */
-.goals-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch; 
-    padding: 10px;
-    margin-top: 30px;
-    width:80vh;
-    box-sizing: border-box;
-    color: rgb(0, 0, 0);
-    height: 90%; 
-  }
-  
-  .habits-container, .chart-container {
-    flex: 1;
-    background-color: rgb(212, 209, 255);
-    padding: 15px;
-    margin: 15px;
+.goals-page {
+    background-color:rgba(28, 31, 199, 0.7);
+    width: 100%;
+    margin: 0 auto ;
+    padding-top: 70px;
     border-radius: 10px;
+  }
+.goals-page h2{
+    font-size: 30px;
+  }
+
+.habits-container{
+    background-color: rgb(212, 209, 255);
+    padding: 20px;
+    border-radius: 10px;
+    height: 600px;
     overflow-y: auto; 
     color: black;
+    text-align: left;
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
+    position: sticky;
+    top: 0;
+    align-self: flex-start; /* In flex layouts, this ensures sticky works as expected */
+    z-index: 2;  
+}
+.chart-container {
+  background-color: white;
+    border-radius: 10px;
+    color: black;
+    display: flex;
+    width: 85%;
+    padding: 20px;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: space-between; 
+    margin-top: 40px;
   }
-  
+  .goals-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; 
+    width: 90%;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    margin: 0 auto;
+    flex-direction: row;
+}
 
-  .habits-container h2 {
-    padding-left: 15px;
-    text-align: left;
+.habits-container{
+  flex: 1;    
+  min-width: 0;
+  background-color: seashell;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+.habits-container button{
+    border: none;
+}
+
+.habits-container button:hover{
+    background-color: rgba(34, 34, 34, 0.573);
+  }.habit-buttons button {
+    margin-right: 10px;
   }
-  
-  .list {
+
+.list {
     flex-grow: 1;
     margin-bottom: 10px;
+}
+.remove {
+    width: 150px;
   }
   
-  .habit {
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+
+.arrow {
+    cursor: pointer;
+  }
+  
+.arrow.left-arrow {
+    margin-right: 10px;
+  }
+  
+.arrow.right-arrow {
+    margin-left: 10px;
+  }
+
+.habit {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* background-color:rgb(160, 153, 255); */
     background-color: white;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
     color: black;
-  }
+}
   
-  .habit.completed {
+.habit.completed {
     background-color: #d4edda;
   }
-  
-  .habit span {
+
+.habit span {
     flex-grow: 1;
     text-align: left;
     font-size: 18px;
@@ -124,314 +117,120 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
   
-  .habit button {
+.habit button {
     background: none;
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
     color: black;
   }
-  
-  .habit span {
-    flex-grow: 1;
-    text-align: left;
-  }
-  
-  .organize {
+.habit-toggle {
+  width: 110px; 
+  min-width: 40px; 
+  padding: 5px 10px; 
+  font-size: 14px; 
+  margin-right: 10px;
+}
+
+.organize {
     border: 2px solid white;
     width: 175px;
     color: white;
-  }
-  
-  .habit-buttons button {
-    margin-right: 10px;
-  }
-  
-  .remove {
-    width: 150px;
-  }
-  
-  .calendar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 40px;
-    
-  }
+}
 
-  .day-label {
-    flex-grow: 1;
-    text-align: center;
+.habit p{
+  font-size: 1.2rem;
+} 
+
+@media (max-width: 900px){
+  .goals-container {
+    flex-direction: column;
+    width: 80%;
   }
-  
-  .arrow {
-    cursor: pointer;
+  .habits-container{
+    position:relative;
+    margin-bottom: 20px;;
   }
-  
-  .arrow.left-arrow {
-    margin-right: 10px;
-  }
-  
-  .arrow.right-arrow {
-    margin-left: 10px;
-  }
-  
-  .btn-bar {
-    padding: 10px;
-    margin-top: 20px;
-    margin-bottom: 60px;
-  }
-  .Chart {
-    margin: 0 auto;
-    width: 90%;
-  } 
-  
-.chart {
-    margin-bottom: 20px;
+}
+
+.goals-page {
+  min-height: 100vh; /* Ensure your main page fills at least the viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+.goals-container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  height: 80vh; /* Adjust as desired, or use 100vh for full page */
+  min-height: 500px; /* Prevents collapsing on small screens */
+}
+.right-container {
+  flex: 1;
+}
+.right-container, .habits-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.habits-container h2{
+  font-size: 18px;
+}
+.arrow.right-arrow{
+  rotate: 180deg;
+}
+.arrow.left-arrow{
+  rotate: 180deg;
+}
+@media (max-width: 900px) {
+  .goals-container{
+  margin: 0 auto;
 }
 .habits-container{
-  width: 90%;
-}
-  
-
-.habits-container button{
-    border: none;
-}
-.habits-container button:hover{
-    background-color: rgba(34, 34, 34, 0.573);
-  }
-
-    
-  .goals-page {
-    background-color:rgba(92, 95, 255, 0.70);
-    width: 100%;
-    color: black;
-    margin: 0 auto ;
-    margin-top: 70px;
-    padding: 10px;
-    border-radius: 10px;
-  }
-
-  .goals-page h2{
-    font-size: 30px;
-  }
-  
-  .plannertable{
-    background-color: rgb(160, 153, 255);
-    padding: 30px;
-    border-radius: 10px;
-    width: 100%;
-  }
-  .planner
-  table th{
-    font-size: 1.2rem;
-  }
-  .plannertable tbody{
-    padding: 10px;
-    color: black;
-    font-size: 1rem;
-  }
-  
-  .checkmate{
-    color:rgb(0, 0, 0);
-    font-size: 22px;
-    padding: 10px;
-    
-  }
-  .habit_name{
-    font-weight: 550;
-    margin-right: 20px;
-  
-  }
-  
-  .goals-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch; 
-    padding: 10px;
-    margin-top: 30px;
-    width: 95%;
-    box-sizing: border-box;
-    color: rgb(0, 0, 0);
-    height: 90%;
-    margin: 0 auto;
-  }
-  
-  .additional-component {
-    background-color: rgb(212, 209, 255);
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    width: 92%;
-    margin: 0 auto;
-  }
-.plannertable th.day-label::before {
-    content: attr(data-full); /* Default to full day names */
-    text-transform: capitalize;
-}
-
-/* General styles for the planner table  */
-.planner-container {
-  width: 100%;
-  overflow-x: auto; 
-  margin-top: 20px;
-}
-
-.plannertable {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-}
-
-.plannertable th, .plannertable td {
+  margin: 0 auto;
   padding: 10px;
-  border: 1px solid #ddd;
-  font-size: 1rem;
 }
-
-.plannertable th {
-  background-color: #f7f7f7;
-  color: black;
-  font-weight: bold;
-}
-
-.plannertable td {
-  background-color: white;
-  color: black;
-}
-
-.day-label.selected {
-  border-radius: 10px;
-  padding: 20px;
-  border: 2px solid #ffffff; /* Optional: Add a border for emphasis */
-}
-
-.goals-page{
-  width: 70%;
-}
-  /*My Changes */
-@media (max-width: 700px) {
   .arrow.left-arrow, .arrow.right-arrow{
     height: 15px;
   }
-  .day-label {
-    font-size: .65rem;
-  }
   .container{
     width: 60%;
-    background-color: aqua;
   }
-  .plannertable th.day-label[data-full="Monday"]::before { content: "MON"; }
-  .plannertable th.day-label[data-full="Tuesday"]::before { content: "TUE"; }
-  .plannertable th.day-label[data-full="Wednesday"]::before { content: "WED"; }
-  .plannertable th.day-label[data-full="Thursday"]::before { content: "THU"; }
-  .plannertable th.day-label[data-full="Friday"]::before { content: "FRI"; }
-  .plannertable th.day-label[data-full="Saturday"]::before { content: "SAT"; }
-  .plannertable th.day-label[data-full="Sunday"]::before { content: "SUN"; }
-  
-  .additional-component {
-    background-color: rgb(59, 55, 113);
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    margin: 0 auto;
-  }
-  
   .goals-page{
         margin-top: 75px;
         width:95%;
         display:flex;
         align-items: center;
         flex-direction: column;
-
     }
   .goals-page h2{
         margin-bottom: 10px;}
+
   .goals-container {
         display: flex;
         margin-top: auto;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;;
         justify-content: center;
         width: 100%;
   }
 
-
-    .habits-container button{
+  .habits-container button{
         margin: 0 10px 10px;
         font-size: .75rem;
         border-radius: 5px;
         cursor: pointer;
         width: 150px;
-        height: 30px;
-        
+        height: 30px; 
     }
-
-    .habit_name td:first-child{
-      font-size: .65rem;
-      text-align: left;
-    }
-    .planner-container{
-      border-radius: 10px;
-      width: 100%;
-    }
-    .plannertable tbody{
-      padding: 5px;
-      color: black;
-      font-size: .6rem;
-      text-align: left;
-    }
-    .plannertable th{
-      padding: 10px;
-      color: black;
-      font-size: .6rem;
-      text-transform: uppercase;
-
-    }
-
-    
-    .checkmate{
-      padding: 5px;
-      margin: 5px;
-      font-size: .6rem;
-    }
-
-    .habit_name td {
-      text-align: center;
-      width: 1%; /* Set a smaller width for the other cells */
-    }
-    
-    .habit_name td:first-child {
-      font-size: .65rem;
-      text-align: left;
-      width: auto;
-      background-color:white;
-      flex-grow: 1; /* Make this cell grow to fill available space */
-      white-space: nowrap; /* Prevent the text from wrapping */
-    }
-    
-    .habit_name td {
-      text-align: center;
-      background-color:rgb(212, 209, 255);
-      width: 1%; /* Make other cells narrower */
+  .chart-container{
+      padding: 20px;
+      margin-top:20px;
+      width: 90%;
     }
 }
-
-
-.habit-toggle {
-  width: 110px; /* Adjust width as needed */
-  min-width: 40px; /* Prevent it from stretching */
-  padding: 5px 10px; /* Adjust padding for better fit */
-  font-size: 14px; /* Reduce font size */
-  margin-right: 10px;
-}
-
-.habit p{
-  font-size: 1.2rem;
-
-}
-
-
 
 @media (max-width: 1200px) {
   .habits-container h2 {
@@ -445,6 +244,7 @@
   }
   .goals-page{
     width: 100%;
+    margin:0;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -456,6 +256,30 @@
     margin: 0 auto;
     padding: 0;
   }
-  
+  .right-container{
+    width: 100%;
+    padding:0;
+    margin:0 auto;
+  }
 
 }
+.calendar-header{
+  gap:8px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.day-label{
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+  background-color: #9783ef;
+}
+.day-label.selected {
+  background-color: #83efed;
+}
+
+.list{
+  height: 400px;
+}
+
