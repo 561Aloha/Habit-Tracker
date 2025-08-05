@@ -2,35 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { Link, useRoutes } from 'react-router-dom';
 import './App.css';
 import { supabase } from './client';
+import User_Circle from './assets/User_Circle.svg';
+import SignInModal from './components/SignInModel'; 
 
 import Welcome from './pages/Welcome.jsx';
 import NotFound from './pages/NotFound.jsx';
 import ReadPosts from './pages/Blog/ReadPosts.jsx';
 import PostPage from './pages/Blog/PostPage.jsx';
 import EditPosts from './pages/Blog/EditPosts.jsx';
-import LoginWithGoogle from './components/LoginWithGoogle';
-import EmailLogin from './components/EmailLogin';
-
 import CreateHabit from './components/CreateHabit.jsx';
-import SignInModal from './components/SignInModel.jsx'; 
 import CreatePost from './pages/Blog/CreatePosts.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Blog from './pages/Blog/Blog.jsx';
 import Goal from './pages/Goals.jsx';
+import hamburgerIcon from './assets/Hamburger_ICON.svg';
+import logo from './assets/icon.png';
 
 function App() {
   const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
-        console.log('User signed in:', session.user);
-      }
-    });
+  const [menuOpen, setMenuOpen] = useState(false);
 
-    return () => subscription.unsubscribe();
-  }, []);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -53,7 +44,7 @@ function App() {
     { path: "/not-found", element: <NotFound /> },
     { path: "/the-posts", element: <ReadPosts data={posts}/> }, 
     { path: "/post/:id", element: <PostPage /> }, // Dynamic route to handle post IDs
-    {path: "/edit-post", element: <EditPosts data={posts} />},
+    { path: "/edit-post", element: <EditPosts data={posts} />},
     { path: "/create-post", element: <CreatePost data={posts} /> },
     { path: "/about-us", element: <AboutUs  /> },
     { path: "/habit", element: <CreateHabit /> },
@@ -65,76 +56,104 @@ function App() {
   const [user, setUser] = useState(null);
   const [showSignInModal, setShowSignInModal] = useState(false);
 
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-    };
-    getUser();
-  }, []);
-  const displayName =
-    user?.user_metadata?.full_name ||
-    user?.email ||
-    "User";
-  useEffect(() => {
-    if (user) setShowSignInModal(false);
-  }, [user]);
 
-    
+  // const displayName =
+  //   user?.user_metadata?.full_name ||
+  //   user?.email ||
+  //   "User";
+
+  const displayName = user?.user_metadata?.full_name?.split(' ')[0] ||
+                    user?.email?.split('@')[0] ||
+                    "User";
+
+
+useEffect(() => {
+  const fetchUser = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session?.user) {
+      // Fetch user with full metadata
+      const { data: userData } = await supabase.auth.getUser();
+      setUser(userData?.user || session.user);
+    } else {
+      setUser(null);
+    }
+  };
+
+  fetchUser(); // initial fetch
+
+  const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+    if (session?.user) {
+      supabase.auth.getUser().then(({ data }) => {
+        setUser(data?.user || session.user);
+      });
+    } else {
+      setUser(null);
+    }
+  });
+
+  return () => listener.subscription.unsubscribe();
+}, []);
+
+const handleSignOut = async () => {
+  await supabase.auth.signOut();
+  setUser(null);
+};
+
 
   return (
-    <>
-      <div>
-        <div className='nav-bar'>
-          <div className='logo-title-container'>
-            <h2>HabitHab</h2>
-          </div>
-          <h4 className='hidden'>Menu</h4>
-          <div className='menu-items'>
-            <Link to='/'>Home</Link>
-            <Link to='/goal'>Goals</Link>
-            <Link to='/blog'>Blog</Link>
-            <Link to='/about-us'>About Us</Link>
-          </div>
-            <div className='signin-container'>
-    {user ? (
-      <div className="user-info">
-        <span className="greeting">Hi, {displayName.split(' ')[0]}</span>
-        <button
-          className="signout-btn"
-          onClick={async () => {
-            await supabase.auth.signOut();
-            setUser(null);
-          }}
-        >
-          Sign Out
-        </button>
-      </div>
-    ) : (
-      <button
-        className="auth-btn"
-        onClick={() => setShowSignInModal(true)}
-        style={{
-          background: '#2979ff',
-          color: '#fff',
-          border: 'none',
-          borderRadius: 5,
-          padding: '8px 20px',
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
-        Sign In
-      </button>
-    )}
-          </div>
+    <div>
+      <div className='nav-bar'>
+        <div className='logo-title-container'>
+          <Link to="/"><img src={logo} alt="Logo" /></Link>
+          <h3 className='logo-title'>Zeno</h3>
+        </div>
 
         <SignInModal open={showSignInModal} onClose={() => setShowSignInModal(false)} />
 
+        <div className="hamburger-container" onClick={() => setMenuOpen(!menuOpen)}>
+          <img src={hamburgerIcon} className={`hamburger ${menuOpen ? 'open' : ''}`} alt="Menu" />
         </div>
-        {element}
+
+        <div className="menu-items desktop-only">
+          <Link to="/">Home</Link>
+          <Link to="/goal">Goals</Link>
+          <Link to="/blog">Blog</Link>
+          <Link to="/about-us">About Us</Link>
+          {user ? (
+            <div className="user-info desktop-only">
+              <div className="user-details">
+                <img src={User_Circle} alt="User Icon" className="user-icon" />
+                <span className="greeting">Hi, {displayName.split(' ')[0]}</span>
+              </div>
+              <button className="signout-btn" onClick={handleSignOut}>Sign Out</button>
+            </div>
+          ) : (
+            <button className="signout-btn desktop-only" onClick={() => setShowSignInModal(true)}>Sign In</button>
+          )}
+        </div>
+
+        <div className={`menu-overlay ${menuOpen ? 'open' : ''}`}>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/goal">Goals</Link></li>
+            <li><Link to="/blog">Blog</Link></li>
+            <li><Link to="/about-us">About Us</Link></li>
+            {user ? (
+              <li className="user-info">
+                <div className="user-details">
+                  <img src={User_Circle} alt="User Icon" className="user-icon" />
+                  <span className="greeting">Hi, {displayName.split(' ')[0]}</span>
+                </div>
+                <button className="signout-btn" onClick={handleSignOut}>Sign Out</button>
+              </li>
+            ) : (
+              <li><button className="signout-btn" onClick={() => setShowSignInModal(true)}>Sign In</button></li>
+            )}
+          </ul>
+        </div>
       </div>
-    </>
+      {element}
+    </div>
   );
 }
 

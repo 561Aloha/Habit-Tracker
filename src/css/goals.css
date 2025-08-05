@@ -1,19 +1,17 @@
-/* Planner */
 .goals-page {
     background-color:rgba(28, 31, 199, 0.7);
-    width: 100%;
+    width: 100vw;
     margin: 0 auto ;
-    padding-top: 70px;
-    border-radius: 10px;
+    padding-top: 20px;
   }
 .goals-page h2{
     font-size: 30px;
   }
 
 .habits-container{
-    background-color: rgb(212, 209, 255);
     padding: 20px;
     border-radius: 10px;
+
     height: 600px;
     overflow-y: auto; 
     color: black;
@@ -25,9 +23,11 @@
     top: 0;
     align-self: flex-start; /* In flex layouts, this ensures sticky works as expected */
     z-index: 2;  
+    flex: 1;    
+    background-color: seashell;
 }
 .chart-container {
-  background-color: white;
+    background-color: seashell;
     border-radius: 10px;
     color: black;
     display: flex;
@@ -38,7 +38,7 @@
     justify-content: space-between; 
     margin-top: 40px;
   }
-  .goals-container {
+.goals-container {
     display: flex;
     justify-content: space-between;
     align-items: stretch; 
@@ -47,52 +47,26 @@
     color: rgb(0, 0, 0);
     margin: 0 auto;
     flex-direction: row;
+    flex: 1;
+    padding:0;
+    height: 80vh; 
+    min-height: 500px;
 }
 
-.habits-container{
-  flex: 1;    
-  min-width: 0;
-  background-color: seashell;
-  border-radius: 10px;
-  overflow-y: auto;
-}
-.habits-container button{
+.habit button {
+    background: none;
     border: none;
-}
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: black;
+  }
 
 .habits-container button:hover{
     background-color: rgba(34, 34, 34, 0.573);
-  }.habit-buttons button {
-    margin-right: 10px;
-  }
-
-.list {
-    flex-grow: 1;
-    margin-bottom: 10px;
 }
-.remove {
-    width: 150px;
-  }
-  
-.calendar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 40px;
-  }
-
-.arrow {
-    cursor: pointer;
-  }
-  
-.arrow.left-arrow {
+.habit-buttons button {
     margin-right: 10px;
-  }
-  
-.arrow.right-arrow {
-    margin-left: 10px;
-  }
-
+}
 .habit {
     display: flex;
     justify-content: space-between;
@@ -106,7 +80,7 @@
   
 .habit.completed {
     background-color: #d4edda;
-  }
+}
 
 .habit span {
     flex-grow: 1;
@@ -115,15 +89,41 @@
     font-weight: medium;
     margin-left: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.habit p{
+  font-size: 1.2rem;
+} 
+
+.list {
+    flex-grow: 1;
+    margin-bottom: 10px;
+  height: 400px;
+}
+
+.remove {
+    width: 150px;
   }
   
-.habit button {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: black;
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap:8px;
+  position: relative;
+  margin: 0 auto;
+  padding-bottom: 30px;
   }
+
+.arrow {
+    cursor: pointer;
+  }
+
+.arrow.right-arrow{
+  rotate: 180deg;
+}
+.arrow.left-arrow{
+  rotate: 180deg;
+}
 .habit-toggle {
   width: 110px; 
   min-width: 40px; 
@@ -138,20 +138,6 @@
     color: white;
 }
 
-.habit p{
-  font-size: 1.2rem;
-} 
-
-@media (max-width: 900px){
-  .goals-container {
-    flex-direction: column;
-    width: 80%;
-  }
-  .habits-container{
-    position:relative;
-    margin-bottom: 20px;;
-  }
-}
 
 .goals-page {
   min-height: 100vh; /* Ensure your main page fills at least the viewport */
@@ -159,13 +145,6 @@
   flex-direction: column;
 }
 
-.goals-container {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  height: 80vh; /* Adjust as desired, or use 100vh for full page */
-  min-height: 500px; /* Prevents collapsing on small screens */
-}
 .right-container {
   flex: 1;
 }
@@ -178,61 +157,46 @@
 .habits-container h2{
   font-size: 18px;
 }
-.arrow.right-arrow{
-  rotate: 180deg;
+
+.day-label{
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+  background-color: #9783ef;
 }
-.arrow.left-arrow{
-  rotate: 180deg;
+.day-label.selected {
+  background-color: #83efed;
 }
-@media (max-width: 900px) {
-  .goals-container{
-  margin: 0 auto;
+
+.habit-buttons{
+  margin:0 auto;
 }
 .habits-container{
-  margin: 0 auto;
-  padding: 10px;
+    max-width: 500px;
 }
-  .arrow.left-arrow, .arrow.right-arrow{
-    height: 15px;
-  }
-  .container{
-    width: 60%;
-  }
-  .goals-page{
-        margin-top: 75px;
-        width:95%;
-        display:flex;
-        align-items: center;
-        flex-direction: column;
-    }
-  .goals-page h2{
-        margin-bottom: 10px;}
 
+@media (max-width: 900px){
   .goals-container {
-        display: flex;
-        margin-top: auto;
-        flex-direction: column;
-        align-items: flex-start;;
-        justify-content: center;
-        width: 100%;
+    flex-direction: column;
   }
-
-  .habits-container button{
-        margin: 0 10px 10px;
-        font-size: .75rem;
-        border-radius: 5px;
-        cursor: pointer;
-        width: 150px;
-        height: 30px; 
-    }
-  .chart-container{
-      padding: 20px;
-      margin-top:20px;
-      width: 90%;
-    }
+  .habits-container{
+    position:relative;
+    margin-bottom: 20px;
+  }
+  
 }
 
 @media (max-width: 1200px) {
+  .habits-container{
+    margin:0 auto;
+    margin-bottom: 20px;
+    padding:20px;
+  }
+  .habits-container{
+    max-width: 500px;
+    position:relative;
+  }
+
   .habits-container h2 {
     font-size: 25px;
     margin: 0 auto;
@@ -261,25 +225,21 @@
     padding:0;
     margin:0 auto;
   }
+  
 
-}
-.calendar-header{
-  gap:8px;
-  position: relative;
-  margin: 0 auto;
+  
 }
 
-.day-label{
-  border-radius: 10px;
-  text-align: center;
-  padding: 10px;
-  background-color: #9783ef;
-}
-.day-label.selected {
-  background-color: #83efed;
-}
 
-.list{
-  height: 400px;
+@media (max-width: 700px) {
+  .habits-container{
+    position: relative;
+    width:90%;
+    border: 2px solid seashell;
+    padding: 20px;
+  }
+  .goals-container{
+    position: relative;
+  }
+  
 }
-

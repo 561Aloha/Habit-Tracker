@@ -25,7 +25,6 @@
   background-color: #aaa;
 }
 
-
 .content {
   display: flex;
   flex-direction: column;   /* Stacks children vertically */
@@ -62,7 +61,6 @@
   background-color: transparent; /* Makes the button background transparent */
   width:auto;
 }
-
 
 .BlogCard img {
   width: 250px; /* Adjust width as necessary */

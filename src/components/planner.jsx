@@ -1,117 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { supabase } from './../client';
+
+import React from 'react';
 import './../css/planner.css'; 
-import CheckSVG from './../assets/Check.svg';
-import CloseLSVG from './../assets/Close_L.svg';
+import { format } from 'date-fns';
 
-const Planner = () => {
-  const [user, setUser] = useState(null);
-  const [habits, setHabits] = useState([]);
-  const [completionData, setCompletionData] = useState([]);
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const Planner = ({ habits = [], completionData = [], onHabitCompletion, currentWeek = [] }) => {
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-    };
-    getUser();
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      fetchHabits();
-      fetchCompletionData();
-    }
-  }, [user]);
-
-  const fetchHabits = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('Habits')
-        .select('*')
-        .eq('user_id', user.id);
-
-      if (error) {
-        throw error;
-      }
-      setHabits(data);
-    } catch (error) {
-      console.error('Error fetching habits:', error.message);
-    }
-  };
-
-  const fetchCompletionData = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('Habit_Completion')
-        .select('*')
-        .eq('user_id', user.id);
-
-      if (error) { throw error;}
-      setCompletionData(data);
-    } catch (error) {
-      console.error('Error fetching completion data:', error.message);
-    }
-  };
-    const getStatus = (habitId, day) => {
-    const item = completionData.find(
-      (c) =>
-        c.habit_id === habitId &&
-        new Date(c.completion_date).getDay() === day
-    );
-    if (!item) return '';
-    if (item.is_completed) return 'checked';
-    if (item.is_completed === false) return 'failed';
-    return '';
-  };
-
-  const renderCheckmark = (habitId, day) => {
+  // Get status for a specific habit and day
+  const getStatus = (habitId, dateKey) => {
     const completion = completionData.find(
-      (item) =>
-        item.habit_id === habitId &&
-        new Date(item.completion_date).getDay() === day &&
-        item.is_completed
+      c => c.habit_id === habitId && c.completion_date === dateKey
     );
-    return completion ? '✓' : '○';
+    
+    if (!completion) return '';
+    return completion.is_completed ? 'checked' : 'failed';
   };
 
-  const markHabitComplete = async (habitId, habitDateKey) => {
-    if (!user) return;
-
-    try {
-      // Get current completion status for this cell
-      const existing = completionData.find(
-        c => c.habit_id === habitId && c.completion_date.startsWith(habitDateKey)
-      );
-      const isCompleted = existing ? !existing.is_completed : true;
-
-      // Save to supabase
-      const { data, error } = await supabase
-        .from('Habit_Completion')
-        .upsert({
-          habit_id: habitId,
-          completion_date: habitDateKey,
-          is_completed: isCompleted,
-          user_id: user.id, 
-        }, { onConflict: ['habit_id', 'completion_date', 'user_id'] });
-
-      if (error) throw error;
-      fetchCompletionData(); // Re-fetch to update grid
-
-    } catch (error) {
-      console.error('Error updating habit completion status:', error.message);
+  // Generate date keys for the current week
+  const getWeekDateKeys = () => {
+    if (currentWeek.length === 0) {
+      // Fallback to current week if currentWeek is not provided
+      const today = new Date();
+      const weekStart = new Date(today.setDate(today.getDate() - today.getDay()));
+      return Array.from({ length: 7 }, (_, i) => {
+        const date = new Date(weekStart);
+        date.setDate(weekStart.getDate() + i);
+        return format(date, 'yyyy-MM-dd');
+      });
     }
+    
+    return currentWeek.map(day => format(day.fullDate, 'yyyy-MM-dd'));
   };
 
-  
+  const weekDateKeys = getWeekDateKeys();
 
-return (
+  return (
     <div className="planner-modern">
+      <h3>Weekly Habit Grid</h3>
       <table>
         <thead>
           <tr>
-            <th></th>
+            <th>Habit</th>
             {days.map(day => (
               <th key={day}>{day}</th>
             ))}
@@ -119,27 +48,24 @@ return (
         </thead>
         <tbody>
           {habits.length > 0 ? (
-            habits.map((habit, i) => (
-              <tr key={habit.habit_id || i}>
+            habits.map((habit) => (
+              <tr key={habit.habit_id}>
                 <td><strong>{habit.habit_name}</strong></td>
-                {days.map((_, j) => {
-                  const today = new Date();
-                  const weekStart = new Date(today.setDate(today.getDate() - today.getDay()));
-                  const cellDate = new Date(weekStart);
-                  cellDate.setDate(weekStart.getDate() + j); // j = 0: Sun, 1: Mon, ...
-                  const dateKey = cellDate.toISOString().split('T')[0]; // 'YYYY-MM-DD'
-                  const dayIdx = (j + 1) % 7;
-                  const status = getStatus(habit.habit_id, dayIdx);
-
+                {weekDateKeys.map((dateKey, dayIndex) => {
+                  const status = getStatus(habit.habit_id, dateKey);
+                  
                   return (
-                    <td key={j} onClick={() => markHabitComplete(habit.habit_id, dateKey)}>
+                    <td 
+                      key={dayIndex} 
+                      onClick={() => onHabitCompletion && onHabitCompletion(habit.habit_id, dateKey)}
+                      style={{ cursor: 'pointer' }}
+                    >
                       <span className={`habit-cell ${status}`}>
-                        {status === 'checked' ? '✓' : status === 'failed' ? '✗' : ''}
+                        {status === 'checked' ? '✓' : status === 'failed' ? '✗' : '○'}
                       </span>
                     </td>
                   );
                 })}
-
               </tr>
             ))
           ) : (
@@ -152,4 +78,5 @@ return (
     </div>
   );
 };
+
 export default Planner;

@@ -33,37 +33,40 @@ export default function HowItWorks() {
   const [selected, setSelected] = useState(0);
 
   return (
-    <div className="hiw-main">
-      <h2 className="hiw-title">How it works</h2>
-      <div className="hiw-row">
-        {/* Left: Image */}
-        <div className="hiw-image-col">
-          <img
-            src={STEPS[selected].image}
-            alt={STEPS[selected].title}
-            className="hiw-image"
-          />
-        </div>
+<div className="hiw-main">
+  <h2 className="hiw-title">How it works</h2>
+  <div className="hiw-row">
 
-        {/* Middle: Step Details */}
-        <div className="hiw-details-col">
-          <div className="hiw-step-title">{STEPS[selected].title}</div>
-          <div className="hiw-step-desc">{STEPS[selected].description}</div>
+    <div className="hiw-steps-col">
+      {STEPS.map((step, idx) => (
+        <div
+          key={step.title}
+          className={`hiw-step-nav${selected === idx ? " active" : ""}`}
+          onClick={() => setSelected(idx)}
+        >
+          {step.title}
         </div>
+      ))}
+    </div>
 
-        {/* Right: Steps Navigation */}
-        <div className="hiw-steps-col">
-          {STEPS.map((step, idx) => (
-            <div
-              key={step.title}
-              className={`hiw-step-nav${selected === idx ? " active" : ""}`}
-              onClick={() => setSelected(idx)}
-            >
-              {step.title}
-            </div>
-          ))}
-        </div>
+    <div className="hiw-body-row">
+      <div className="hiw-image-col">
+        <img
+          src={STEPS[selected].image}
+          alt={STEPS[selected].title}
+          className="hiw-image"
+        />
+      </div>
+
+      <div className="hiw-details-col">
+        <div className="hiw-step-title">{STEPS[selected].title}</div>
+        <div className="hiw-step-desc">{STEPS[selected].description}</div>
       </div>
     </div>
+
+  </div>
+</div>
+
+
   );
 }

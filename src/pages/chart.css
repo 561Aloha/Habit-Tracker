@@ -1,168 +1,162 @@
-/* Button bar styling */
+/* ===================
+   Streaks Tracker
+   =================== */
 .streaks-tracker-container {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
 .streaks-tracker {
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 150px;
-    text-align: center;
+  display: inline-block;
+  width: 325px;
+  height: auto;
+  max-width: 200px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.streaks-tracker {
-    border-radius: 4px;
-    border: solid 2px white;
-    width: 325px;
-    height: 125px;
-    display: inline-block;
-    margin: 5px;
-}
-
+/* ===================
+   About Us Section
+   =================== */
 .about-us-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .image {
-    width: 700px;
-    height: 500px;
+  width: 700px;
+  height: 500px;
 }
 
 .about-us {
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 30px;
-    background-color: antiquewhite;
-    border: solid white 2px;
-    width: 900px;
-    text-align: center;
+  padding: 0 15px 30px;
+  background-color: antiquewhite;
+  border: 2px solid white;
+  width: 900px;
+  text-align: center;
 }
 
-/* Styling for the chart container within Goals page */
-.chart {
-    border: 1px solid white; /* Visible border for debugging, remove if not needed */
-    display: flex;
-    padding: 10px;
-    flex-direction: column;
-    background-color: black;
-    align-items: center; /* Center align the contents of the chart vertically */
+/* ===================
+   Button Bar
+   =================== */
+.btn-bar {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto 60px;
+  width: 100%;
+  padding: 10px;
 }
 
 .btn-bar button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: black;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: black;
 }
 
 .btn-bar button:hover {
-    background-color: rgba(34, 34, 34, 0.573);
+  background-color: rgba(34, 34, 34, 0.573);
 }
 
-.btn-bar {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    margin-bottom: 60px;
-}
-
-.streaks-tracker {
-    text-align: center;
-    margin-top: 20px;
-    border: 2px white solid;
-    padding: 10px;
-    margin: 10px;
-    height: auto;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-}
-.arrow.left-arrow, .arrow.right-arrow{
-    height: 15px;
-}
-
-@media (max-width: 1200px){
-    .btn-bar{
-        width: 90%;
-        margin: 0 auto;
-       }
-    .new {
-        width: 90%;
-        height: 90%;
-    }
-    .chart {
-        margin-top: 20px;
-        margin: 0 auto;
-        padding:0;
-        width: 90%;
-        }
-    .streaks-tracker {
-        width: 50%;
-        padding: 2px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
-    .streaks-tracker p {
-        margin-bottom: 1px;
-        font-size: .75rem;
-    }
-    .streaks-tracker h2 {
-        margin-top: .5px;
-        margin-bottom: .5px;
-    }
-
-    .btn-bar button {
-        padding: 10px 20px;
-        margin: 0 10px;
-        font-size: .75rem;
-        height: 30px;
-        border: none;
-        border-radius: 5px;
-        margin-bottom: 5px;
-        cursor: pointer;
-    }
-    .Chart h2{
-        font-size: 1.5rem;
-        margin-bottom: 0px;
-    }
-}
-  
+/* ===================
+   Chart Section
+   =================== */
 .chart {
-    border: 1px solid white; /* Visible border for debugging, remove if not needed */
-    display: flex;
-    padding: 10px;
-    flex-direction: column;
-    background-color: black;
-    margin-bottom: 20px;
-    align-items: center; /* Center align the contents of the chart vertically */
-   }
-
-@media (max-width: 700px) {
-    .chart {
-      width: 650px; 
-      margin-top: 20px;
-    }
-  }
-
-  @media (max-width: 700px) {
-    .new{
-      width: 100%;
-      height: 100%;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: black;
+  border: 1px solid white; /* remove if not needed */
 }
 
 .chartjs-render-monitor {
-    border-radius: 10px !important;
+  border-radius: 10px !important;
+}
+
+.arrow.left-arrow,
+.arrow.right-arrow {
+  height: 15px;
+}
+
+/* ===================
+   Responsive Styles
+   =================== */
+@media (max-width: 1200px) {
+  .btn-bar {
+    width: 90%;
+  }
+
+  .new {
+    width: 90%;
+    height: 90%;
+  }
+
+  .Chart {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .streaks-tracker {
+    width: 50%;
+    min-width: unset;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2px;
+  }
+
+  .streaks-tracker p {
+    margin-bottom: 1px;
+    font-size: 0.75rem;
+  }
+
+  .streaks-tracker h2 {
+    margin: 0.5px 0;
+  }
+
+  .btn-bar button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 0.75rem;
+    height: 30px;
+    margin-bottom: 5px;
+  }
+
+  .Chart h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .chart-container {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .new {
+    width: 100%;
+    height: 100%;
+  }
+
+  .chart {
+    width: 650px;
+    margin-top: 20px;
+  }
 }

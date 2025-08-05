@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../../client';
-
+import EditPost from './EditPosts';
 import more from './more.svg';
+import { Link } from 'react-router-dom';
 import '../../css/about-us.css'; 
 import '../../css/postpage.css'; 
 
@@ -64,11 +65,12 @@ const PostPage = () => {
 
   return (
     <div className='postpage-f'>
+
       <div className='title-container'>
+        <Link to={`/edit/${post.id}`}>Edit</Link>
+
         <h1>{post.title}</h1>
-        <button onClick={handleEditClick}>Edit Post</button>
            </div>
-      {/* <h4>Go back</h4> */}
       <p>Author: {post.author}</p>
       <p>Date: {post.time}</p>
       <p className='description'>{post.description}</p>

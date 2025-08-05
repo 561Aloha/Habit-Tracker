@@ -1,16 +1,23 @@
-
 .BlogPost-s {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background-color:#e8e8e8;
+  background-color: #E6EBFF;
   color: rgb(0, 0, 0);
   padding: 20px;
+  margin: 0 auto;;
   gap: 10px;
+  width: 80%;
   justify-content: flex-start;
-  margin-top: 75px;
-
-} 
+  border-radius: 10px;
+  padding-top: 100px;
+}
+  .sort-buttons h1{
+    font-size: 32px;;
+  }
+  .sort-buttons p{
+    font-size: 16px;
+  }
 
 .together {
     display: flex;
@@ -37,34 +44,27 @@
     color: rgb(0, 0, 0);
     font-size: 18px;}
 
+.sort-buttons h1, .sort-buttons p{
+  text-align: left;
+}
 .sort-buttons button {
     color: rgb(232, 232, 232);
-    padding: 10px 15px;
+    padding: 5px 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
     cursor: pointer;
     height: 40px;
-    font-size: 18px;
+    font-size: 14px;
     margin: 0 auto;}
       
-
-.sort-buttons button:hover{
-  background-color: rgba(34, 34, 34, 0.573);
-  border: 1px solid white;}
-
-
-
-
-    
 .search {
-  width: 700px; /* Adjust the width as needed for larger screens */
+  width: 50%;
+  max-width: 700px; /* Adjust the width as needed for larger screens */
   margin-bottom: 10px; /* Add some space between the search bar and buttons */
   margin: 0 auto;
   height: 40px;
-  font-size: 18px;
   color: rgb(0, 0, 0);
   border-radius: 5px;
-
   padding-left:20px;
   border: none;
   background-color: #f8f8f8;
@@ -72,56 +72,31 @@
     
 .sort-buttons .button-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* Center the buttons horizontally */
+  align-items: center;
   margin: 0 auto;
+  overflow: hidden;
 }
     
 .sort-buttons {
-  flex-direction: column; /* Stack the search bar and buttons vertically */
-  align-items: center; /* Center the content horizontally */
+  flex-direction: column;
+  width: 90%;
+  margin:0 auto;
+  align-items: center; 
 }
+
 .sort-buttons .button-container button {
-  width: auto; /* Let the buttons take their natural width */
+  width: 150px;
   margin: 10px;
-
 }
 
-
-.BlogPost-s{
-  border-radius: 10px;
+.container-blogcard{
+  margin: 0 auto;
+  display: flex;
+  gap:20px;
+  flex-wrap: wrap;
 }
 
-
-  @media (max-width: 700px) {
-    .blogpost {
-      grid-template-columns: 1fr; /* 1 card per row on small screens */
-    }
-    .BlogPost-s{
-      width: 90%;
-    }
-    .BlogPost-s h1{
-      margin-left: 1;
-    }
-
-    .search {
-      width: 100%; /* Make the search bar take up the full width *//* Center the search bar horizontally */
-      display: block; /* Ensure the search bar behaves like a block element */
-    }
-    .sort-buttons button {
-      width: 100%;
-      margin: 0 auto;
-      margin-top: 10px;
-    }
-
-  }
-  
-
-
-  @media (min-width: 400px) {
-    .search{
-      width: 50%;
-    }
+@media (min-width: 400px) {
     .button-container{
       width: fit-content;
       padding-bottom: 30px;
@@ -137,40 +112,46 @@
       margin-top: 75px;
     }
   }
-
-
-
-.container-blogcard{
-  margin: 0 auto;
-  display: flex;
-  gap:20px;
-  flex-wrap: wrap;
-
-}
-
-
+@media (max-width: 700px) {
+    .blogpost {
+      grid-template-columns: 1fr;
+    }
+    .BlogPost-s{
+      width: 90%;
+    }
+    .BlogPost-s h1{
+      margin-left: 1;
+    }
+    .search {
+      display: block; 
+    }
+    .sort-buttons button {
+      margin: 0 auto;
+      margin-top: 10px;
+    }
+  }
 
 @media (min-width: 1200px){
   .BlogPost-s{
     width: 70%;
     padding: 20px;
 
-
-
   }
   .sort-buttons{
     margin: 0 auto;
+    width: 100%;
+    background-color: aqua;
   }
-  .sort-buttons p{
-    font-size: 20px;
-    width: 50%;
-    margin: 0 auto;
+  .button-container{
+    width: 100%;
   }
-  .container-blogcard{
 
+  .container-blogcard{
     display: flex;
     flex-wrap: wrap;
     width: 80%;
-
+  }
+  .sort-buttons p{
+    width: 50%;
   }
 }

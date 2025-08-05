@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { supabase } from '../client';
 import '../css/HowItWorks.css';
 
-const EmailLogin = () => {
+const EmailSignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleEmailLogin = async (e) => {
+  const handleEmailSignUp = async (e) => {
     e.preventDefault();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signUp({ email, password });
     if (error) setError(error.message);
   };
 
   return (
-    <form onSubmit={handleEmailLogin} className="email-form">
+    <form onSubmit={handleEmailSignUp} className="email-form">
       <input
         type="email"
         className="email-input"
@@ -31,10 +31,10 @@ const EmailLogin = () => {
         onChange={e => setPassword(e.target.value)}
         required
       />
-      <button type="submit" className="email-submit">Sign in with Email</button>
+      <button type="submit" className="email-submit">Sign up with Email</button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
     </form>
   );
 };
 
-export default EmailLogin;
+export default EmailSignUp;

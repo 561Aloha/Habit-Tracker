@@ -1,31 +1,46 @@
+/* Add this new wrapper class */
+.habit-form-wrapper {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
+  padding: 20px;
+  border-radius: 30px;
+  margin: 50px auto;
+  max-width: 800px;
+  width: 90%;
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+  position: relative;
+  top: 30px; /* This shifts it down without exposing the background */
+}
+
+.create-habit{
+  padding: 40px;
+  padding-top: 40px;
+  max-width: 100%; /* Changed from 720px */
+  margin: 0; /* Remove margin since wrapper handles it */
+  border-radius: 20px;
+  width: 90%;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.95); /* Made slightly more opaque */
+}
+
 button{
   width:250px;
   margin: 0 auto;
 }
 .habitname{
-    margin-bottom: 10px; /* Add some space between the search bar and buttons */
-    margin: 0 auto;
-    height: 40px;
-    font-size: 18px;
+    margin-bottom: 10px;
+    height: 30px;
+    font-size: 16px;
     color: rgb(0, 0, 0);
     border-radius: 12px;
+    padding: 0 20px;
     padding-left:20px;
-    border: white;
-    min-width: 550px;
-    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    width:50%;
 }
 
-.create-habit{
-  padding: 40px;
-  padding-top: 80px;
-  margin: 0 auto;
-  max-width: 800px;
-  width: 70vw;
-  border-radius: 20px;
-  background-color: rgb(255, 255, 255, .5);
-}
 .check:checked + label::before {
-  opacity: 1; /* Show checkmark when checked */
+  opacity: 1;
 }
 
 .category-button {
@@ -39,9 +54,16 @@ button{
   cursor: pointer;
   margin: 5px;
   border: none;
-  background-color: #f0f0f0;
   height: 175px;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
   transition: background-color 0.3s;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .category-button.selected {
@@ -49,7 +71,7 @@ button{
 }
 
 .category-button.selected {
-  border-color: blue; /* Highlight the selected category */
+  border-color: blue;
 }
 
 .category-button span {
@@ -58,46 +80,41 @@ button{
 }
 
 .category-button img {
-  width: 100px; /* Fixed size for images */
+  width: 100px;
   height: 100px;
   margin-bottom: 10px;
 }
 
-.category-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: 10px; 
-  background-color: white; /* Background color for buttons */
-}
 .category-button:hover {
-  background-color: #d9d9d9; /* Change background on hover */
+  background-color: #d9d9d9;
+}
+
+.category-button.selected {
+  background-color: #cdb5ff;
 }
 
 .more-button {
-  grid-column: 1 / -1; /* Spans the button across all columns */
+  grid-column: 1 / -1;
   text-align: center;
-  background-color: #9a8bff; /* Darker background for the 'More...' button */
+  background-color: #9a8bff;
   color: white;
-  border-radius: 20px; /* Makes it pill-shaped */
+  border-radius: 20px;
   border: none;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 10px; /* Adds some space above the button */
+  margin-top: 10px;
 }
 
 .categories {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Creates three columns */
-  grid-template-rows: repeat(2, 1fr); /* Creates two rows */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 10px;
   justify-content: center;
   align-items: center;
   padding: 10px;
   margin: 0 auto;
-  max-width: 625px; /* Adjust based on your container size */
+  max-width: 625px;
   margin: 0 auto;
 }
 
@@ -107,11 +124,11 @@ button{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure it's above all other content */
+    z-index: 1000;
 }
 
 .modal-content{
@@ -120,7 +137,7 @@ button{
   flex-wrap: wrap;
 }
 .modal-content {
-  position: relative; /* Add this line if not already present */
+  position: relative;
     height: 650px;
     background: rgb(165, 114, 114);
     padding: 20px;
@@ -128,18 +145,18 @@ button{
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     max-width: 600px;
     margin-top: 50px;
-    overflow-y: auto; /* Adds scroll to the modal content if needed */
+    overflow-y: auto;
 }
 .modal-content {
-  grid-template-columns: repeat(3, 1fr); /* Creates three columns */
-  grid-template-rows: repeat(2, 1fr); /* Creates two rows */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   background-color: #bababa;
  justify-content: center;
 }
 .close {
     position:absolute;
-    right: 10px; /* Adjust right to 0px */
-    top: 0px; /* Adjust top to 0px */
+    right: 10px;
+    top: 0px;
     font-size: 24px;
     padding: 10px;
     cursor: pointer;
@@ -149,97 +166,185 @@ button{
     margin-right: 5px;
 }
 
-.nav-btns {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
 
 .createhabit-btn {
-    background-color: #442fe4; /* Example button color */
+    background-color: #442fe4;
     color: white;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
 }
 
-.select-menu {
-  color: black; /* Text color */
-}
-
 @media (max-width: 1000px) {
   .categories{
-    background-color: #442fe4;
     gap: 1%;
-    grid-template-columns: repeat(2, 1fr); /* Creates three columns */
-    grid-template-rows: repeat(3, 1fr); /* Creates two rows */
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
   }
-
 }
 .wrap div {
-  width: 125px; /* Width for each day button */
-  height: 70px; /* Height for each day button */
-  background-color: #fff; /* Background color for each button */
-  border-radius: 10px; /* Rounded corners for each button */
-  padding: 15px; /* Padding within each button */
-  display: flex; /* Enables flexbox layout within each button */
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-  position: relative; /* Allows positioning of pseudo-elements relative to this div */
-  cursor: pointer; /* Change cursor to pointer to indicate clickable area */
-  transition: background-color 0.3s; /* Smooth transition for background color */
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
   color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  text-align: center;
+  height: 20px;
+  line-height: 50px;
+  font-size: 14px;
+  position: relative;
+  cursor: pointer;
+}
+
+.wrap div:hover {
+  background-color: #e1ffe2;
 }
 
 .wrap {
   display: grid;
-  grid-template-columns: repeat(4, 125px); /* Adjust number of columns if needed */
-  justify-content: center;
-  align-items: center;
-  gap: 40px; /* Adjust or remove if spacing is too large */
-  padding: 0;
-  margin: 0 auto;
-  padding-bottom: 20px;
-  padding-top: 0px;
-  width: 100%;
-  border: 2px solid black; /* Border around the grid */
-}
-
-.wrap div {
-  width: 125px;
-  height: 70px;
-  background-color: #fff;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin: 0; /* Ensure there's no additional margin */
-  padding: 0; /* Remove padding to prevent any internal spacing */
-  color: #333;
+  grid-template-columns: repeat(4,1fr);
+  gap:8px;
 }
 
 .wrap input[type="checkbox"] {
   opacity: 0;
   position: absolute;
   width: 100%;
+  padding:0;
   height: 100%;
-   border: none;
-  z-index: 1; /* Ensure checkbox is clickable */
   cursor: pointer;
 }
 
 .wrap input[type="checkbox"]:checked + label {
   background-color: #b9f3bb;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.form-group-freq > label {
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.wrap input[type="checkbox"]:checked + label {
+  background-color: #b9f3bb;
+  border-radius: 25px;
+  font-weight: bold;
+}
+.nav-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap:12px;
+}
+
+.nav-btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+  .wrap {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 500px) {
+  .wrap {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+.header-habit{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin: 0 auto;
+  flex-direction: row;
+}
+.header-habit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.select-menu {
+  width: 50%;
+  border-radius: 8px;
+  color:black;
+}
+
+.habitname {
+  width: 40%;
+  height: 30px;
+  font-size: 16px;
+  min-width: 200px;
+  color: #222;
+  border: 1px solid #ccc;
+  padding: 0 20px;
+  height: 15px;
+  font-size: 16px;
+  width: 40%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.habitname::placeholder {
+  color: #000000; 
+  font-size: 16px;
+}
+
+.header-habit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.header-habit .habitname ,.select-menu {
+  flex: 1;
+  max-width: 48%;
+}
+
+.header-habit .select-menu .react-select__control {
   width: 100%;
-  padding: 25px;
-  border: none;
+  box-sizing: border-box;
 }
 
 .create-habit h3{
-  color: brown;
+  color: #442fe4;
   padding-bottom: 0;
   margin: 0;
-  background-color: #9a8bff;
+}
+.create-habit h2{
+  font-size:32px;
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 0;
+  color:#442fe4;
+}
+
+
+.wrap input[type="checkbox"]:checked + label {
+  background-color: #b9f3bb;
+  font-weight: bold;
+  width: 100%;
+  padding:0;
+  margin:0;
+  border-radius: 12px;
+  color: #222;
 }

@@ -10,13 +10,11 @@ const Join = () => {
   };
 
   const handleEmailSignup = () => {
-    // Redirect to your email signup page or open email signup modal
-    window.location = '/signup-email'; // Change as needed
+    window.location = '/signup-email';
   };
 
   const handleSignIn = () => {
-    // Redirect to your login page or modal
-    window.location = '/login'; // Change as needed
+    window.location = '/login';
   };
 
   return (
@@ -87,4 +85,4 @@ const Join = () => {
   );
 };
 
-export default Join;;
+export default Join;

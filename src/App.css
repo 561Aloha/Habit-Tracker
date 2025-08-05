@@ -8,7 +8,7 @@
   flex-direction: row;
   margin:0 auto;
   width: 80%;
-  padding-top: 100px;
+  padding-top: 50px;
 }
 
 .header-content {
@@ -18,17 +18,18 @@
   text-align: left;
   background-color: transparent;
   margin: 0 auto;
-  padding-top: 100px;
   max-width: 700px;
-  max-height: 400px;
+  max-height: 320px;
   padding: 40px;
-  border-radius: 40px;
   background-color: rgba(0, 25, 166, 0.10) ;
   border-radius: 20px;
   background: linear-gradient(145deg, #6a2dd9, #5926b7);
-  /* box-shadow:  20px 20px 100px #c8acfb,
-               -20px -20px 100px #a68cd5; */
 }
+  .header-content h1 {
+    font-size: 2rem;
+    width: 100%;
+    margin-bottom: 4px;
+  }
 .banner-img-container{
   display: flex;
   justify-content: center;
@@ -50,11 +51,11 @@
     align-items: center;
   }
   .header-content{
-    height: 275px;
+    max-height: 275px;
   }
   .header-content h1 {
     padding: 0;
-    font-size: 2rem;
+    font-size: 1.75rem;
     margin-bottom: 4px;
   }
   .banner-img-container{
@@ -133,17 +134,6 @@
   .logo-title-container h1{
     font-size: 2rem;
   }}
-
-
-@media (max-width: 700px){
-  .hidden{
-    display: block;
-    margin-right: 10%;
-  }
-  .menu-items, .signin{
-    display: none;
-  }
-}
 /*************   WELCOME  *********/
 .cta-buttons{
   margin-top: 40px;
@@ -238,41 +228,6 @@
 https://coursera.org/share/4d73a4c9cacd645b8b3edbd8426ec815
 https://coursera.org/share/7e121dd253138aae8c2ed406e28aa058 */
 
-
-
-.blogfeature {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 80%;
-  margin: 0 auto;
-  text-align: left;
-  margin-top: 40px;
-  overflow: hidden;
-  border-radius: 20px;
-  background-color: rgba(0, 25, 166, 0.10);
-}
-.blogpost img{
-  height: auto;
-  border-radius: 20px;
-  width: auto;
-  max-width: 200px;
-}
-.wrapper{
-  overflow: hidden;
-  display: flex;
-  gap: 24px;
-  flex-direction: row;
-}
-
-
-.user-info{
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  flex-direction: column;
-}
 .signout-btn {
   font-size: 12px;
   background-color: transparent;
@@ -280,4 +235,215 @@ https://coursera.org/share/7e121dd253138aae8c2ed406e28aa058 */
   padding:0;
   margin: 0;
   color: black;
+}
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 30px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  z-index: 10;
+}
+
+.logo-title-container h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.menu-items {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.menu-items a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+.signin-container {
+  display: flex;
+  align-items:flex-start
+}
+
+.user-info .greeting {
+  font-weight: 500;
+}
+
+.signout-btn,
+.auth-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.auth-btn svg {
+  margin-right: 6px;
+}
+
+/* MOBILE NAVIGATION */
+@media (max-width: 768px) {
+  .menu-items {
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 200px;
+    background: white;
+    padding-top: 100px;
+    gap: 20px;
+    transition: right 0.3s ease-in-out;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu-items.open {
+    right: 0;
+  }
+
+  .hidden {
+    display: block;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+}
+
+.hidden {
+  display: none;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+}
+
+.user-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.greeting {
+  font-weight: 500;
+  color: #1a237e;
+}
+
+.signout-btn {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: #000;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.signout-btn:hover {
+  background-color: #f0f0f0;
+}
+.nav-bar{
+  width: auto;
+}
+
+.hiw-main{
+  background-color: seashell;
+  width: 80
+}
+/* Show only on small screens */
+.hamburger-container {
+  display: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger {
+  width: 30px;
+  transition: transform 0.3s ease;
+}
+
+.hamburger.open {
+  transform: rotate(90deg);
+}
+
+/* Fullscreen menu overlay */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.menu-overlay.open {
+  display: flex;
+}
+
+.menu-overlay ul {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+}
+
+.menu-overlay li {
+  margin: 20px 0;
+}
+
+.menu-overlay a {
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.menu-overlay a:hover {
+  color: #0015ff;
+}
+
+.menu-items {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .menu-items {
+    display: none;
+  }
+
+  .hamburger-container {
+    display: block;
+  }
+
+}
+
+.nav-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 1px solid white;
+  background-color: #fff;
+}
+
+.logo-title-container img{
+  height: 32px;
+  width: auto;
+  margin-right: 14px;
 }
