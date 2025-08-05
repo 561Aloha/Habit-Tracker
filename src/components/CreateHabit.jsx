@@ -2,8 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { supabase } from '../client';
 import { Link } from 'react-router-dom';
 import './createhabit.css';
-import closeIcon from '../assets/close_l.svg';
-
+import closeIcon from '../assets/close.svg';
 import Select from 'react-select';
 
 const CreateHabit = () => {
