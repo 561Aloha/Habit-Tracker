@@ -378,17 +378,18 @@ https://coursera.org/share/7e121dd253138aae8c2ed406e28aa058 */
 }
 
 /* Fullscreen menu overlay */
+
 .menu-overlay {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  width: 50vw;
   height: 100%;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(241, 233, 255, 0.95);
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  right: 0;
 }
 
 .menu-overlay.open {
@@ -407,14 +408,14 @@ https://coursera.org/share/7e121dd253138aae8c2ed406e28aa058 */
 
 .menu-overlay a {
   text-decoration: none;
-  color: white;
-  font-size: 24px;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 .menu-overlay a:hover {
-  color: #0015ff;
+  color: #4400ff;
 }
 
 .menu-items {
@@ -430,7 +431,6 @@ https://coursera.org/share/7e121dd253138aae8c2ed406e28aa058 */
   .hamburger-container {
     display: block;
   }
-
 }
 
 .nav-logo {
