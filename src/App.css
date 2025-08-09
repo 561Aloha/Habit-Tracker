@@ -447,3 +447,89 @@ https://coursera.org/share/7e121dd253138aae8c2ed406e28aa058 */
   width: auto;
   margin-right: 14px;
 }
+.hamburger-icon{
+  width: 30px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+/* Bar positions */
+.hamburger-icon .top {
+  transform-origin: top left;
+}
+
+.hamburger-icon .middle {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.hamburger-icon .bar {
+  height: 4px;
+  background-color: #000;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger-icon .bottom {
+  transform-origin: bottom left;
+}
+
+/* Animate to X */
+.hamburger-icon.open .top {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-icon.open .middle {
+  opacity: 0;
+}
+
+.hamburger-icon.open .bottom {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.hamburger-icon {
+  width: 30px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 1002;
+  position: relative;
+}
+
+.hamburger-icon .bar {
+  height: 4px;
+  width: 100%;
+  background-color: black;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger-icon.open .top {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-icon.open .middle {
+  opacity: 0;
+}
+
+.hamburger-icon.open .bottom {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.fade-in {
+  opacity: 1;
+  z-index: 1002;
+  pointer-events: auto;
+}
+
+.fade-out {
+  opacity: 0;
+  z-index: 1001;
+  pointer-events: none;
+}

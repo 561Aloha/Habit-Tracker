@@ -8,6 +8,31 @@ import '../../css/about-us.css';
 import '../../css/postpage.css'; 
 
 const PostPage = () => {
+    const [count, setCount] = useState(0);
+    useEffect(() => {
+      const getCount = async () => {
+        const { data, error } = await supabase
+          .from('Blog')
+          .select('betcount')
+          .eq('id', props.id);
+  
+        if (data && data.length > 0) {
+          setCount(data[0].betcount);
+        }
+      };
+  
+      getCount();
+    }, [props.id]);
+  
+    const updateCount = async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      await supabase
+        .from('Blog')
+        .update({ betcount: count + 1 })
+        .eq('id', props.id);
+      setCount(count + 1);
+    };
   const { id } = useParams();
   const navigate = useNavigate(); 
   const [post, setPost] = useState(null);
@@ -76,7 +101,10 @@ const PostPage = () => {
       <p className='description'>{post.description}</p>
 
       <img src={post.image} className='post-img' alt="Post" />
-
+          <div className="upvotes">
+            👍 The Upvotes: {count}
+            <button className="betButton" onClick={updateCount}>Vote 🗳️</button>
+          </div>
       <div className='comments'>
         {comments &&
           comments.map((comment, index) => (

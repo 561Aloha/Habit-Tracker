@@ -4,7 +4,7 @@ import './App.css';
 import { supabase } from './client';
 import User_Circle from './assets/User_Circle.svg';
 import SignInModal from './components/SignInModel'; 
-
+import closeIcon from './assets/close.svg';
 import Welcome from './pages/Welcome.jsx';
 import NotFound from './pages/NotFound.jsx';
 import ReadPosts from './pages/Blog/ReadPosts.jsx';
@@ -20,7 +20,6 @@ import logo from './assets/icon.png';
 
 function App() {
   const [posts, setPosts] = useState([]);
-  const [menuOpen, setMenuOpen] = useState(false);
 
 
   useEffect(() => {
@@ -44,7 +43,7 @@ function App() {
     { path: "/not-found", element: <NotFound /> },
     { path: "/the-posts", element: <ReadPosts data={posts}/> }, 
     { path: "/post/:id", element: <PostPage /> }, // Dynamic route to handle post IDs
-    { path: "/edit-post", element: <EditPosts data={posts} />},
+    { path: "/edit/:id", element: <EditPosts data={posts} /> },
     { path: "/create-post", element: <CreatePost data={posts} /> },
     { path: "/about-us", element: <AboutUs  /> },
     { path: "/habit", element: <CreateHabit /> },
@@ -55,12 +54,7 @@ function App() {
   /* Nav Bar */
   const [user, setUser] = useState(null);
   const [showSignInModal, setShowSignInModal] = useState(false);
-
-
-  // const displayName =
-  //   user?.user_metadata?.full_name ||
-  //   user?.email ||
-  //   "User";
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const displayName = user?.user_metadata?.full_name?.split(' ')[0] ||
                     user?.email?.split('@')[0] ||
@@ -79,7 +73,7 @@ useEffect(() => {
     }
   };
 
-  fetchUser(); // initial fetch
+  fetchUser();
 
   const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
     if (session?.user) {
@@ -98,8 +92,6 @@ const handleSignOut = async () => {
   await supabase.auth.signOut();
   setUser(null);
 };
-
-
   return (
     <div>
       <div className='nav-bar'>
@@ -109,10 +101,21 @@ const handleSignOut = async () => {
         </div>
 
         <SignInModal open={showSignInModal} onClose={() => setShowSignInModal(false)} />
+<div
+  className="hamburger-container"
+  onClick={() => setMenuOpen(!menuOpen)}
+>
+  <div
+    className={`hamburger-icon ${menuOpen ? 'open' : ''}`}
+    onClick={() => setMenuOpen(!menuOpen)}
+  >
+    <span className="bar top"></span>
+    <span className="bar middle"></span>
+    <span className="bar bottom"></span>
+  </div>
 
-        <div className="hamburger-container" onClick={() => setMenuOpen(!menuOpen)}>
-          <img src={hamburgerIcon} className={`hamburger ${menuOpen ? 'open' : ''}`} alt="Menu" />
-        </div>
+</div>
+
 
         <div className="menu-items desktop-only">
           <Link to="/">Home</Link>

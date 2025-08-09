@@ -1,51 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './blog-card.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from './../../client';
+import { Link } from 'react-router-dom';
 
-const BlogCard = (props) => {
-  const [count, setCount] = useState(0);
-  const navigate = useNavigate();
+const BlogCard = ({ id, image, author, date, title, description, tags }) => {
+  const [count, setCount] = useState(0); // state for upvote count
 
-  useEffect(() => {
-    const getCount = async () => {
-      const { data, error } = await supabase
-        .from('Blog')
-        .select('betcount')
-        .eq('id', props.id);
-
-      if (data && data.length > 0) {
-        setCount(data[0].betcount);
-      }
-    };
-
-    getCount();
-  }, [props.id]);
-
-  const updateCount = async (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    await supabase
-      .from('Blog')
-      .update({ betcount: count + 1 })
-      .eq('id', props.id);
-    setCount(count + 1);
+  const updateCount = (e) => {
+    e.preventDefault(); // Prevent Link navigation when clicking the button
+    setCount(prev => prev + 1);
   };
 
   return (
-    <div className='blogpost'>
-      <Link to={`/post/${props.id}`} className="BlogCard" style={{ textDecoration: 'none' }}>
+    <div className="blogpost">
+      <Link to={`/post/${id}`} className="BlogCard">
         <img
-          src={props.image || '/default.jpg'}
-          className='post-img'
+          src={image || '/default.jpg'}
           alt="Post"
         />
+
         <div className="content">
-          <h2 className="title">{props.title || 'Untitled'}</h2>
-          <p className="preview">{props.description || 'No description provided.'}</p>
+          <div className="meta">
+            {author || 'Unknown Author'} • {date || 'Unknown Date'}
+          </div>
+
+          <div className="title-row">
+            <h2 className="title">{title || 'Untitled'}</h2>
+            <img
+              src="src/assets/arrowup.png"
+              alt="Open"
+              className="arrow-icon"
+            />
+          </div>
+
+          <p className="preview">{description || 'No description provided.'}</p>
+
+          <div className="tags">
+            {tags?.map((tag, idx) => (
+              <span key={idx} className="tag">{tag}</span>
+            ))}
+          </div>
+
           <div className="upvotes">
-            👍 The Upvotes: {count}
-            <button className="betButton" onClick={updateCount}>Vote 🗳️</button>
+            👍 Upvotes: {count}
+            <button className="betButton" onClick={updateCount}>
+              Vote 🗳️
+            </button>
           </div>
         </div>
       </Link>

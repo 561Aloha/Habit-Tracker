@@ -1,85 +1,158 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../../client';
+import './createpost.css';
 
-const EditBlogPost = ({ data }) => {
-    const { id } = useParams();
-    const [post, setPost] = useState({ id: null, title: '', authorr: '', description: '',image:'' });
+export default function EditPosts({ data }) {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [post, setPost] = useState({ title: '', authorr: '', description: '', tag: [], image: '' });
+  const [availableTags, setAvailableTags] = useState([
+    "Design", "Research", "Health", "Spiritual", "Career Focused", "Education/School", "Finance", "Creativity"
+  ]);
+  const [user, setUser] = useState(null);
+  const [authError, setAuthError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-    useEffect(() => {
-        const fetchPost = async () => {
-            try {
-                const { data: postData, error } = await supabase.from('Blog').select().eq('id', id).single();
-                if (error) {
-                    throw error;
-                }
-                setPost(postData);
-            } catch (error) {
-                console.error('Error fetching post:', error.message);
-            }
-        };
+  useEffect(() => {
+    const fetchPost = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      if (!user) return navigate('/unauthorized');
 
-        fetchPost();
-    }, [id]);
-
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setPost((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+      const { data: postData, error } = await supabase.from('Blog').select().eq('id', id).single();
+      if (error) return console.error('Error fetching post:', error);
+      if (postData.user_id !== user.id) {
+        alert('Unauthorized');
+        return navigate('/unauthorized');
+      }
+      setPost(postData);
     };
+    fetchPost();
+  }, [id, navigate]);
 
-    const updatePost = async (event) => {
-        event.preventDefault();
-    
-        try {
-            await supabase
-                .from('Blog')
-                .update({ title: post.title, authorr: post.authorr, description: post.description, image:post.image })
-                .eq('id', id);
-    
-            console.log('Post updated successfully');
-            window.location = '/';
-        } catch (error) {
-            console.error('Error updating post:', error.message);
-        }
-    };
-    
-    const deletePost = async (event) => {
-        event.preventDefault();
-        await supabase
-            .from('Blog')
-            .delete()
-            .eq('id', id);
-        window.location = '/blog';
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPost(prev => ({ ...prev, [name]: value }));
+  };
 
-    return (
-        <div>
-            <form onSubmit={updatePost}>
-                <label htmlFor="title">Title</label> <br />
-                <input type="text" id="title" name="title" value={post.title} onChange={handleChange} />
-                <br />
-                <br />
+  const toggleTag = (tag) => {
+    setPost(prev => ({
+      ...prev,
+      tag: prev.tag.includes(tag)
+        ? prev.tag.filter(t => t !== tag)
+        : [...prev.tag, tag]
+    }));
+  };
 
-                <label htmlFor="author">Author</label><br />
-                <input type="text" id="author" name="authorr" value={post.authorr} onChange={handleChange} />
-                <br /><br />
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-                <label htmlFor="description">Description</label><br />
-                <textarea rows="5" cols="50" id="description" name="description" value={post.description} onChange={handleChange}></textarea>
-                <br /><br />
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}.${fileExt}`;
+    const filePath = `${fileName}`;
 
-                <label htmlFor="image">Image Link</label><br />
-                <textarea rows="5" cols="50" id="image" name="image" value={post.image} onChange={handleChange}></textarea>
-                <br /><br />
-                <button type="button" className="deleteButton" onClick={deletePost}>
-                    Delete
-                </button>
-            </form>
+    const { error: uploadError } = await supabase.storage
+      .from('blog-images')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      console.error('Upload failed:', uploadError.message);
+      setAuthError('Image upload failed');
+      return;
+    }
+
+    const { data: publicURLData } = supabase
+      .storage
+      .from('blog-images')
+      .getPublicUrl(filePath);
+
+    setPost(prev => ({ ...prev, image: publicURLData.publicUrl }));
+  };
+
+  const updatePost = async (e) => {
+    e.preventDefault();
+    const { error } = await supabase
+      .from('Blog')
+      .update({
+        title: post.title,
+        authorr: post.authorr,
+        description: post.description,
+        tag: post.tag,
+        image: post.image
+      })
+      .eq('id', id)
+      .eq('user_id', user.id);
+
+    if (error) {
+      setAuthError('Failed to update post.');
+      return;
+    }
+
+    setSuccessMessage('Post updated successfully!');
+    setTimeout(() => navigate('/blog'), 1500);
+  };
+
+  return (
+    <div className="container">
+      <h2>Edit Your Post</h2>
+      <form onSubmit={updatePost}>
+        <div className="tags-box">
+          <label className="form-label">Tags</label>
+          <div className="tags">
+            {availableTags.map((tag, i) => (
+              <button
+                key={i}
+                type="button"
+                className={`tag ${post.tag.includes(tag) ? 'active' : ''}`}
+                onClick={() => toggleTag(tag)}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
         </div>
-    );
-};
 
-export default EditBlogPost;
+        <div className="form-group">
+          <label className="form-label">Blog Photo</label>
+          <input
+            type="text"
+            name="image"
+            className="text-input"
+            placeholder="Paste image URL or upload a file"
+            value={post.image}
+            onChange={handleChange}
+          />
+          <input type="file" accept="image/*" onChange={handleImageUpload} />
+          {post.image && <img src={post.image} alt="Preview" className="image-preview" />}
+        </div>
+
+        <label className="form-label">Title Heading</label>
+        <input
+          type="text"
+          name="title"
+          className="text-input"
+          value={post.title}
+          onChange={handleChange}
+          required
+        />
+
+        <label className="form-label">Description</label>
+        <textarea
+          name="description"
+          className="textarea-input"
+          value={post.description}
+          onChange={handleChange}
+          required
+        />
+
+        <div className="button-row">
+          <button type="submit" className="button primary">Update Post!</button>
+        </div>
+      </form>
+      {authError && <div className="error auth-error">{authError}</div>}
+      {successMessage && <div className="success">{successMessage}</div>}
+    </div>
+  );
+}
