@@ -1,7 +1,6 @@
 import React from 'react';
 import '../App.css';
 import myImage from '../assets/wellness.jpeg';
-import first from '../assets/298.jpeg';
 import HowItWorks from '../components/HowItWorks';
 
 const Welcome = () => {

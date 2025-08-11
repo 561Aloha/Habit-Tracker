@@ -18,7 +18,7 @@
   background-color: white;
   border: 2px solid white;
   border-radius: 4px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin-top: 20px;
 }
@@ -80,7 +80,6 @@
   align-items: center;
   padding: 20px;
   margin-bottom: 20px;
-  background-color: black;
   border: 1px solid white; /* remove if not needed */
 }
 
@@ -160,3 +159,4 @@
     margin-top: 20px;
   }
 }
+

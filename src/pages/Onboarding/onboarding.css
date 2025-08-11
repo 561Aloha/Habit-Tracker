@@ -1,0 +1,235 @@
+/* src/pages/Onboarding/onboarding.css */
+
+/* Screen */
+.screen {
+  min-height: 100vh;
+  background: #f5f3ff;             /* soft lavender */
+  display: grid;
+  place-items: start center;
+  padding: 24px 16px 40px;
+}
+
+/* Header */
+.header-row {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px auto 12px;
+  display: block;            /* stack brand, then progress */
+}
+
+@media (max-width: 768px) {
+  .header-row {
+    width: 90%;
+    margin-top: 48px;
+    text-align: center;
+  }
+  .onboarding-close {
+  position: absolute;
+  top: 24px;
+  border: black solid 2px;
+  border-radius: 30px;
+  }
+
+    
+}
+.brand-left {
+  display: flex;
+  gap: 10px;
+}
+
+.logo-zeno {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+
+/* Progress (80% width, 4px height) */
+.progress-wrap {
+  width: 80%;
+  margin-left: auto;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  margin: 0 auto;
+  margin-top: 48px;
+  background: rgb(233, 213, 166);  /* pending */
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: rgb(246, 194, 71);   /* completed */
+  border-radius: 999px;
+  transition: width 180ms ease;
+}
+
+/* Card */
+.qa-card {
+  width: 90%;
+  max-width: 700px;
+  margin: 12px auto 0;
+  background: #f5f3ff; /* keep background seamless like screenshot */
+  border-radius: 28px;
+  padding: 8px 12px 24px;
+}
+
+/* Question */
+.question {
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 800;
+  color: #111827;
+  margin: 18px 12px 16px;
+}
+
+/* Options: big rounded white tiles stacked vertically */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 12px;
+  margin: auto 0;
+  max-width: 600px;;
+}
+
+.option-tile {
+  width: 100%;
+  text-align: left;
+  background: #ffffff;
+  border: 1px solid #f1f1f1;
+  border-radius: 18px;
+  padding: 18px 16px;
+  font-size: 18px;
+  color: #1f2937;
+  box-shadow: 0 2px 10px rgba(31,41,55,0.06);
+  cursor: pointer;
+}
+
+.option-tile:hover { filter: brightness(.99); }
+.option-tile.selected {
+  outline: 5px solid rgb(246, 194, 71);
+  box-shadow: 0 0 0 4px rgba(246,194,71,.18);
+}
+
+/* Footer controls */
+.footer {
+  width: 100%;
+  max-width: 760px;
+  margin: 16px auto 0;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 14px;
+  font-size: 14px;
+}
+
+.back-btn:disabled { opacity: .5; cursor: not-allowed; }
+.back-icon { width: 16px; height: 16px; object-fit: contain; }
+.hint { font-size: 12px; color: #6b7280; }
+/* src/pages/Onboarding/onboarding.css (update) */
+
+
+
+.brand-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.logo-zeno {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-size: 28px;           /* bigger */
+  font-weight: 800;
+  color: #111111;            /* black */
+  letter-spacing: .2px;
+}
+
+/* progress stays the same, just full width under brand */
+.progress-wrap {
+  width: 100%;
+  max-width: 960px;
+}
+
+/* buttons/tiles */
+.back-btn {
+  color: #111111;            /* black text */
+  border: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.option-tile {
+  background: #ffffff;
+}
+
+.close-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.skip-wrap {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.skip-btn {
+  background: transparent;
+  border: none;
+  color: #555;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.skip-btn:hover {
+  color: #000;
+}
+
+.close-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background: transparent;      /* <- make sure */
+}
+
+.onboarding-close {
+  position: absolute;
+  top: 24px;
+  right: 10%;
+  z-index: 1000;               /* make sure it’s above other elements */
+}
+
+.onboarding-close button {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  width: 48px;
+}

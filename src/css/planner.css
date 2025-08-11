@@ -9,9 +9,9 @@
 }
 
 tbody td:first-child {
-  width: 150px;
+  width: 175px;
   text-align: left;
-  padding-left: 20px;
+  padding-left: 0px;
   font-weight: normal;
 }
 
@@ -23,9 +23,10 @@ tbody td:first-child {
 .planner-modern {
   margin: 0 auto;
   margin-top: 0;
-  width: 90%;
+  width: 85%;
+  max-width: 600px;
   height: 30%;
-  padding-bottom: 30px;
+  padding: 20px;
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 2px 24px 0 rgba(30, 34, 90, 0.07);
@@ -93,12 +94,26 @@ tbody td:first-child {
     font-size: 12px;
   }
 
-  .habit_name td {
-    text-align: center;
+  .planner-modern th{
+    font-size: 1rem;
   }
+  .planner-modern th:first-child {  
+    text-align: left;
+  }
+tbody td:first-child {
+  width: 175px;
+  text-align: left;
+  padding-left: 0px;
+  font-weight: normal;
+}
 
+  .planner-modern th,
+  .planner-modern td {
+  padding: 2px 2px;
+
+}
   .habit_name td:first-child {
-    font-size: 0.65rem;
+    font-size: 0.5rem;
     text-align: left;
     width: auto;
     background-color: white;
@@ -107,7 +122,7 @@ tbody td:first-child {
   }
 
   .planner-modern {
-    width: 100%;
-    margin-top: 20px;
+    width: 90%;
+    
   }
 }

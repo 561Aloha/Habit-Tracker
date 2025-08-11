@@ -6,11 +6,8 @@
   color: rgb(0, 0, 0);
   padding: 20px;
   margin: 0 auto;;
-  gap: 10px;
-  width: 80%;
   justify-content: flex-start;
   border-radius: 10px;
-  padding-top: 100px;
 }
   .sort-buttons h1{
     font-size: 32px;;
@@ -116,9 +113,6 @@
     .blogpost {
       grid-template-columns: 1fr;
     }
-    .BlogPost-s{
-      width: 90%;
-    }
     .BlogPost-s h1{
       margin-left: 1;
     }
@@ -132,11 +126,7 @@
   }
 
 @media (min-width: 1200px){
-  .BlogPost-s{
-    width: 70%;
-    padding: 20px;
 
-  }
   .sort-buttons{
     margin: 0 auto;
     width: 100%;
@@ -153,4 +143,9 @@
   .sort-buttons p{
     width: 50%;
   }
+}
+
+.BlogPost-s{
+  padding: auto;  
+  margin:auto;
 }

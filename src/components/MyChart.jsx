@@ -133,9 +133,6 @@ const MyChart = ({
   // NEW CALCULATION
   const totalHabitsCompleted = calculateTotalHabitsCompleted();
 
-  console.log("DEBUG - Old calculation result:", oldTotalHabitsDone);
-  console.log("DEBUG - New calculation result:", totalHabitsCompleted);
-
   return (
     <div className="Chart">
       <h2>Weekly Habit Progress</h2>
@@ -163,8 +160,7 @@ const MyChart = ({
         <div className="streaks-tracker">
           <p>Current Streak</p>
           <h2>0</h2>
-          <p>Best Streak</p>
-          <h4>0</h4>
+
         </div>
         <div className="streaks-tracker">
           <p>Habits Done</p>
@@ -172,9 +168,7 @@ const MyChart = ({
             {totalHabitsCompleted}
           </h2>
           <p>This week</p>
-          <small style={{color: 'gray'}}>
-            (Old calc would show: {oldTotalHabitsDone})
-          </small>
+
         </div>
       </div>
     </div>

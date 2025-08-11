@@ -48,7 +48,7 @@
 
 .title {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   color: black;
   margin: 0;
@@ -89,10 +89,23 @@
 }
 
 .upvotes {
+  display: flex;
+  flex-direction: row;
   margin-top: 10px;
+  gap:24px;
   font-size: 14px;
+  width: 80%;
   color: #000;
   font-weight: bold;
+}
+.upvotes button {
+  background-color: #6a1b9a;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  width:50%;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .betButton {
@@ -100,7 +113,38 @@
   border: 2px solid #000;
   background-color: transparent;
   color: inherit;
-  padding: 6px 10px;
   cursor: pointer;
   border-radius: 4px;
+}
+
+.title-row img {
+  height: 24px;
+  width: 24px;
+}
+.tags-container {
+  border: 0;
+  background-color: turquoise;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; /* allows wrapping */
+  gap: 4px; /* space between tags */
+}
+
+.tag {
+  margin: 0; /* remove default margin if present */
+  padding: 4px 8px;
+  border-radius: 20px;
+  background-color: white;
+  font-size: 0.85rem;
+}
+
+.tag{
+  background-color: #93a7e2;
+  border: hidden;
+  font-size: 12px;;
+}
+.tag:hover {
+  background-color: #93a7e2;
+  color: #311b92;
 }

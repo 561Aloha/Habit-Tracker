@@ -32,6 +32,7 @@
     color: black;
     display: flex;
     width: 85%;
+    max-width: 600px;
     padding: 20px;
     margin: 0 auto;
     flex-direction: column;
@@ -172,7 +173,7 @@
   margin:0 auto;
 }
 .habits-container{
-    max-width: 500px;
+  max-width: 500px;
 }
 
 @media (max-width: 900px){
@@ -225,9 +226,6 @@
     padding:0;
     margin:0 auto;
   }
-  
-
-  
 }
 
 
