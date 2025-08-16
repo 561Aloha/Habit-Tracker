@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import myImage from '../assets/wellness.jpeg';
 import HowItWorks from '../components/HowItWorks';
+import { Link } from 'react-router-dom';
 
 const Welcome = () => {
     return(
@@ -13,7 +14,7 @@ const Welcome = () => {
                 to stay on track and keep you motivated.
                 </h4>
                 <div className='cta-buttons'>
-                    <button>Explore Features</button>
+                    <Link to="/features"><button>Explore Features</button></Link>
                 </div>
              </div>
              <div className='banner-img-container'>             <img className='banner-img' src={myImage} alt='photo credits:MUTI'/>

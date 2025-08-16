@@ -367,21 +367,16 @@
   --footer-muted: #b6bcc8;
   --footer-accent: #8aa4ff;
   --footer-border: rgba(255, 255, 255, 0.08);
-  --max-w: 1200px;
 }
 
 .footer {
   background: radial-gradient(1200px 200px at 50% 0%, rgba(138, 164, 255, 0.08), transparent 60%) var(--footer-bg);
   color: var(--footer-fg);
   border-top: 1px solid var(--footer-border);
-  padding: 24px;
 }
 
 .footer-inner {
   margin: 0 auto;
-  max-width: var(--max-w);
-  display: grid;
-  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 24px;
 }
@@ -445,7 +440,6 @@
   left: 0;
   bottom: -2px;
   height: 2px;
-  width: 100%;
   transform: scaleX(0);
   transform-origin: left;
   background: linear-gradient(90deg, var(--footer-accent), transparent 70%);
@@ -491,9 +485,7 @@
 }
 
 @media (max-width: 520px) {
-  .footer {
-    padding: 20px;
-  }
+
   .footer-logo {
     width: 36px;
     height: 36px;
@@ -564,4 +556,9 @@
 
 .profile-menu .signout-btn:hover {
   background-color: #f0f0f0;
+}
+
+footer{
+  background-color: #5926b7;
+  width: 100%;
 }

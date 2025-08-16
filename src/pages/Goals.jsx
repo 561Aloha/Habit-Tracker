@@ -8,8 +8,10 @@ import arrow from './../assets/arrow.svg';
 import { format } from 'date-fns';
 
 import Planner from "../components/planner.jsx";
+import CompleteGrid from '../components/completegrid.jsx';
 
 function Goals() {
+  const year = new Date().getFullYear();
   const [chartData, setChartData] = useState({
     labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     datasets: [
@@ -318,6 +320,7 @@ function Goals() {
               onPrevWeek={handlePrevClick}
               onNextWeek={handleNextClick}
             />
+          <CompleteGrid year={year} />
           </div>
         </div>
       </div>

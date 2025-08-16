@@ -23,7 +23,7 @@ import Authen from './components/authen';
 import WalkthroughPage from './pages/Onboarding/WalkthroughPage.jsx';
 import OnboardRoute from './pages/Onboarding/onboard';
 import Footer from './pages/Footer.jsx';
-
+import FeaturesPage from './pages/Features.jsx';
 function App() {
   const [posts, setPosts] = useState([]);
   const location = useLocation()
@@ -61,6 +61,7 @@ const [showProfileMenu, setShowProfileMenu] = useState(false);
     { path: "/goal", element: <Goal /> },
     { path: "*", element: <NotFound /> },
     { path: "/authen", element: <Authen /> },
+    { path: "/features", element: <FeaturesPage /> },
     { path: "/walkthrough", element: <WalkthroughPage /> }, 
   ]);
 
