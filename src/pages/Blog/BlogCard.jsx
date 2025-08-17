@@ -32,18 +32,15 @@ const BlogCard = ({ id, image, author, date, title, description, tag, tags }) =>
 
         <div className="content">
           {metaText && <div className="meta">{metaText}</div>}
-
           <div className="title-row">
             <h2 className="title">{title || 'Untitled'}</h2>
             <img src="src/assets/arrowup.png" alt="Open" className="arrow-icon" />
           </div>
 
-          
           {description && String(description).trim() && (
             <p className="preview">{description}</p>
           )}
 
-          <div className="tags-container">
           {tagsArr.length > 0 && (
             <div className="tags">
               {tagsArr.map((t, idx) => (
@@ -53,7 +50,7 @@ const BlogCard = ({ id, image, author, date, title, description, tag, tags }) =>
               ))}
             </div>
           )}
-          </div>
+  
           <div className="upvotes">
             👍 Upvotes: {count}
             <button className="betButton" onClick={updateCount}>

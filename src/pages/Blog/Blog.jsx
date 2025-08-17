@@ -3,7 +3,7 @@ import BlogCard from './BlogCard';
 import './blog.css';
 import { supabase } from './../../client';
 import { Link } from 'react-router-dom';
-
+import Footer from '../../components/Footer';
 const Blog = () => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -54,11 +54,11 @@ const Blog = () => {
   
   return (
     <div className="BlogPost-s">
+      <div className='blog-header'>
       <div className='sort-buttons'>
-      <h1>Welcome <br></br>Let's get this Journey Started</h1>
-
-      <p>Your go-to place for tips, stories, and insights on building better habits and achieving your goals. Join our community, get inspired, and start transforming your life today.</p>
-          <div className='button-container'>
+          <h1>Welcome <br></br>Let's get this Journey Started</h1>
+          <p>Your go-to place for tips, stories, and insights on building better habits and achieving your goals. Join our community, get inspired, and start transforming your life today.</p>
+ 
           <input
           className='search'
           type="text"
@@ -67,8 +67,7 @@ const Blog = () => {
           onChange={handleSearch}/>
           <button className='organize' onClick={sortByDate}>Sort by Date</button>
           <button className='organize' onClick={sortByUpvotes}>Sort by Upvotes</button>
-          <Link to="/create-post"><button className='create-btn'>Create New Post</button></Link></div>
-
+          <Link to="/create-post"><button className='create-btn'>Create New Post</button></Link>
       </div>
       <div className='container-blogcard'>
         {filteredPosts.length > 0 ? (
@@ -77,8 +76,8 @@ const Blog = () => {
           ))
         ) : (
           <h2>No Blog posts found 😞</h2>
-        )}</div>
-
+        )}</div></div>
+        <Footer/>
     </div>
   );
 };

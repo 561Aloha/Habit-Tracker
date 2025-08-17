@@ -24,10 +24,11 @@
     align-self: flex-start; /* In flex layouts, this ensures sticky works as expected */
     z-index: 2;  
     flex: 1;    
-    background-color: seashell;
+    background-color: rgb(255, 255, 255);
 }
 .chart-container {
-    background-color: seashell;
+
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
     color: black;
     display: flex;
@@ -37,7 +38,7 @@
     margin: 0 auto;
     flex-direction: column;
     justify-content: space-between; 
-    margin-top: 40px;
+    margin-top: 30px;
   }
 .goals-container {
     display: flex;
@@ -134,9 +135,9 @@
 }
 
 .organize {
-    border: 2px solid white;
-    width: 175px;
-    color: white;
+  border: 2px solid white;
+  width: 175px;
+  color: white;
 }
 
 
@@ -239,5 +240,20 @@
   .goals-container{
     position: relative;
   }
-  
+  .chart-container {
+    background-color: rgb(255, 255, 255);
+    margin-top: 20px;
+  }
+}
+
+.goal-header{
+  font-size: 24px;
+  margin: 0 auto;
+  width:80%;
+  padding-top: 48px;
+  margin-top: 24px;
+}
+
+.goals-container{
+  max-width: 1200px;;
 }

@@ -9,7 +9,7 @@ export default function CreatePost() {
     description: '',
     tags: []
   });
-  const [availableTags, setAvailableTags] = useState([
+  const [availableTags] = useState([
     "Design", "Research", "Health", "Spiritual", "Career Focused", "Education/School", "Finance", "Creativity"
   ]);
   const [image, setImage] = useState(null);
@@ -18,6 +18,19 @@ export default function CreatePost() {
   const [user, setUser] = useState(null);
   const [authError, setAuthError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+
+  // single toggleTag with 3-tag cap
+  const toggleTag = (tag) => {
+    setPost(prev => {
+      if (prev.tags.includes(tag)) {
+        return { ...prev, tags: prev.tags.filter(t => t !== tag) };
+      }
+      if (prev.tags.length >= 3) {
+        return prev;
+      }
+      return { ...prev, tags: [...prev.tags, tag] };
+    });
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -41,40 +54,31 @@ export default function CreatePost() {
     setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
-  const toggleTag = (tag) => {
-    setPost(prev => ({
-      ...prev,
-      tags: prev.tags.includes(tag)
-        ? prev.tags.filter(t => t !== tag)
-        : [...prev.tags, tag]
-    }));
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}.${fileExt}`;
+    const filePath = `${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('blog-images')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      console.error('Upload failed:', uploadError.message);
+      setAuthError('Image upload failed');
+      return;
+    }
+
+    const { data: publicURLData } = supabase
+      .storage
+      .from('blog-images')
+      .getPublicUrl(filePath);
+
+    setImage(publicURLData.publicUrl);
   };
-
-const handleImageUpload = async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  const fileExt = file.name.split('.').pop();
-  const fileName = `${Date.now()}.${fileExt}`;
-  const filePath = `${fileName}`;
-
-  const { error: uploadError } = await supabase.storage
-    .from('blog-images') // your storage bucket name
-    .upload(filePath, file);
-
-  if (uploadError) {
-    console.error('Upload failed:', uploadError.message);
-    setAuthError('Image upload failed');
-    return;
-  }
-
-  const { data: publicURLData } = supabase
-    .storage
-    .from('blog-images')
-    .getPublicUrl(filePath);
-
-  setImage(publicURLData.publicUrl);
-};
 
   const validateForm = () => {
     const newErrors = {};
@@ -85,39 +89,39 @@ const handleImageUpload = async (e) => {
     return Object.keys(newErrors).length === 0;
   };
 
-const createPost = async (e) => {
-  e.preventDefault();
-  setAuthError('');
-  setSuccessMessage('');
+  const createPost = async (e) => {
+    e.preventDefault();
+    setAuthError('');
+    setSuccessMessage('');
 
-  if (!user) {
-    setAuthError('To publish this you must sign in');
-    return;
-  }
+    if (!user) {
+      setAuthError('To publish this you must sign in');
+      return;
+    }
 
-  if (!validateForm()) return;
+    if (!validateForm()) return;
 
-  try {
-    const { error } = await supabase
-      .from('Blog')
-      .insert([{
-        title: post.title,
-        authorr: post.authorr,
-        description: post.description,
-        tag: post.tags,
-        image: image || '',
-        time: new Date().toISOString(),
+    try {
+      const { error } = await supabase
+        .from('Blog')
+        .insert([{
+          title: post.title,
+          authorr: post.authorr,
+          description: post.description,
+          tag: post.tags,
+          image: image || '',
+          time: new Date().toISOString(),
           user_id: user.id 
-      }]);
-    if (error) throw error;
+        }]);
+      if (error) throw error;
 
-    setSuccessMessage('Post created successfully!');
-    setTimeout(() => window.location = "/blog", 1500);
-  } catch (error) {
-    console.error('Error creating post:', error.message);
-    setAuthError('Something went wrong. Please try again.');
-  }
-};
+      setSuccessMessage('Post created successfully!');
+      setTimeout(() => window.location = "/blog", 1500);
+    } catch (error) {
+      console.error('Error creating post:', error.message);
+      setAuthError('Something went wrong. Please try again.');
+    }
+  };
 
   return (
     <div className="container">
@@ -132,6 +136,7 @@ const createPost = async (e) => {
                 type="button"
                 className={`tag ${post.tags.includes(tag) ? 'active' : ''}`}
                 onClick={() => toggleTag(tag)}
+                disabled={!post.tags.includes(tag) && post.tags.length >= 3}
               >
                 {tag}
               </button>

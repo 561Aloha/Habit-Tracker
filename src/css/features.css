@@ -1,0 +1,111 @@
+/* Container for the entire feature section */
+.features-container {
+  background: #ffffff;
+  color: #333;
+  padding: 4rem 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Header (title and intro paragraph) */
+.features-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.features-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.features-header p {
+  margin-top: 1rem;
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Feature grid wrapper */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+/* Individual feature block */
+.feature-block {
+  display: flex;
+  align-items: flex-start; /* Top-align image + text */
+  gap: 1.5rem;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  background-color: #f9f9f9;
+  transition: box-shadow 0.3s ease;
+}
+
+
+.feature-block:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Feature icon */
+.feature-block img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Feature text content */
+.feature-content h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+
+  color: #222;
+  margin-bottom: 0.5rem;
+}
+
+.feature-content p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Tablet: 2-column layout + reverse on even rows */
+@media (min-width: 768px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .feature-block:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .features-header h1 {
+    font-size: 3rem;
+  }
+}
+
+/* Desktop: Larger spacing */
+@media (min-width: 1024px) {
+  .features-grid {
+    gap: 3rem;
+  }
+
+  .feature-block img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .feature-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .feature-content p {
+    font-size: 1.05rem;
+  }
+}

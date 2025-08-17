@@ -46,6 +46,7 @@
   width: 100%;
 }
 
+
 .title {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 16px;
@@ -71,6 +72,7 @@
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
+  margin-bottom: 24px;
   text-overflow: ellipsis;
 }
 
@@ -99,7 +101,7 @@
   font-weight: bold;
 }
 .upvotes button {
-  background-color: #6a1b9a;
+  background-color: #000000;
   color: white;
   border: none;
   padding: 6px 12px;
@@ -121,30 +123,46 @@
   height: 24px;
   width: 24px;
 }
-.tags-container {
-  border: 0;
-  background-color: turquoise;
-  margin: 0;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap; /* allows wrapping */
-  gap: 4px; /* space between tags */
+
+.BlogCard { border: none !important; }
+
+.BlogCard .tags { 
+  border: none !important; 
+  outline: none !important; 
+  box-shadow: none !important; 
+  border-radius: 0 !important; 
+  padding: 0 !important;
+  background: transparent !important;
 }
 
-.tag {
-  margin: 0; /* remove default margin if present */
-  padding: 4px 8px;
-  border-radius: 20px;
-  background-color: white;
-  font-size: 0.85rem;
+.BlogCard .tag { 
+  border: none !important; 
 }
 
-.tag{
-  background-color: #93a7e2;
-  border: hidden;
-  font-size: 12px;;
+.tags span{
+  background-color: rgb(216, 165, 255);
 }
-.tag:hover {
-  background-color: #93a7e2;
-  color: #311b92;
+
+.blogpost{
+  height: 700px;
+}
+@media (max-width: 640px) {
+  .blogpost {
+    height: auto !important;
+    margin: 0 0 12px;
+  }
+  .BlogCard {
+    padding: 10px;
+    margin:0 auto;
+  }
+  .preview {
+    margin-bottom: 12px;
+  }
+  .tags {
+    gap: 6px;
+  }
+  .upvotes {
+    gap: 12px;
+    width: 100%;
+  }
 }

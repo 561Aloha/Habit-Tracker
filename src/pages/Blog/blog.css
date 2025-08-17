@@ -26,7 +26,7 @@
     width: calc(100%-40px);
   } 
 
-.comments-i {
+.comments-i { 
     border: 1px white solid;
     border-radius: 10px;
     padding: 10px;
@@ -44,19 +44,11 @@
 .sort-buttons h1, .sort-buttons p{
   text-align: left;
 }
-.sort-buttons button {
-    color: rgb(232, 232, 232);
-    padding: 5px 10px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    height: 40px;
-    font-size: 14px;
-    margin: 0 auto;}
+
       
 .search {
-  width: 50%;
-  max-width: 700px; /* Adjust the width as needed for larger screens */
+  width: 40%;
+  max-width: 600px; /* Adjust the width as needed for larger screens */
   margin-bottom: 10px; /* Add some space between the search bar and buttons */
   margin: 0 auto;
   height: 40px;
@@ -74,18 +66,6 @@
   overflow: hidden;
 }
     
-.sort-buttons {
-  flex-direction: column;
-  width: 90%;
-  margin:0 auto;
-  align-items: center; 
-}
-
-.sort-buttons .button-container button {
-  width: 150px;
-  margin: 10px;
-}
-
 .container-blogcard{
   margin: 0 auto;
   display: flex;
@@ -99,11 +79,7 @@
       padding-bottom: 30px;
     }
 
-    .sort-buttons button {
-      width: 70%;
-      margin: 0 auto;
-      margin-top: 10px;
-    }
+
     .BlogPost-s{
       margin: 0 auto;
       margin-top: 75px;
@@ -146,6 +122,38 @@
 }
 
 .BlogPost-s{
-  padding: auto;  
-  margin:auto;
+  margin: 0 auto;
+  padding: 48px;
+  margin-top: 48px;
+
+}
+
+.button-container {
+  width: 100%;
+  padding: 0;
+  margin:0 auto;
+}
+
+.blog-header{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.sort-buttons button{
+  width: 150px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.search{
+  margin-right: 32px;
+}
+
+.container-blogcard{
+  width: 100%;
+}
+.container-blogcard{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 }

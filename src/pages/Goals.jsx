@@ -1,4 +1,5 @@
 import './../css/goals.css';
+import Footer from '../components/Footer.jsx';
 
 import React, { useState, useEffect } from "react";
 import MyChart from '../components/MyChart.jsx';
@@ -241,8 +242,9 @@ function Goals() {
 
   return (
     <div className="goals-page">
-      <h2>The Habit Tracker</h2>
+            <h2 className='goal-header'>The Habit Tracker</h2>
       <div className="goals-container">
+        
         <div className="habits-container">
           <h2>Habits for {format(selectedDate, 'EEEE, MMMM d')}</h2>
           <div className="calendar">
@@ -323,7 +325,9 @@ function Goals() {
           <CompleteGrid year={year} />
           </div>
         </div>
+
       </div>
+              <Footer/>
     </div>
   );
 }  
