@@ -5,12 +5,12 @@ import iconImg from '../assets/We.png'
 import HowItWorks from '../components/HowItWorks';
 import Footer from './../components/Footer';
 import { Link } from 'react-router-dom';
+import ScrollRevealBackdrop from '../components/ScrollReveal';
 
 const Welcome = () => {
     return(
     <div >
-        <div className='header'>
-            <div className='header-content'>
+                    <div className='header-content'>
                 <h1>Habit Tracking Made Easier</h1>
                 <h4>Let us help you towards progress.<br></br> Our daily routine app is a great way 
                 to stay on track and keep you motivated.
@@ -19,6 +19,9 @@ const Welcome = () => {
                     <Link to="/features"><button>Explore Features</button></Link>
                 </div>
              </div>
+        <ScrollRevealBackdrop />
+        <div className='header'>
+
              {/* <div className='banner-img-container'>             <img className='banner-img' src={myImage} alt='photo credits:MUTI'/>
             </div> */}
         </div>
