@@ -14,10 +14,10 @@
   margin: 0 auto;
   max-width: 700px;
   width: 75%;
-  padding: 40px;
-  margin-top: 32px;
+  padding-top: 150px;
   border-radius: 20px;
 }
+
 .cta-buttons {
   justify-content: center;
 }

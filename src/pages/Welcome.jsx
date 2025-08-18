@@ -20,15 +20,11 @@ const Welcome = () => {
                 </div>
              </div>
         <ScrollRevealBackdrop />
-        <div className='header'>
 
-             {/* <div className='banner-img-container'>             <img className='banner-img' src={myImage} alt='photo credits:MUTI'/>
-            </div> */}
-        </div>
         <div className='howitworks-div'>
             <div className='quick-intro'>
-            <h2>Break old patterns, <br></br>
-            form new habits
+            <h2>Break Old Patterns, <br></br>
+            Form New Ones
             </h2><p>How you feel matters! Whether you're feeling sad, anxious, or stressed, Happify brings you effective tools and programs to help you take control of your feelings and thoughts.
             <br></br>
             <br></br>
