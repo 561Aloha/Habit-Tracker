@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../client'; // adjust path if needed
+import { supabase } from '../client';
 import googleIcon from '../assets/google.png';
 import '../css/HowItWorks.css';
 
 const SignInModal = ({ open, onClose }) => {
-  const [mode, setMode] = useState('login'); // 'login' or 'signup'
+  const [mode, setMode] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -19,7 +19,12 @@ const SignInModal = ({ open, onClose }) => {
 
   const handleGoogleSignIn = async () => {
     setMessage('');
-    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+    const { error } = await supabase.auth.signInWithOAuth({ 
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/authen`
+      }
+    });
     if (error) setMessage(error.message);
   };
 
@@ -30,10 +35,10 @@ const SignInModal = ({ open, onClose }) => {
       if (error) {
         setMessage(error.message);
       } else {
-        onClose();
+        window.location.href = '/authen';
       }
     } else {
-      const { error } = await supabase.auth.signUp({ email, password });
+      const { data, error } = await supabase.auth.signUp({ email, password });
       if (error) {
         if (error.message.includes('User already registered')) {
           setMessage('User already exists with this email.');
@@ -41,7 +46,26 @@ const SignInModal = ({ open, onClose }) => {
           setMessage(error.message);
         }
       } else {
-        onClose();
+        // For email signups, create UserData profile immediately since we have the user data
+        if (data.user) {
+          const { error: insertError } = await supabase
+            .from("UserData")
+            .insert({
+              user_uuid: data.user.id,
+              email: data.user.email,
+              full_name: null, // Email signups don't have full name initially
+              avatar_url: null,
+              onboarding_completed: false,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString()
+            });
+
+          if (insertError) {
+            console.error('Error creating user profile:', insertError);
+          }
+        }
+        
+        window.location.href = '/authen';
       }
     }
   };
@@ -66,7 +90,6 @@ const SignInModal = ({ open, onClose }) => {
 
         <div className="zeno-divider">OR</div>
 
-        {/* Render both login and signup forms to preserve hook order */}
         <div style={{ display: mode === 'login' ? 'block' : 'none' }}>
           <input
             type="email"
@@ -111,7 +134,7 @@ const SignInModal = ({ open, onClose }) => {
 
         {mode === 'login' ? (
           <a className="zeno-login-link" onClick={() => setMode('signup')}>
-            Don’t have an account? Sign up
+            Don't have an account? Sign up
           </a>
         ) : (
           <a className="zeno-login-link" onClick={() => setMode('login')}>

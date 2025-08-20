@@ -1,6 +1,8 @@
 // src/pages/Onboarding/onboard.jsx
 import React, { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "../../client"; // ADDED: Import supabase
 import arrowIcon from "/src/assets/arrow.svg";
 import logoImg from "/src/assets/icon.png";
 import closeIcon from "/src/assets/close.svg";
@@ -18,9 +20,11 @@ const QUESTIONS = [
 ];
 
 export default function ZenoOnboarding({ onComplete }) {
+  const navigate = useNavigate();
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState({});
   const [finished, setFinished] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false); // ADDED: Loading state
 
   const q = QUESTIONS[current];
   const total = QUESTIONS.length;
@@ -38,17 +42,105 @@ export default function ZenoOnboarding({ onComplete }) {
     }
   };
 
-  const goNext = (nextAnswers = answers) => {
-    if (current < total - 1) {
-      setCurrent(c => c + 1);
-    } else {
-      localStorage.setItem("zeno_onboarding_done", "true");
-      onComplete?.(nextAnswers);
+  // UPDATED: Complete onboarding with Supabase updates
+  const completeOnboarding = async (finalAnswers = answers) => {
+    setIsUpdating(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user) {
+        // Update UserData table
+        const { error: dbError } = await supabase
+          .from("UserData")
+          .upsert({
+            user_id: user.id,
+            email: user.email,
+            onboarding_completed: true,
+            authen_seen: true,
+            onboarding_answers: finalAnswers, // Store answers if needed
+            updated_at: new Date().toISOString()
+          });
+
+        // Update user metadata for fast future lookups
+        const { error: metaError } = await supabase.auth.updateUser({
+          data: { 
+            onboarding_completed: true 
+          }
+        });
+
+        if (dbError) {
+          console.error('Database update error:', dbError);
+        }
+        if (metaError) {
+          console.error('Metadata update error:', metaError);
+        }
+
+        // Store locally as backup
+        localStorage.setItem("zeno_onboarding_done", "true");
+        
+        // Call parent callback if provided
+        onComplete?.(finalAnswers);
+      }
+    } catch (error) {
+      console.error('Error completing onboarding:', error);
+    } finally {
+      setIsUpdating(false);
       setFinished(true);
     }
   };
 
+  const goNext = (nextAnswers = answers) => {
+    if (current < total - 1) {
+      setCurrent(c => c + 1);
+    } else {
+      completeOnboarding(nextAnswers);
+    }
+  };
+
   const goBack = () => { if (current > 0) setCurrent(c => c - 1); };
+
+  // UPDATED: Handle skip with proper Supabase updates
+  const handleSkip = async () => {
+    setIsUpdating(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user) {
+        // Still mark as completed even if skipped
+        await supabase
+          .from("UserData")
+          .upsert({
+            user_id: user.id,
+            email: user.email,
+            onboarding_completed: true,
+            authen_seen: true,
+            skipped_onboarding: true, // Optional: track that it was skipped
+            updated_at: new Date().toISOString()
+          });
+
+        await supabase.auth.updateUser({
+          data: { 
+            onboarding_completed: true 
+          }
+        });
+      }
+
+      localStorage.setItem("zeno_onboarding_done", "true");
+      navigate('/goal', { replace: true });
+    } catch (error) {
+      console.error('Error skipping onboarding:', error);
+      // Navigate anyway to prevent user from getting stuck
+      navigate('/goal', { replace: true });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  // UPDATED: Handle close with proper Supabase updates
+  const handleClose = async () => {
+    // Same as skip - mark as completed
+    await handleSkip();
+  };
 
   if (finished) {
     return (
@@ -57,40 +149,40 @@ export default function ZenoOnboarding({ onComplete }) {
           <img src={logoImg} alt="Zeno Logo" className="logo-zeno" />
           <span className="brand-name">Zeno</span>
         </div>
-        <h2 className="question" style={{ textAlign: 'center' }}>You’re all set</h2>
+        <h2 className="question" style={{ textAlign: 'center' }}>You're all set</h2>
         <p className="hint">Thanks for completing onboarding.</p>
-          <button
-              type="button"
-              className="next-btn"
-              onClick={() => window.location.href = '/walkthrough'}
-          >
-            Let’s walk you through the platform
-      </button>
+        <button
+          type="button"
+          className="next-btn"
+          onClick={() => navigate('/walkthrough', { replace: true })}
+          disabled={isUpdating}
+        >
+          {isUpdating ? 'Setting up...' : "Let's walk you through the platform"}
+        </button>
       </div>
     );
   }
 
   return (
     <div className="screen">
-            <div className="onboarding-close">
-  <button type="button" onClick={() => window.location.href = '/goal'}>
-    <img src={closeIcon} alt="Close Onboarding" className="close-icon" />
-  </button>
-</div>
-       <header className="header-row">
-
-      <div className="brand-left">
-        <img src={logoImg} alt="Zeno Logo" className="logo-zeno" />
-        <span className="brand-name">Zeno</span>
+      <div className="onboarding-close">
+        <button type="button" onClick={handleClose} disabled={isUpdating}>
+          <img src={closeIcon} alt="Close Onboarding" className="close-icon" />
+        </button>
       </div>
-
-      <div className="progress-wrap">
-        <div className="progress-track">
-          <div className="progress-fill" style={{ width: `${progress}%` }} />
+      
+      <header className="header-row">
+        <div className="brand-left">
+          <img src={logoImg} alt="Zeno Logo" className="logo-zeno" />
+          <span className="brand-name">Zeno</span>
         </div>
-      </div>
-    </header>
 
+        <div className="progress-wrap">
+          <div className="progress-track">
+            <div className="progress-fill" style={{ width: `${progress}%` }} />
+          </div>
+        </div>
+      </header>
 
       <div className="qa-card">
         <AnimatePresence mode="wait">
@@ -112,6 +204,7 @@ export default function ZenoOnboarding({ onComplete }) {
                     type="button"
                     className={`option-tile ${selected ? 'selected' : ''}`}
                     onClick={() => handleSelect(opt)}
+                    disabled={isUpdating}
                   >
                     {opt}
                   </button>
@@ -124,15 +217,20 @@ export default function ZenoOnboarding({ onComplete }) {
                 type="button"
                 className="back-btn"
                 onClick={goBack}
-                disabled={current === 0}
+                disabled={current === 0 || isUpdating}
               >
                 <img src={arrowIcon} alt="Back" className="back-icon" />
                 Go back
               </button>
 
               {q.multi ? (
-                <button type="button" className="next-btn" onClick={() => goNext()}>
-                  Next
+                <button 
+                  type="button" 
+                  className="next-btn" 
+                  onClick={() => goNext()}
+                  disabled={isUpdating}
+                >
+                  {isUpdating ? 'Updating...' : 'Next'}
                 </button>
               ) : (
                 <span className="hint">Tap an option to continue</span>
@@ -140,19 +238,17 @@ export default function ZenoOnboarding({ onComplete }) {
             </div>
           </motion.div>
         </AnimatePresence>
+        
         <div className="skip-wrap">
-  <button 
-    type="button" 
-    className="skip-btn" 
-    onClick={() => {
-      localStorage.setItem("zeno_onboarding_done", "true");
-      window.location.href = '/goal';
-    }}
-  >
-    Skip Onboarding
-  </button>
-</div>
-
+          <button 
+            type="button" 
+            className="skip-btn" 
+            onClick={handleSkip}
+            disabled={isUpdating}
+          >
+            {isUpdating ? 'Updating...' : 'Skip Onboarding'}
+          </button>
+        </div>
       </div>
     </div>
   );

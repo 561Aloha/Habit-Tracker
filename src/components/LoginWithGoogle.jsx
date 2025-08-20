@@ -1,12 +1,31 @@
+// Updated LoginWithGoogle with debugging
 import React from 'react';
 import { supabase } from '../client';
 
 const LoginWithGoogle = () => {
   const handleGoogleLogin = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-    });
-    if (error) console.error('Google Sign-In error:', error.message);
+    console.log('🔵 Starting Google login...');
+    
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/authen` // Explicit redirect
+        }
+      });
+      
+      console.log('🔵 OAuth response:', { data, error });
+      
+      if (error) {
+        console.error('❌ Google Sign-In error:', error.message);
+        alert(`Login error: ${error.message}`);
+      } else {
+        console.log('✅ OAuth initiated successfully');
+      }
+    } catch (err) {
+      console.error('❌ Unexpected error:', err);
+      alert(`Unexpected error: ${err.message}`);
+    }
   };
 
   return (
