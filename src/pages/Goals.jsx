@@ -1,4 +1,4 @@
-// Goals.jsx (updated parts)
+// src/pages/Goals.jsx (full updated)
 import './../css/goals.css';
 import Footer from '../components/Footer.jsx';
 
@@ -7,9 +7,10 @@ import MyChart from '../components/MyChart.jsx';
 import { supabase } from '../client';
 import { Link } from 'react-router-dom';
 import arrow from './../assets/arrow.svg';
-import { format } from 'date-fns';
+import { format, startOfWeek, endOfWeek } from 'date-fns';
 
 import Planner from "../components/planner.jsx";
+import WeekCalendar from "../components/WeekCalendar.jsx";
 
 function Goals() {
   const year = new Date().getFullYear();
@@ -22,7 +23,7 @@ function Goals() {
   const [habits, setHabits] = useState([]);
   const [completionData, setCompletionData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [currentWeek, setCurrentWeek] = useState(getCurrentWeek());
+  const [currentWeek, setCurrentWeek] = useState(getWeekForDate(new Date()));
   const [calendarOffset, setCalendarOffset] = useState(0);
   const [user, setUser] = useState(null);
   const [selectedHabitId, setSelectedHabitId] = useState(null);
@@ -108,7 +109,7 @@ function Goals() {
   };
 
   const toggleSelectHabit = (habitId) => {
-    setSelectedHabitId(prev => (prev === habitId ? null : habitId));
+    setSelectedHabitId(prev => (prev === habitId ? null : prev = habitId));
   };
 
   const updateChartData = () => {
@@ -146,40 +147,42 @@ function Goals() {
   const handlePrevClick = () => setCalendarOffset(calendarOffset - 1);
   const handleNextClick = () => setCalendarOffset(calendarOffset + 1);
 
-  function getCurrentWeek() {
-    const today = new Date();
+  function getWeekForDate(date) {
+    const start = startOfWeek(date, { weekStartsOn: 0 });
     const week = [];
-    const startOfWeek = new Date(today);
-    startOfWeek.setDate(today.getDate() - today.getDay());
     for (let i = 0; i < 7; i++) {
-      const day = new Date(startOfWeek);
-      day.setDate(startOfWeek.getDate() + i);
-      const dayOfWeek = day.toLocaleDateString('en-US', { weekday: 'long' });
-      const date = day.getDate();
-      week.push({ dayOfWeek, date, fullDate: new Date(day) });
+      const day = new Date(start);
+      day.setDate(start.getDate() + i);
+      week.push({
+        dayOfWeek: day.toLocaleDateString('en-US', { weekday: 'long' }),
+        date: day.getDate(),
+        fullDate: new Date(day),
+      });
     }
     return week;
   }
 
+  function getCurrentWeek() {
+    return getWeekForDate(new Date());
+  }
+
   function updateWeek(offset) {
     const today = new Date();
-    const startOfWeek = new Date(today);
-    startOfWeek.setDate(today.getDate() - today.getDay() + (7 * offset));
-    const updatedWeek = [];
-    for (let i = 0; i < 7; i++) {
-      const day = new Date(startOfWeek);
-      day.setDate(startOfWeek.getDate() + i);
-      const dayOfWeek = day.toLocaleDateString('en-US', { weekday: 'long' });
-      const date = day.getDate();
-      updatedWeek.push({ dayOfWeek, date, fullDate: new Date(day) });
-    }
-    setCurrentWeek(updatedWeek);
+    const base = new Date(today);
+    base.setDate(today.getDate() + (7 * offset));
+    setCurrentWeek(getWeekForDate(base));
+    setSelectedDate(getWeekForDate(base)[0].fullDate);
   }
 
   const handleDayClick = (index) => {
     if (currentWeek[index] && currentWeek[index].fullDate) {
       setSelectedDate(new Date(currentWeek[index].fullDate));
     }
+  };
+
+  const onCalendarChange = (date) => {
+    setSelectedDate(date);
+    setCurrentWeek(getWeekForDate(date));
   };
 
   const handleViewChange = (view) => setView(view);
@@ -195,11 +198,18 @@ function Goals() {
     return completion ? completion.is_completed : false;
   };
 
+  const selectedRangeText = `${format(startOfWeek(selectedDate, { weekStartsOn: 0 }), 'MMM d')} - ${format(endOfWeek(selectedDate, { weekStartsOn: 0 }), 'MMM d')}`;
+
   return (
     <div className="goals-page">
       <h2 className='goal-header'>The Habit Tracker</h2>
       <div className="goals-container">
         <div className="habits-container">
+          <div style={{ marginBottom: 12 }}>
+            <WeekCalendar value={selectedDate} onChange={onCalendarChange} weekStartsOn={0} />
+            <div style={{ marginTop: 8, fontWeight: 600 }}>Week: {selectedRangeText}</div>
+          </div>
+
           <h2>Habits for {format(selectedDate, 'EEEE, MMMM d')}</h2>
 
           <div className="calendar">
@@ -212,6 +222,7 @@ function Goals() {
                     key={`${item.fullDate.getTime()}-${index}`}
                     className={`day-label ${isSelected ? 'selected' : ''}`}
                     onClick={() => handleDayClick(index)}
+                    style={{ background: isSelected ? 'rgba(79,70,229,0.12)' : 'transparent', borderRadius: 8 }}
                   >
                     <div className="selected-d">{item.dayOfWeek.slice(0, 3).toUpperCase()}</div>
                     <div>{item.date}</div>

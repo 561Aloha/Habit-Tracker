@@ -277,8 +277,3 @@ button.remove:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-
-.goals-page{
-  margin: 0 auto;
-  padding: 0;
-}
