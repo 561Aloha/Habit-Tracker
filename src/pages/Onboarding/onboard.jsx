@@ -136,7 +136,6 @@ export default function ZenoOnboarding({ onComplete }) {
     }
   };
 
-  // UPDATED: Handle close with proper Supabase updates
   const handleClose = async () => {
     // Same as skip - mark as completed
     await handleSkip();

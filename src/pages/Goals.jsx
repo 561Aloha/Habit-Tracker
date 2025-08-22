@@ -1,3 +1,4 @@
+// Goals.jsx (updated parts)
 import './../css/goals.css';
 import Footer from '../components/Footer.jsx';
 
@@ -9,20 +10,12 @@ import arrow from './../assets/arrow.svg';
 import { format } from 'date-fns';
 
 import Planner from "../components/planner.jsx";
-import CompleteGrid from '../components/completegrid.jsx';
 
 function Goals() {
   const year = new Date().getFullYear();
   const [chartData, setChartData] = useState({
-    labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    datasets: [
-      {
-        label: 'Habits Filled',
-        data: Array(7).fill(0),
-        backgroundColor: '#8884d8',
-        borderWidth: 1,
-      },
-    ],
+    labels: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+    datasets: [{ label: 'Habits Filled', data: Array(7).fill(0), backgroundColor: '#8884d8', borderWidth: 1 }],
   });
 
   const [view, setView] = useState('Week');
@@ -32,6 +25,7 @@ function Goals() {
   const [currentWeek, setCurrentWeek] = useState(getCurrentWeek());
   const [calendarOffset, setCalendarOffset] = useState(0);
   const [user, setUser] = useState(null);
+  const [selectedHabitId, setSelectedHabitId] = useState(null);
 
   useEffect(() => {
     const getUser = async () => {
@@ -41,29 +35,23 @@ function Goals() {
     getUser();
   }, []);
 
-  // Fetch habits and completion data together
   const fetchAllData = async () => {
     if (!user) return;
-    
     try {
       const { data: habitsData, error: habitsError } = await supabase
         .from('Habits')
         .select('*')
         .eq('user_id', user.id);
-
       if (habitsError) throw habitsError;
 
-      // Fetch completion data
       const { data: completionData, error: completionError } = await supabase
         .from('Habit_Completion')
         .select('*')
         .eq('user_id', user.id);
-
       if (completionError) throw completionError;
 
       setHabits(habitsData || []);
       setCompletionData(completionData || []);
-      
     } catch (error) {
       console.error('Error fetching data:', error.message);
     }
@@ -71,53 +59,58 @@ function Goals() {
 
   const handleHabitCompletion = async (habitId, dateKey) => {
     if (!user) return;
-
     try {
-      // Find existing completion record
       const existing = completionData.find(
         c => c.habit_id === habitId && c.completion_date === dateKey
       );
-      
       const isCompleted = existing ? !existing.is_completed : true;
 
-      // Update database
       const { error } = await supabase
         .from('Habit_Completion')
-        .upsert({
-          habit_id: habitId,
-          completion_date: dateKey,
-          is_completed: isCompleted,
-          user_id: user.id,
-        }, { onConflict: ['habit_id', 'completion_date', 'user_id'] });
-
+        .upsert(
+          { habit_id: habitId, completion_date: dateKey, is_completed: isCompleted, user_id: user.id },
+          { onConflict: ['habit_id','completion_date','user_id'] }
+        );
       if (error) throw error;
 
-      // Update local state immediately for better UX
-      setCompletionData(prevData => {
-        const newData = [...prevData];
-        const existingIndex = newData.findIndex(
-          c => c.habit_id === habitId && c.completion_date === dateKey
-        );
-
-        if (existingIndex >= 0) {
-          newData[existingIndex] = { ...newData[existingIndex], is_completed: isCompleted };
-        } else {
-          newData.push({
-            habit_id: habitId,
-            completion_date: dateKey,
-            is_completed: isCompleted,
-            user_id: user.id
-          });
-        }
-        return newData;
+      setCompletionData(prev => {
+        const copy = [...prev];
+        const idx = copy.findIndex(c => c.habit_id === habitId && c.completion_date === dateKey);
+        if (idx >= 0) copy[idx] = { ...copy[idx], is_completed: isCompleted };
+        else copy.push({ habit_id: habitId, completion_date: dateKey, is_completed: isCompleted, user_id: user.id });
+        return copy;
       });
-
     } catch (error) {
       console.error('Error updating habit completion:', error.message);
     }
   };
 
-  // Update chart data whenever habits or completion data changes
+  const handleRemoveHabit = async () => {
+    if (!user || !selectedHabitId) return;
+    const habit = habits.find(h => h.habit_id === selectedHabitId);
+    const ok = window.confirm(
+      `Are you sure you want to delete "${habit?.habit_name ?? 'this habit'}"? This will also delete its completion history.`
+    );
+    if (!ok) return;
+
+    try {
+      await supabase.from('Habit_Completion').delete().eq('habit_id', selectedHabitId).eq('user_id', user.id);
+      const { error: delErr } = await supabase.from('Habits').delete().eq('habit_id', selectedHabitId).eq('user_id', user.id);
+      if (delErr) throw delErr;
+
+      setHabits(prev => prev.filter(h => h.habit_id !== selectedHabitId));
+      setCompletionData(prev => prev.filter(c => c.habit_id !== selectedHabitId));
+      setSelectedHabitId(null);
+    } catch (error) {
+      console.error('Error deleting habit:', error.message);
+      alert('Failed to delete habit: ' + error.message);
+    }
+  };
+
+  const toggleSelectHabit = (habitId) => {
+    setSelectedHabitId(prev => (prev === habitId ? null : habitId));
+  };
+
   const updateChartData = () => {
     const weeklyData = Array(7).fill(0);
     const dailyHabitCounts = Array(7).fill(0);
@@ -126,19 +119,12 @@ function Goals() {
       currentWeek.forEach((day, index) => {
         const dateKey = format(day.fullDate, 'yyyy-MM-dd');
         const dayName = format(day.fullDate, 'EEEE');
-
-        // Check if this habit should occur on this day
         if (habit.frequency && habit.frequency.includes(dayName)) {
           dailyHabitCounts[index] += 1;
-          
-          // Check if it's completed
           const completion = completionData.find(
             c => c.habit_id === habit.habit_id && c.completion_date === dateKey && c.is_completed
           );
-          
-          if (completion) {
-            weeklyData[index] += 1;
-          }
+          if (completion) weeklyData[index] += 1;
         }
       });
     });
@@ -149,33 +135,13 @@ function Goals() {
 
     setChartData({
       labels: currentWeek.map(day => day.dayOfWeek),
-      datasets: [
-        {
-          label: 'Habits Completed (%)',
-          data: weeklyCompletionPercentages,
-          backgroundColor: '#8884d8',
-          borderWidth: 1,
-        },
-      ],
+      datasets: [{ label: 'Habits Completed (%)', data: weeklyCompletionPercentages, backgroundColor: '#8884d8', borderWidth: 1 }],
     });
   };
 
-  // Initial data fetch
-  useEffect(() => {
-    if (user) {
-      fetchAllData();
-    }
-  }, [user]);
-
-  // Update chart when data changes
-  useEffect(() => {
-    updateChartData();
-  }, [habits, completionData, currentWeek]);
-
-  // Week navigation
-  useEffect(() => {
-    updateWeek(calendarOffset);
-  }, [calendarOffset]);
+  useEffect(() => { if (user) fetchAllData(); }, [user]);
+  useEffect(() => { updateChartData(); }, [habits, completionData, currentWeek]);
+  useEffect(() => { updateWeek(calendarOffset); }, [calendarOffset]);
 
   const handlePrevClick = () => setCalendarOffset(calendarOffset - 1);
   const handleNextClick = () => setCalendarOffset(calendarOffset + 1);
@@ -183,15 +149,11 @@ function Goals() {
   function getCurrentWeek() {
     const today = new Date();
     const week = [];
-    
-    // Get the start of the week (Sunday)
     const startOfWeek = new Date(today);
     startOfWeek.setDate(today.getDate() - today.getDay());
-    
     for (let i = 0; i < 7; i++) {
       const day = new Date(startOfWeek);
       day.setDate(startOfWeek.getDate() + i);
-      
       const dayOfWeek = day.toLocaleDateString('en-US', { weekday: 'long' });
       const date = day.getDate();
       week.push({ dayOfWeek, date, fullDate: new Date(day) });
@@ -203,12 +165,10 @@ function Goals() {
     const today = new Date();
     const startOfWeek = new Date(today);
     startOfWeek.setDate(today.getDate() - today.getDay() + (7 * offset));
-    
     const updatedWeek = [];
     for (let i = 0; i < 7; i++) {
       const day = new Date(startOfWeek);
       day.setDate(startOfWeek.getDate() + i);
-      
       const dayOfWeek = day.toLocaleDateString('en-US', { weekday: 'long' });
       const date = day.getDate();
       updatedWeek.push({ dayOfWeek, date, fullDate: new Date(day) });
@@ -222,11 +182,8 @@ function Goals() {
     }
   };
 
-  const handleViewChange = (view) => {
-    setView(view);
-  };
+  const handleViewChange = (view) => setView(view);
 
-  // Filter habits for selected day
   const filteredHabitsForSelectedDay = habits.filter(habit => {
     const dayName = format(selectedDate, 'EEEE');
     return habit.frequency && habit.frequency.includes(dayName);
@@ -234,32 +191,22 @@ function Goals() {
 
   const isHabitCompleted = (habitId, date) => {
     const dateKey = format(date, 'yyyy-MM-dd');
-    const completion = completionData.find(
-      c => c.habit_id === habitId && c.completion_date === dateKey
-    );
+    const completion = completionData.find(c => c.habit_id === habitId && c.completion_date === dateKey);
     return completion ? completion.is_completed : false;
   };
 
   return (
     <div className="goals-page">
-            <h2 className='goal-header'>The Habit Tracker</h2>
+      <h2 className='goal-header'>The Habit Tracker</h2>
       <div className="goals-container">
-        
         <div className="habits-container">
           <h2>Habits for {format(selectedDate, 'EEEE, MMMM d')}</h2>
+
           <div className="calendar">
             <div className="calendar-header">
-              <img
-                className="arrow left-arrow"
-                src={arrow}
-                style={{ transform: 'rotate(180deg)' }}
-                onClick={handlePrevClick}
-                alt="Previous Week"
-              />
+              <img className="arrow left-arrow" src={arrow} style={{ transform: 'rotate(180deg)' }} onClick={handlePrevClick} alt="Previous Week" />
               {currentWeek.map((item, index) => {
-                const isSelected = selectedDate && 
-                  item.fullDate.toDateString() === selectedDate.toDateString();
-                
+                const isSelected = selectedDate && item.fullDate.toDateString() === selectedDate.toDateString();
                 return (
                   <div
                     key={`${item.fullDate.getTime()}-${index}`}
@@ -271,25 +218,32 @@ function Goals() {
                   </div>
                 );
               })}
-              <img
-                className="arrow right-arrow"
-                src={arrow}
-                onClick={handleNextClick}
-                alt="Next Week"
-              />
+              <img className="arrow right-arrow" src={arrow} onClick={handleNextClick} alt="Next Week" />
             </div>
           </div>
+
           <div className="list">
             {filteredHabitsForSelectedDay.map(habit => {
               const habitDateKey = format(selectedDate, 'yyyy-MM-dd');
               const isCompleted = isHabitCompleted(habit.habit_id, selectedDate);
+              const selectedForRemoval = selectedHabitId === habit.habit_id;
 
               return (
-                <div key={`${habit.habit_id}-${habitDateKey}`} className={`habit ${isCompleted ? 'completed' : ''}`}>
+                <div
+                  key={`${habit.habit_id}-${habitDateKey}`}
+                  className={`habit ${isCompleted ? 'completed' : ''} selectable ${selectedForRemoval ? 'selected-for-removal' : ''}`}
+                  onClick={() => toggleSelectHabit(habit.habit_id)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggleSelectHabit(habit.habit_id); }}
+                >
                   <p>{habit.habit_name}</p>
-                  <button 
-                    className="habit-toggle" 
-                    onClick={() => handleHabitCompletion(habit.habit_id, habitDateKey)}
+                  <button
+                    className="habit-toggle"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleHabitCompletion(habit.habit_id, habitDateKey);
+                    }}
                   >
                     {isCompleted ? 'Done ✓' : '○'}
                   </button>
@@ -297,20 +251,24 @@ function Goals() {
               );
             })}
           </div>
+
           <div className="habit-buttons">
             <Link to="/habit">
               <button className="organize">Add a new Habit</button>
             </Link>
-            <button className="remove">Remove</button>
+            <button className="remove" onClick={handleRemoveHabit} disabled={!selectedHabitId}>
+              Remove
+            </button>
           </div>
         </div>
+
         <div className='right-container'>
           <Planner
             habits={habits}
             completionData={completionData}
             onHabitCompletion={handleHabitCompletion}
             currentWeek={currentWeek}
-          />    
+          />
           <div className="chart-container">
             <MyChart
               chartData={chartData}
@@ -322,14 +280,12 @@ function Goals() {
               onPrevWeek={handlePrevClick}
               onNextWeek={handleNextClick}
             />
-          <CompleteGrid year={year} />
           </div>
         </div>
-
       </div>
-              <Footer/>
+      <Footer/>
     </div>
   );
-}  
+}
 
 export default Goals;

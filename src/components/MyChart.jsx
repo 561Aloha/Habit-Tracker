@@ -1,176 +1,48 @@
-import React from "react";
-import { Bar } from 'react-chartjs-2';
-import 'chart.js/auto';
-import arrow from './../assets/arrow.svg';
-import './../pages/chart.css';
-import { format } from 'date-fns';
+// MyChart.jsx
+import React, { useEffect, useState } from "react";
+import CompleteGrid from "./CompleteGrid";
+import { supabase } from "../client";
 
-const MyChart = ({ 
-  chartData, 
-  onWeekChange, 
-  currentWeek, 
-  onViewChange, 
-  habits = [], 
-  completionData = [],
-  onPrevWeek,
-  onNextWeek
-}) => {
-  
-  // DEBUG: Log what we're receiving
-  console.log("DEBUG - MyChart Props:");
-  console.log("habits:", habits);
-  console.log("completionData:", completionData);
-  console.log("currentWeek:", currentWeek);
-  console.log("chartData:", chartData);
+function yyyymmddLocal(dateLike) {
+  const d = new Date(dateLike);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          label: function (tooltipItem) {
-            const filled = tooltipItem.raw;
-            return `Completion: ${filled}%`;
-          },
-        },
-        bodyFont: { size: 14 },
-        titleFont: { size: 16 },
-      },
-    },
-    scales: {
-      x: {
-        grid: { display: false },
-        ticks: { font: { size: 14 } },
-      },
-      y: {
-        grid: { display: false },
-        beginAtZero: true,
-        max: 100,
-        ticks: {
-          stepSize: 10,
-          callback: value => `${value}%`,
-          font: { size: 14 },
-        },
-      },
-    },
-    elements: {
-      bar: { borderRadius: 2, borderSkipped: false },
-    },
-  };
+const MyChart = () => {
+  const [completedDays, setCompletedDays] = useState({});
 
-  const handleNextClick = () => {
-    if (onNextWeek) {
-      onNextWeek();
-    }
-  };
+  useEffect(() => {
+    const fetchCompletions = async () => {
+      const { data, error } = await supabase
+        .from("Habit_completion")
+        .select("completion_date")
+        .eq("is_completed", true);
 
-  const handlePrevClick = () => {
-    if (onPrevWeek) {
-      onPrevWeek();
-    }
-  };
+      if (error) {
+        console.error("Error fetching completions:", error);
+        return;
+      }
 
-  // Calculate total habits completed this week (actual count, not percentages)
-  const calculateTotalHabitsCompleted = () => {
-    console.log("DEBUG - Calculating total habits completed...");
-    
-    // If we don't have the required data, fall back to 0
-    if (!habits.length || !completionData.length || !currentWeek.length) {
-      console.log("DEBUG - Missing required data, returning 0");
-      return 0;
-    }
-    
-    let totalCompleted = 0;
-    
-    currentWeek.forEach((day, dayIndex) => {
-      const dateKey = format(day.fullDate, 'yyyy-MM-dd');
-      const dayName = format(day.fullDate, 'EEEE');
-      
-      console.log(`DEBUG - Checking day ${dayIndex}: ${dayName} (${dateKey})`);
-      
-      habits.forEach(habit => {
-        // Check if habit should occur on this day
-        if (habit.frequency && habit.frequency.includes(dayName)) {
-          // Check if it's completed
-          const completion = completionData.find(
-            c => c.habit_id === habit.habit_id && 
-                 c.completion_date === dateKey && 
-                 c.is_completed
-          );
-          
-          if (completion) {
-            totalCompleted += 1;
-            console.log(`DEBUG - Found completed habit: ${habit.habit_name} on ${dateKey}`);
-          }
-        }
+      const map = {};
+      (data || []).forEach((row) => {
+        if (!row.completion_date) return;
+        const key = yyyymmddLocal(row.completion_date);
+        map[key] = true; // shade this day
       });
-    });
-    
-    console.log("DEBUG - Total completed habits:", totalCompleted);
-    return totalCompleted;
-  };
 
-  const safeData =
-    chartData &&
-    chartData.datasets &&
-    chartData.datasets[0] &&
-    Array.isArray(chartData.datasets[0].data)
-      ? chartData.datasets[0].data
-      : [];
+      setCompletedDays(map);
+    };
 
-  const safeLabels = chartData && Array.isArray(chartData.labels)
-    ? chartData.labels
-    : [];
-
-  if (!safeLabels.length || !safeData.length) {
-    return <div style={{ textAlign: 'center', margin: '2rem 0' }}>No chart data available.</div>;
-  }
-
-  // OLD CALCULATION (what was causing 450)
-  const oldTotalHabitsDone = safeData.reduce((sum, val) => sum + (typeof val === 'number' ? val : 0), 0);
-  
-  // NEW CALCULATION
-  const totalHabitsCompleted = calculateTotalHabitsCompleted();
+    fetchCompletions();
+  }, []);
 
   return (
-    <div className="Chart">
-      <h2>Weekly Habit Progress</h2>
-      <div className="calendar-header">
-        <img
-          className="arrow left-arrow"
-          src={arrow}
-          style={{ transform: 'rotate(180deg)' }}
-          onClick={handlePrevClick}
-          alt="previous week"
-        />
-        <p>
-          {currentWeek[0]?.dayOfWeek}, {currentWeek[0]?.fullDate.toLocaleDateString()} - {currentWeek[6]?.dayOfWeek}, {currentWeek[6]?.fullDate.toLocaleDateString()}
-        </p>
-        <img
-          className="arrow right-arrow"
-          src={arrow}
-          onClick={handleNextClick}
-          alt="next week"
-        />
-      </div>
-      <Bar data={chartData} options={options} />
-
-      <div className="streaks-tracker-container">
-        <div className="streaks-tracker">
-          <p>Current Streak</p>
-          <h2>0</h2>
-
-        </div>
-        <div className="streaks-tracker">
-          <p>Habits Done</p>
-          <h2 style={{color: totalHabitsCompleted === 0 ? 'red' : 'green'}}>
-            {totalHabitsCompleted}
-          </h2>
-          <p>This week</p>
-
-        </div>
-      </div>
+    <div>
+      <h2 className="text-xl font-semibold mb-4">Habit Completion Chart</h2>
+      <CompleteGrid completedDays={completedDays} />
     </div>
   );
 };

@@ -27,7 +27,6 @@
     background-color: rgb(255, 255, 255);
 }
 .chart-container {
-
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     color: black;
@@ -139,10 +138,8 @@
   width: 175px;
   color: white;
 }
-
-
 .goals-page {
-  min-height: 100vh; /* Ensure your main page fills at least the viewport */
+  min-height: 100vh; 
   display: flex;
   flex-direction: column;
 }
@@ -161,13 +158,16 @@
 }
 
 .day-label{
+  margin-top: 12px;
   border-radius: 10px;
   text-align: center;
+  font-weight:600;
   padding: 10px;
   background-color: #9783ef;
 }
 .day-label.selected {
-  background-color: #83efed;
+  background-color: #4029d6;
+  color:white;
 }
 
 .habit-buttons{
@@ -185,20 +185,16 @@
     position:relative;
     margin-bottom: 20px;
   }
-  
 }
 
 @media (max-width: 1200px) {
   .habits-container{
     margin:0 auto;
     margin-bottom: 20px;
-    padding:20px;
-  }
-  .habits-container{
+    width: 90%;
     max-width: 500px;
     position:relative;
   }
-
   .habits-container h2 {
     font-size: 25px;
     margin: 0 auto;
@@ -256,4 +252,33 @@
 
 .goals-container{
   max-width: 1200px;;
+}
+
+/* goals.css additions */
+.habit {
+  border: 2px solid transparent;
+  border-radius: 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.habit.selectable { cursor: pointer; }
+
+.habit.selectable:hover {
+  border-color: #d1d5db;
+}
+
+.habit.selected-for-removal {
+  border-color: #ef4444;
+  background-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+button.remove:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.goals-page{
+  margin: 0 auto;
+  padding: 0;
 }
