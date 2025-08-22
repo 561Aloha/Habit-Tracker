@@ -205,10 +205,6 @@ function Goals() {
       <h2 className='goal-header'>The Habit Tracker</h2>
       <div className="goals-container">
         <div className="habits-container">
-          <div style={{ marginBottom: 12 }}>
-            <WeekCalendar value={selectedDate} onChange={onCalendarChange} weekStartsOn={0} />
-            <div style={{ marginTop: 8, fontWeight: 600 }}>Week: {selectedRangeText}</div>
-          </div>
 
           <h2>Habits for {format(selectedDate, 'EEEE, MMMM d')}</h2>
 

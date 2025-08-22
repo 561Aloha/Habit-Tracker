@@ -106,7 +106,6 @@ const [showProfileMenu, setShowProfileMenu] = useState(false);
   return (
       <div>      
         {!hideNav && (
-
         <div className='nav-bar'>
           <div className='logo-title-container'>
             <Link to="/"><img src={logo} alt="Logo" /></Link>
@@ -147,9 +146,6 @@ const [showProfileMenu, setShowProfileMenu] = useState(false);
             </button>
           )}
         </div>
-
-        
-
           <div className="hamburger-container" onClick={() => setMenuOpen(!menuOpen)}>
             <div className={`hamburger-icon ${menuOpen ? 'open' : ''}`}>
               <span className="bar top"></span>
@@ -157,28 +153,50 @@ const [showProfileMenu, setShowProfileMenu] = useState(false);
               <span className="bar bottom"></span>
             </div>
           </div>
-
-          <div className={`menu-overlay ${menuOpen ? 'open' : ''}`}>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/goal">Goals</Link></li>
-              <li><Link to="/blog">Blog</Link></li>
-              <li><Link to="/about-us">About Us</Link></li>
-              {user ? (
-                <li className="user-info">
-                  <div className="user-details">
-                    <img src={User_Circle} alt="User Icon" className="user-icon" />
-                    <span className="greeting">Hi, {displayName.split(' ')[0]}</span>
-                  </div>
-                  <button className="signout-btn" onClick={handleSignOut}>Sign Out</button>
-                </li>
-              ) : (
-                <li><button className="signout-btn" onClick={() => setShowSignInModal(true)}>Sign In</button></li>
-              )}
-            </ul>
-          </div>
-        </div>
+          {menuOpen && (
+            <div className="menu-backdrop" onClick={() => setMenuOpen(false)}>
+              <div className="menu-overlay open" onClick={(e) => e.stopPropagation()}>
+                <ul>
+                  <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
+                  <li><Link to="/goal" onClick={() => setMenuOpen(false)}>Goals</Link></li>
+                  <li><Link to="/blog" onClick={() => setMenuOpen(false)}>Blog</Link></li>
+                  <li><Link to="/about-us" onClick={() => setMenuOpen(false)}>About Us</Link></li>
+                  {user ? (
+                    <li className="user-info">
+                      <div className="user-details">
+                        <img src={User_Circle} alt="User Icon" className="user-icon" />
+                        <span className="greeting">Hi, {displayName.split(' ')[0]}</span>
+                      </div>
+                      <button 
+                        className="signout-btn" 
+                        onClick={() => {
+                          handleSignOut();
+                          setMenuOpen(false);
+                        }}
+                      >
+                        Sign Out
+                      </button>
+                    </li>
+                  ) : (
+                    <li>
+                      <button 
+                        className="signout-btn" 
+                        onClick={() => {
+                          setShowSignInModal(true);
+                          setMenuOpen(false);
+                        }}
+                      >
+                        Sign In
+                      </button>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            </div>
           )}
+        </div>
+        )}
+
         {element}
 
 

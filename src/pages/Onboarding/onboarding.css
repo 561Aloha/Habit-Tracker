@@ -233,3 +233,50 @@
   padding: 8px;
   width: 48px;
 }
+
+/* Make the overall screen flexbox, center the card */
+.screen {
+  min-height: 100vh;
+  background: #f5f3ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;  /* keep header visible */
+  padding: 24px 16px 40px;
+  box-sizing: border-box;
+}
+
+/* Fix card size */
+.qa-card {
+  width: 90%;
+  max-width: 700px;
+  min-height: 500px;           /* <- fixed height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* spread question + footer */
+  margin: 20px auto 0;
+  background: #f5f3ff;
+  border-radius: 28px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* On small screens, adjust */
+@media (max-width: 768px) {
+  .qa-card {
+    min-height: 80vh;       /* fill most of mobile screen */
+    padding: 16px;
+  }
+  .question {
+    font-size: 22px;
+  }
+  .option-tile {
+    font-size: 16px;
+    padding: 14px 12px;
+  }
+  .footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+}

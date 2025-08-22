@@ -42,7 +42,6 @@ export default function ZenoOnboarding({ onComplete }) {
     }
   };
 
-  // UPDATED: Complete onboarding with Supabase updates
   const completeOnboarding = async (finalAnswers = answers) => {
     setIsUpdating(true);
     try {
@@ -75,10 +74,8 @@ export default function ZenoOnboarding({ onComplete }) {
           console.error('Metadata update error:', metaError);
         }
 
-        // Store locally as backup
         localStorage.setItem("zeno_onboarding_done", "true");
         
-        // Call parent callback if provided
         onComplete?.(finalAnswers);
       }
     } catch (error) {
@@ -143,7 +140,7 @@ export default function ZenoOnboarding({ onComplete }) {
 
   if (finished) {
     return (
-      <div className="screen" style={{ placeItems: 'center' }}>
+      <div className="screen">
         <div className="brand-left" style={{ marginBottom: 8 }}>
           <img src={logoImg} alt="Zeno Logo" className="logo-zeno" />
           <span className="brand-name">Zeno</span>

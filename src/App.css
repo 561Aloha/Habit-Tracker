@@ -289,4 +289,31 @@
     width: 100%;
   }
 
+}.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu-overlay {
+  width: 50vw;
+  max-width: 320px;
+  height: 100%;
+  background: rgba(241, 233, 255, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideIn 0.25s ease;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0.5; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .menu-overlay { width: 80vw; }
 }
