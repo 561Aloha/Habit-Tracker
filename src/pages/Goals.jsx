@@ -1,21 +1,26 @@
-// src/pages/Goals.jsx (full updated)
+// src/pages/Goals.jsx (fixed)
 import './../css/goals.css';
 import Footer from '../components/Footer.jsx';
-
-import React, { useState, useEffect } from "react";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import edit from './../assets/edit-03.svg';
+import React, { useState, useEffect, useRef } from "react";
 import MyChart from '../components/MyChart.jsx';
 import { supabase } from '../client';
 import { Link } from 'react-router-dom';
 import arrow from './../assets/arrow.svg';
 import { format, startOfWeek, endOfWeek } from 'date-fns';
-
+import chevronDown from './../assets/chevron-down.svg';
 import Planner from "../components/planner.jsx";
-import WeekCalendar from "../components/WeekCalendar.jsx";
+import EditHabitModal from './EditHabit.jsx';
+
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
 function Goals() {
   const year = new Date().getFullYear();
   const [chartData, setChartData] = useState({
-    labels: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+    labels: DAYS,
     datasets: [{ label: 'Habits Filled', data: Array(7).fill(0), backgroundColor: '#8884d8', borderWidth: 1 }],
   });
 
@@ -27,6 +32,12 @@ function Goals() {
   const [calendarOffset, setCalendarOffset] = useState(0);
   const [user, setUser] = useState(null);
   const [selectedHabitId, setSelectedHabitId] = useState(null);
+  const [openDatePicker, setOpenDatePicker] = useState(false);
+  const headerAnchorRef = useRef(null);
+
+  // edit modal state
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [habitToEdit, setHabitToEdit] = useState(null);
 
   useEffect(() => {
     const getUser = async () => {
@@ -108,8 +119,32 @@ function Goals() {
     }
   };
 
+  const handleDeleteFromModal = async (habitId) => {
+    if (!user || !habitId) return;
+    const habit = habits.find(h => h.habit_id === habitId);
+    const ok = window.confirm(
+      `Delete "${habit?.habit_name ?? 'this habit'}" and its completion history?`
+    );
+    if (!ok) return;
+
+    try {
+      await supabase.from('Habit_Completion').delete().eq('habit_id', habitId).eq('user_id', user.id);
+      const { error: delErr } = await supabase.from('Habits').delete().eq('habit_id', habitId).eq('user_id', user.id);
+      if (delErr) throw delErr;
+
+      setHabits(prev => prev.filter(h => h.habit_id !== habitId));
+      setCompletionData(prev => prev.filter(c => c.habit_id !== habitId));
+      setEditModalOpen(false);
+      setHabitToEdit(null);
+      if (selectedHabitId === habitId) setSelectedHabitId(null);
+    } catch (error) {
+      console.error('Error deleting habit:', error.message);
+      alert('Failed to delete habit: ' + error.message);
+    }
+  };
+
   const toggleSelectHabit = (habitId) => {
-    setSelectedHabitId(prev => (prev === habitId ? null : prev = habitId));
+    setSelectedHabitId(prev => (prev === habitId ? null : habitId));
   };
 
   const updateChartData = () => {
@@ -200,13 +235,81 @@ function Goals() {
 
   const selectedRangeText = `${format(startOfWeek(selectedDate, { weekStartsOn: 0 }), 'MMM d')} - ${format(endOfWeek(selectedDate, { weekStartsOn: 0 }), 'MMM d')}`;
 
+  const handleEditHabit = (habit, e) => {
+    e.stopPropagation();
+    setHabitToEdit(habit);
+    setEditModalOpen(true);
+  };
+
+  const handleSaveEdit = async (updated) => {
+    if (!user || !updated) return;
+    try {
+      const { error } = await supabase
+        .from('Habits')
+        .update({
+          habit_name: updated.habit_name,
+          frequency: updated.frequency,
+          category: updated.category ?? null,
+        })
+        .eq('habit_id', updated.habit_id)
+        .eq('user_id', user.id);
+      if (error) throw error;
+
+      setHabits(prev =>
+        prev.map(h => h.habit_id === updated.habit_id ? { ...h, ...updated } : h)
+      );
+      setEditModalOpen(false);
+      setHabitToEdit(null);
+    } catch (err) {
+      console.error('Error saving habit:', err.message);
+      alert('Failed to save habit: ' + err.message);
+    }
+  };
+
+
   return (
     <div className="goals-page">
       <h2 className='goal-header'>The Habit Tracker</h2>
       <div className="goals-container">
         <div className="habits-container">
 
-          <h2>Habits for {format(selectedDate, 'EEEE, MMMM d')}</h2>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <h2 className="habits-header" style={{ display: 'flex', alignItems: 'center' }}>
+        <span
+          ref={headerAnchorRef}
+          onClick={() => setOpenDatePicker(true)}
+          style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setOpenDatePicker(true); }}
+        >
+          Habits for{" "}
+          <span className="date-text">{format(selectedDate, 'EEEE, MMMM d')}</span>
+          <img src={chevronDown} alt="open date picker" className="chevron-icon" style={{ marginLeft: 8 }} />
+        </span>
+          <DatePicker
+            open={openDatePicker}
+            onClose={() => setOpenDatePicker(false)}
+            value={selectedDate}
+            onChange={(newDate) => {
+              if (newDate) {
+                setSelectedDate(newDate);
+                setCurrentWeek(getWeekForDate(newDate));
+              }
+            }}
+            slotProps={{
+              textField: { style: { display: 'none' } },
+              popper: {
+                placement: 'bottom-start',
+                anchorEl: () => headerAnchorRef.current,
+                modifiers: [{ name: 'offset', options: { offset: [0, 8] } }],
+              },
+            }}
+          />
+        </h2>
+        
+      </LocalizationProvider>
+
 
           <div className="calendar">
             <div className="calendar-header">
@@ -218,7 +321,6 @@ function Goals() {
                     key={`${item.fullDate.getTime()}-${index}`}
                     className={`day-label ${isSelected ? 'selected' : ''}`}
                     onClick={() => handleDayClick(index)}
-                    style={{ background: isSelected ? 'rgba(79,70,229,0.12)' : 'transparent', borderRadius: 8 }}
                   >
                     <div className="selected-d">{item.dayOfWeek.slice(0, 3).toUpperCase()}</div>
                     <div>{item.date}</div>
@@ -234,25 +336,40 @@ function Goals() {
               const habitDateKey = format(selectedDate, 'yyyy-MM-dd');
               const isCompleted = isHabitCompleted(habit.habit_id, selectedDate);
               const selectedForRemoval = selectedHabitId === habit.habit_id;
-
               return (
                 <div
                   key={`${habit.habit_id}-${habitDateKey}`}
-                  className={`habit ${isCompleted ? 'completed' : ''} selectable ${selectedForRemoval ? 'selected-for-removal' : ''}`}
+                  className={`habit-row ${isCompleted ? 'completed' : ''} selectable 
+                    ${selectedForRemoval ? 'selected' : ''}`}
                   onClick={() => toggleSelectHabit(habit.habit_id)}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggleSelectHabit(habit.habit_id); }}
                 >
-                  <p>{habit.habit_name}</p>
+                  <div className="habit-content">
+                    <p>{habit.habit_name}</p>
+                    <button
+                      type="button"
+                      className={`habit-toggle ${isCompleted ? 'completed' : ''}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleHabitCompletion(habit.habit_id, habitDateKey);
+                      }}
+                    >
+                      {isCompleted ? 'Done ✓' : '○'}
+                    </button>
+                  </div>
                   <button
-                    className="habit-toggle"
+                    type="button"
+                    className="edit-icon"
+                    aria-label={`Edit ${habit.habit_name}`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleHabitCompletion(habit.habit_id, habitDateKey);
+                      setHabitToEdit(habit);
+                      setEditModalOpen((prev) => !(prev && habitToEdit?.habit_id === habit.habit_id));
                     }}
-                  >
-                    {isCompleted ? 'Done ✓' : '○'}
+                    >
+                    <img src={edit} alt="" />
                   </button>
                 </div>
               );
@@ -288,11 +405,30 @@ function Goals() {
               onNextWeek={handleNextClick}
             />
           </div>
+          <EditHabitModal
+            open={editModalOpen}
+            habit={habitToEdit}
+            onClose={() => {
+              setEditModalOpen(false);
+              setHabitToEdit(null);
+            }}
+            onSave={handleSaveEdit}
+            onDelete={(id) => handleDeleteFromModal(id)}
+            days={DAYS}   // 👈 pass DAYS
+          />
+
         </div>
       </div>
+
+
+
       <Footer/>
     </div>
   );
 }
+
+
+
+
 
 export default Goals;

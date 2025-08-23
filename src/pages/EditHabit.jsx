@@ -1,77 +1,106 @@
-// src/components/EditHabitModal.jsx
-import React, { useEffect, useState } from "react";
+// src/components/EditHabit.jsx
+import React, { useState, useEffect, useRef } from "react";
+import "../css/edithabit.css";
 
-const DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const DEFAULT_CATEGORIES = ["Health", "Fitness", "Work", "Study", "Personal", "Other"];
 
-export default function EditHabitModal({ open, habit, onClose, onSave, onDelete }) {
+function EditHabit({ habit, onClose, onSave, onDelete, days }) {
   const [name, setName] = useState("");
-  const [days, setDays] = useState(new Set());
+  const [frequency, setFrequency] = useState([]);
+  const [category, setCategory] = useState("");
+  const [errors, setErrors] = useState({ name: "", frequency: "" });
+  const inputRef = useRef(null);
 
   useEffect(() => {
-    if (habit) {
-      setName(habit.habit_name || "");
-      setDays(new Set(habit.frequency || []));
-    }
+    if (!habit) return;
+    setName(habit?.habit_name ?? "");
+    setFrequency(habit?.frequency ?? []);
+    setCategory(habit?.category ?? "");
+    setErrors({ name: "", frequency: "" });
+    const t = setTimeout(() => inputRef.current?.focus(), 0);
+    return () => clearTimeout(t);
   }, [habit]);
 
-  if (!open || !habit) return null;
+  if (!habit) return null;
 
-  const toggleDay = (d) => {
-    const next = new Set(days);
-    next.has(d) ? next.delete(d) : next.add(d);
-    setDays(next);
+  const toggleDay = (day) => {
+    setFrequency((prev) => (prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]));
   };
 
-  const overlay = {
-    position: "fixed", inset: 0, background: "rgba(0,0,0,0.25)",
-    display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000
+  const validate = () => {
+    const next = { name: "", frequency: "" };
+    if (!name.trim()) next.name = "Please enter a habit name.";
+    if (!frequency.length) next.frequency = "Pick at least one day.";
+    setErrors(next);
+    return !next.name && !next.frequency;
   };
-  const box = { background: "#fff", width: 460, maxWidth: "92vw", borderRadius: 10, padding: 20, boxShadow: "0 10px 30px rgba(0,0,0,.2)" };
-  const row = { display: "flex", gap: 8, flexWrap: "wrap", marginTop: 8 };
-  const chip = (active) => ({
-    padding: "6px 10px", borderRadius: 8, border: "1px solid",
-    borderColor: active ? "#1d4ed8" : "#d1d5db",
-    background: active ? "#dbeafe" : "#fff", cursor: "pointer", fontSize: 12
-  });
-  const actions = { display: "flex", gap: 8, justifyContent: "flex-end", marginTop: 16 };
+
+  const handleSave = () => {
+    if (!validate()) return;
+    onSave({
+      habit_id: habit.habit_id,
+      habit_name: name.trim(),
+      frequency,
+      category: category?.trim() || null,
+    });
+  };
 
   return (
-    <div style={overlay} onClick={onClose}>
-      <div style={box} onClick={(e) => e.stopPropagation()}>
-        <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700 }}>Edit Habit</h3>
+    <div className="habit-editor" role="group" aria-label={`Edit ${habit.habit_name}`} onClick={(e) => e.stopPropagation()}>
+      <h3 className="editor-title">Edit Habit</h3>
 
-        <label style={{ display: "block", fontSize: 12, marginTop: 14 }}>Name</label>
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          style={{ width: "100%", padding: 10, borderRadius: 8, border: "1px solid #d1d5db" }}
-          placeholder="Habit name"
-        />
+      <label className="editor-label" htmlFor="habit-name">Name</label>
+      <input
+        id="habit-name"
+        className="editor-input"
+        ref={inputRef}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Habit name"
+        aria-invalid={!!errors.name}
+      />
+      {errors.name ? <div className="error-text">{errors.name}</div> : null}
 
-        <label style={{ display: "block", fontSize: 12, marginTop: 14 }}>Repeat on</label>
-        <div style={row}>
-          {DAYS.map((d) => (
-            <button key={d} type="button" style={chip(days.has(d))} onClick={() => toggleDay(d)}>
-              {d.slice(0,3).toUpperCase()}
-            </button>
-          ))}
-        </div>
+      <label className="editor-label">Frequency</label>
+      <div className="days-grid">
+        {days.map((d) => (
+          <label key={d} className="day-item">
+            <input type="checkbox" checked={frequency.includes(d)} onChange={() => toggleDay(d)} />
+            <span>{d}</span>
+          </label>
+        ))}
+      </div>
+      {errors.frequency ? <div className="error-text">{errors.frequency}</div> : null}
 
-        <div style={actions}>
-          <button onClick={() => onDelete(habit.habit_id)} style={{ padding: "8px 12px", borderRadius: 8, background: "#fee2e2", border: "1px solid #fca5a5" }}>
-            Delete
-          </button>
-          <button onClick={onClose} style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #d1d5db", background: "#fff" }}>
-            Cancel
-          </button>
-          <button
-            onClick={() => onSave({ ...habit, habit_name: name.trim(), frequency: Array.from(days) })}
-            style={{ padding: "8px 12px", borderRadius: 8, background: "#1d4ed8", color: "#fff", border: "1px solid #1e40af" }}
-          >
-            Save
-          </button>
-        </div>
+      <label className="editor-label" htmlFor="habit-category">Category</label>
+      <select
+        id="habit-category"
+        className="editor-input"
+        value={category || ""}
+        onChange={(e) => setCategory(e.target.value)}
+      >
+        <option value="">— Select a category —</option>
+        {DEFAULT_CATEGORIES.map((c) => (
+          <option key={c} value={c}>{c}</option>
+        ))}
+      </select>
+
+      <label className="editor-label" htmlFor="habit-category-custom">Custom category (optional)</label>
+      <input
+        id="habit-category-custom"
+        className="editor-input"
+        placeholder="Or type your own"
+        value={category || ""}
+        onChange={(e) => setCategory(e.target.value)}
+      />
+
+      <div className="editor-actions">
+        <button type="button" onClick={handleSave}>Save</button>
+        <button type="button" onClick={onClose}>Cancel</button>
+        <button type="button" className="delete-btn" onClick={() => onDelete(habit.habit_id)}>Delete</button>
       </div>
     </div>
   );
 }
+
+export default EditHabit;

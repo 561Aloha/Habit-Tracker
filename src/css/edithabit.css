@@ -1,0 +1,96 @@
+/* src/css/editHabitInline.css */
+
+.habit-row {
+  transition: background-color 0.15s ease, box-shadow 0.2s ease, max-height 0.25s ease;
+}
+
+.habit-row.expanded {
+  background: rgba(151,131,239,0.15);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08) inset;
+}
+
+.habit-editor {
+  width: 85%;
+  max-width: 600px;
+  margin: 10px 0 18px 24px; /* aligns with .habit-content margin-left */
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #ffffff;
+  font-size: 12px;
+  max-height: 700px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.editor-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.editor-label {
+  font-weight: 600;
+}
+
+.editor-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  outline: none;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.editor-input:focus {
+  border-color: #5a47cf;
+  box-shadow: 0 0 0 3px rgba(90,71,207,0.15);
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+}
+
+.day-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.error-text {
+  color: #b91c1c;
+  font-size: 12px;
+}
+
+.editor-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.editor-actions button {
+  font-size: 12px;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f3f4f6;
+  cursor: pointer;
+}
+
+.editor-actions button:hover {
+  background: #e0e7ff;
+  border-color: #c7d2fe;
+}
+
+.delete-btn {
+  color: #b91c1c;
+  border-color: #fca5a5;
+  background: #fee2e2;
+}
