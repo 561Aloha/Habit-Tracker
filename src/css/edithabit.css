@@ -18,7 +18,7 @@
   border-radius: 10px;
   background: #ffffff;
   font-size: 12px;
-  max-height: 700px;
+  max-height: 725px;
   overflow-y: auto;
   box-sizing: border-box;
 }
@@ -29,9 +29,6 @@
   gap: 8px;
 }
 
-.editor-label {
-  font-weight: 600;
-}
 
 .editor-input {
   width: 100%;
@@ -80,17 +77,62 @@
   padding: 8px 12px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  background: #f3f4f6;
+  background: #8c76e3;
   cursor: pointer;
 }
 
 .editor-actions button:hover {
-  background: #e0e7ff;
+  background: #4e1dd4;
   border-color: #c7d2fe;
 }
 
 .delete-btn {
-  color: #b91c1c;
-  border-color: #fca5a5;
   background: #fee2e2;
+}
+
+.habit-editor-overlay {
+  position: fixed;     
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4); 
+  z-index: 999;          /* High z-index to be above other UI */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;     /* Push modal down a bit */
+}
+
+/* Make sure the editor itself is above the overlay */
+.habit-editor {
+  position: relative;
+  z-index: 1000;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 16px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.edit-icon {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.habit-row:hover .edit-icon {
+  opacity: 1;
+  background-color: transparent;
+  pointer-events: auto;
+}
+
+.editor-label {
+  font-weight: 600;
+
 }

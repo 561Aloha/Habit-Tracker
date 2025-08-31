@@ -1,0 +1,441 @@
+/* ===== AUTHENTICATION STYLES ===== */
+
+/* Base overlay and backdrop */
+.auth-overlay,
+.zeno-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.zeno-modal-backdrop {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+/* ===== MODAL CONTAINERS ===== */
+
+/* Standard auth card */
+.auth-card {
+  position: relative;
+  z-index: 1;
+  width: min(450px, 92vw);
+  background: #ffffff;
+  color: #111827;
+  border-radius: 14px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+  padding: 32px 28px;
+  text-align: center;
+  overflow: hidden;
+  outline: none;
+}
+
+/* Zeno modal (SignInModal) */
+.zeno-modal {
+  position: relative;
+  z-index: 1;
+  width: min(400px, 92vw);
+  background: #ffffff;
+  color: #111827;
+  border-radius: 14px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+  padding: 32px 28px;
+  text-align: center;
+  overflow: hidden;
+  outline: none;
+  cursor: default;
+}
+
+/* ===== HEADERS AND TEXT ===== */
+
+.auth-card h3 { 
+  margin: 0 0 8px; 
+  font-size: 20px; 
+  font-weight: 700; 
+}
+
+.auth-card p { 
+  margin: 0 0 20px; 
+  color: #374151; 
+  font-size: 14px; 
+}
+
+.zeno-header {
+  margin-bottom: 24px;
+}
+
+.zeno-logo {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.zeno-tagline {
+  margin: 0 0 20px;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ===== FORM LAYOUTS ===== */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+}
+
+/* ===== INPUT STYLES ===== */
+
+.auth-input,
+.zeno-input {
+  width: 100%;
+  max-width: 350px;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  color: #3c4043;
+  transition: all 0.2s ease;
+}
+
+.zeno-input {
+  margin: 0 auto 12px;
+}
+
+.auth-input::placeholder,
+.zeno-input::placeholder {
+  color: #9ca3af;
+}
+
+.auth-input:focus,
+.zeno-input:focus {
+  outline: none;              
+  border-color: #5a47cf;
+  box-shadow: 0 0 0 3px rgba(90,71,207,0.15);  
+}
+
+/* ===== BUTTON STYLES ===== */
+
+/* Standard auth buttons */
+.auth-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+  cursor: pointer;
+  font-weight: 600;
+  color: #3c4043;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  min-width: 0;
+}
+
+.auth-btn:hover {
+  background: #e5e7eb;
+}
+
+.auth-btn.primary { 
+  background: #4f46e5; 
+  border-color: #4f46e5; 
+  color: #fff; 
+}
+
+.auth-btn.primary:hover {
+  background: #4338ca;
+}
+
+/* Zeno buttons */
+.zeno-btn.primary {
+  width: 100%;
+  max-width: 350px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #4f46e5;
+  background: #4f46e5;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0 auto 16px;
+  font-size: 14px;
+}
+
+.zeno-btn.primary:hover {
+  background: #4338ca;
+  border-color: #4338ca;
+}
+
+/* Navigation auth button */
+.auth-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Sign out button */
+.signout-btn {
+  background: none;
+  color: #000;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.signout-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* ===== OAUTH BUTTONS ===== */
+
+.auth-oauth,
+.zeno-btn.white {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 350px;
+  padding: 12px 16px;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  background: #fff;
+  color: #3c4043;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 4px;
+}
+
+.zeno-btn.white {
+  margin: 0 auto 16px;
+  font-size: 14px;
+}
+
+.auth-oauth:hover,
+.zeno-btn.white:hover {
+  background: #f8f9fa;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.auth-oauth img.icon,
+.zeno-btn.white .icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ===== BUTTON ROWS ===== */
+
+.auth-row { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  width: 100%;
+  max-width: 350px;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ===== DIVIDERS ===== */
+
+.auth-divider,
+.zeno-divider { 
+  margin: 16px 0 12px; 
+  color: #6b7280; 
+  font-size: 12px; 
+}
+
+/* ===== ERROR MESSAGES ===== */
+
+.zeno-error {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin: 12px auto;
+  max-width: 350px;
+  border: 1px solid #fca5a5;
+}
+
+/* ===== LINKS ===== */
+
+.zeno-login-link {
+  color: #5a47cf;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+  display: block;
+  margin-top: 16px;
+}
+
+.zeno-login-link:hover {
+  color: #4338ca;
+}
+
+/* ===== NAVIGATION AUTH COMPONENTS ===== */
+
+.auth-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.signin-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* ===== USER PROFILE ===== */
+
+.profile-wrapper {
+  margin-right: 48px;
+  position: relative;
+  display: inline-block;
+}
+
+.profile-pic {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.profile-pic.active {
+  border-color: black;
+}
+
+.profile-menu {
+  position: absolute;
+  top: 44px;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  z-index: 100;
+}
+
+.profile-menu .signout-btn {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: black;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  width: 100%;
+  text-align: left;
+}
+
+.profile-menu .signout-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* ===== USER INFO ===== */
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+}
+
+.user-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.greeting {
+  font-weight: 500;
+  color: #1a237e;
+}
+
+/* ===== SPECIAL MODAL VARIANTS ===== */
+
+/* Exit confirmation modal */
+.auth-card.exit-confirm {
+  max-width: 400px;
+}
+
+.exit-confirm h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.exit-confirm p {
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.exit-confirm .auth-row {
+  margin-top: 0;
+}
+
+/* ===== MOBILE RESPONSIVENESS ===== */
+
+@media (max-width: 768px) {
+  .auth-actions {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .zeno-modal {
+    width: 95vw;
+    padding: 24px 20px;
+  }
+  
+  .zeno-logo {
+    font-size: 22px;
+  }
+  
+  .zeno-tagline {
+    font-size: 13px;
+  }
+  
+  .zeno-input,
+  .zeno-btn {
+    max-width: 100%;
+  }
+
+  .auth-card {
+    width: 95vw;
+    padding: 24px 20px;
+  }
+
+  .auth-input {
+    max-width: 100%;
+  }
+}

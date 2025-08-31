@@ -1,10 +1,11 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import './../css/planner.css'; 
 import { format } from 'date-fns';
 
 const Planner = ({ habits = [], completionData = [], onHabitCompletion, currentWeek = [] }) => {
+  const [showAllHabits, setShowAllHabits] = useState(false);
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const INITIAL_DISPLAY_COUNT = 5;
 
   // Get status for a specific habit and day
   const getStatus = (habitId, dateKey) => {
@@ -34,6 +35,17 @@ const Planner = ({ habits = [], completionData = [], onHabitCompletion, currentW
 
   const weekDateKeys = getWeekDateKeys();
 
+  // Determine which habits to display
+  const displayedHabits = showAllHabits 
+    ? habits 
+    : habits.slice(0, INITIAL_DISPLAY_COUNT);
+
+  const hasMoreHabits = habits.length > INITIAL_DISPLAY_COUNT;
+
+  const toggleShowAllHabits = () => {
+    setShowAllHabits(!showAllHabits);
+  };
+
   return (
     <div className="planner-modern">
       <h3>Weekly Habit Grid</h3>
@@ -47,8 +59,8 @@ const Planner = ({ habits = [], completionData = [], onHabitCompletion, currentW
           </tr>
         </thead>
         <tbody>
-          {habits.length > 0 ? (
-            habits.map((habit) => (
+          {displayedHabits.length > 0 ? (
+            displayedHabits.map((habit) => (
               <tr key={habit.habit_id}>
                 <td><strong>{habit.habit_name}</strong></td>
                 {weekDateKeys.map((dateKey, dayIndex) => {
@@ -58,7 +70,6 @@ const Planner = ({ habits = [], completionData = [], onHabitCompletion, currentW
                     <td 
                       key={dayIndex} 
                       onClick={() => onHabitCompletion && onHabitCompletion(habit.habit_id, dateKey)}
-                      style={{ cursor: 'pointer' }}
                     >
                       <span className={`habit-cell ${status}`}>
                         {status === 'checked' ? '✓' : status === 'failed' ? '✗' : '○'}
@@ -70,11 +81,22 @@ const Planner = ({ habits = [], completionData = [], onHabitCompletion, currentW
             ))
           ) : (
             <tr>
-              <td colSpan={8} style={{ textAlign: 'center' }}>No habits found.</td>
+              <td colSpan={8} className="no-habits-message">No habits found.</td>
             </tr>
           )}
         </tbody>
       </table>
+      {hasMoreHabits && (
+        <button className="expand-toggle" onClick={toggleShowAllHabits}>
+          {showAllHabits ? 'Show Less' : `Show ${habits.length - INITIAL_DISPLAY_COUNT} More`}
+          <svg 
+            className={`expand-chevron ${showAllHabits ? 'expanded' : ''}`}
+            viewBox="0 0 24 24"
+          >
+            <path d="M7 10l5 5 5-5z"/>
+          </svg>
+        </button>
+      )}
     </div>
   );
 };

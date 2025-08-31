@@ -189,7 +189,6 @@
 
 .menu-overlay a {
   text-decoration: none;
-  
   color: rgb(0, 0, 0);
   font-size: 18px;
   font-weight: bold;
@@ -199,8 +198,6 @@
 .menu-overlay a:hover {
   color: #4400ff;
 }
-
-
 
 .auth-actions {
   margin-left: auto;
@@ -255,22 +252,23 @@
 .profile-menu .signout-btn:hover {
   background-color: #f0f0f0;
 }
-.footer{
+/* .footer{
   font-size: 14px;
   display: flex;
   width:80%;
+  max-width: 50px;
   margin:0;
   flex-direction: column;
-}
-.footer p{
+} */
+/* .footer p{
   text-align: center;
   padding: 2px;
   margin:0;
-}
+} */
 
 @media (max-width: 768px) {
   .footer{
-    width: 50%;
+    background-color: #4400ff;
   }
   .menu-items {
     display: none;
@@ -316,4 +314,21 @@
 
 @media (max-width: 768px) {
   .menu-overlay { width: 80vw; }
+}
+
+
+.footer {
+  font-size: 14px;
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto 0;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.footer p {
+  text-align: center;
+  padding: 2px;
+  margin: 0;
 }

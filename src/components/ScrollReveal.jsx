@@ -1,6 +1,6 @@
 // src/components/ScrollRevealBackdrop.jsx
 import React, { useEffect, useRef } from "react";
-import "./ScrollRevealBackdrop.css";
+import "../css/ScrollRevealBackdrop.css";
 import HeroImage from "../assets/hero-image.jpeg";
 
 export default function ScrollRevealBackdrop() {

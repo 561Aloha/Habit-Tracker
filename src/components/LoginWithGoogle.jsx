@@ -1,7 +1,4 @@
-// Updated LoginWithGoogle with debugging
-import React from 'react';
 import { supabase } from '../client';
-
 const LoginWithGoogle = () => {
   const handleGoogleLogin = async () => {
     console.log('🔵 Starting Google login...');

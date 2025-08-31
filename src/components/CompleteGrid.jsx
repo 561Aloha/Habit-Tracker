@@ -27,18 +27,14 @@ function getBackgroundColor(percentage) {
   if (percentage === undefined || percentage === null || percentage === 0) {
     return "#e5e7eb"; // Gray for no completion
   }
-  
-  // Green gradient based on percentage
   const opacity = percentage / 100;
-  return `rgba(34, 197, 94, ${opacity})`; // Green with varying opacity
+  return `rgba(34, 197, 94, ${opacity})`;
 }
 
 export default function CompleteGrid({
   year = new Date().getFullYear(),
-  completedDays = {}, // Now { 'YYYY-MM-DD': percentage }
+  completedDays = {},
 }) {
-  console.log("CompleteGrid received completedDays:", completedDays);
-  console.log("Number of days with data:", Object.keys(completedDays).length);
 
   return (
     <div className="completegrid-wrap">

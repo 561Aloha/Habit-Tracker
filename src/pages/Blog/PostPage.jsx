@@ -1,119 +1,115 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../../client';
-import EditPost from './EditPosts';
-import more from './more.svg';
-import { Link } from 'react-router-dom';
-import '../../css/about-us.css'; 
-import '../../css/postpage.css'; 
+import '../../css/about-us.css';
+import '../../css/postpage.css';
 
 const PostPage = () => {
-    const [count, setCount] = useState(0);
-    useEffect(() => {
-      const getCount = async () => {
-        const { data, error } = await supabase
-          .from('Blog')
-          .select('betcount')
-          .eq('id', props.id);
-  
-        if (data && data.length > 0) {
-          setCount(data[0].betcount);
-        }
-      };
-  
-      getCount();
-    }, [props.id]);
-  
-    const updateCount = async (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      await supabase
-        .from('Blog')
-        .update({ betcount: count + 1 })
-        .eq('id', props.id);
-      setCount(count + 1);
-    };
   const { id } = useParams();
-  const navigate = useNavigate(); 
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [user_id, setUserID] = useState('');
   const [commentText, setCommentText] = useState('');
-
+  const [count, setCount] = useState(0);
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const { data, error } = await supabase.from('Blog').select('*').eq('id', id).single();
-        if (error) throw error;
-        setPost(data);
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setCurrentUser(user);
+    };
+    getUser();
+  }, []);
+  useEffect(() => {
+      if (!id) return;
 
-        const { data: commentsData, error: commentsError } = await supabase
+      const fetchAll = async () => {
+        const { data: postData, error: postErr } = await supabase
+          .from('Blog')
+          .select('*')
+          .eq('id', id)
+          .single();
+
+        if (!postErr && postData) {
+          const formattedTime = postData.time
+            ? new Date(postData.time)
+            : null;
+          setPost({
+            ...postData,
+            time: formattedTime
+              ? `${formattedTime.getMonth() + 1}/${formattedTime.getDate()}/${formattedTime.getFullYear()}`
+              : '',
+          });
+        }
+
+        const { data: commentsData } = await supabase
           .from('Comments')
           .select('*')
           .eq('post_id', id);
-        if (commentsError) throw commentsError;
-        if (data && data.time) {
-          const date = new Date(data.time);
-          const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-          data.time = formattedDate;
-        }
 
-        setComments(commentsData);
-      } catch (error) {
-        console.error('Error fetching post:', error.message);
-      }
-    };
+        setComments(commentsData || []);
 
-    fetchPost();
-  }, [id]);
+        const { data: countData } = await supabase
+          .from('Blog')
+          .select('betcount')
+          .eq('id', id)
+          .single();
+
+        setCount(countData?.betcount ?? 0);
+      };
+
+      fetchAll();
+    }, [id]);
+
+
+  const updateCount = async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const newCount = count + 1;
+    setCount(newCount);
+    await supabase.from('Blog').update({ betcount: newCount }).eq('id', id);
+  };
 
   const commentsubmissions = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-    try {
-      const { error } = await supabase.from('Comments').insert([{ post_id: id, user_id: user_id, text: commentText }]);
-      if (error) throw error;
-      setComments((prev) => [...prev, { user_id: user_id, text: commentText }]);
+    const { error } = await supabase
+      .from('Comments')
+      .insert([{ post_id: id, user_id, text: commentText }]);
+    if (!error) {
+      setComments((prev) => [...prev, { user_id, text: commentText }]);
       setCommentText('');
       setUserID('');
-    } catch (error) {
-      console.error('Error posting comment:', error.message);
     }
-  };
-
-  const handleEditClick = (event) => {
-    event.stopPropagation();
-    navigate(`/blog/edit/${id}`);
   };
 
   if (!post) return <p>Loading...</p>;
 
   return (
-    <div className='postpage-f'>
-
-      <div className='title-container'>
-        <Link to={`/edit/${post.id}`}>Edit</Link>
-
+    <div className="postpage-f">
+      <div className="title-container">
+        <Link to={`/blog/edit/${post.id}`}>Edit</Link>
         <h1>{post.title}</h1>
-           </div>
+      </div>
+
       <p>Author: {post.author}</p>
       <p>Date: {post.time}</p>
-      <p className='description'>{post.description}</p>
+      <p className="description">{post.description}</p>
 
-      <img src={post.image} className='post-img' alt="Post" />
-          <div className="upvotes">
-            👍 The Upvotes: {count}
-            <button className="betButton" onClick={updateCount}>Vote 🗳️</button>
+      {post.image ? <img src={post.image} className="post-img" alt="Post" /> : null}
+
+      <div className="upvotes">
+        👍 The Upvotes: {count}
+        <button className="betButton" onClick={updateCount}>Vote 🗳️</button>
+      </div>
+
+      <div className="comments">
+        {comments?.map((comment, index) => (
+          <div key={index} className="comments-i">
+            <p>
+              {comment.user_id} said: {comment.text}
+            </p>
           </div>
-      <div className='comments'>
-        {comments &&
-          comments.map((comment, index) => (
-            <div key={index} className='comments-i'>
-              <p>
-                {comment.user_id} said: {comment.text}
-              </p>
-            </div>
-          ))}
+        ))}
+
         <form onSubmit={commentsubmissions}>
           <input
             type="text"

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import '../css/welcome.css';
 import myImage from '../assets/wellness.jpeg';
 import iconImg from '../assets/We.png'
@@ -9,8 +9,8 @@ import ScrollRevealBackdrop from '../components/ScrollReveal';
 
 const Welcome = () => {
     return(
-    <div >
-                    <div className='header-content'>
+    <div className='welcome-page'>
+       <div className='header-content'>
                 <h1>Habit Tracking Made Easier</h1>
                 <h4>Let us help you towards progress.<br></br> Our daily routine app is a great way 
                 to stay on track and keep you motivated.
@@ -18,14 +18,14 @@ const Welcome = () => {
                 <div className='cta-buttons'>
                     <Link to="/features"><button>Explore Features</button></Link>
                 </div>
-             </div>
+            </div>
         <ScrollRevealBackdrop />
 
         <div className='howitworks-div'>
             <div className='quick-intro'>
             <h2>Break Old Patterns, <br></br>
             Form New Ones
-            </h2><p>How you feel matters! Whether you're feeling sad, anxious, or stressed, Happify brings you effective tools and programs to help you take control of your feelings and thoughts.
+            </h2><p>How you feel matters! Whether you're feeling sad, anxious, or stressed, Zeno brings you effective tools and programs to help you take control of your feelings and thoughts.
             <br></br>
             <br></br>
             Our proven techniques are developed by leading scientists and experts who've been studying evidence-based interventions in the fields of positive psychology, mindfulness, and cognitive behavioral therapy for decades.</p></div>
@@ -34,7 +34,7 @@ const Welcome = () => {
 
         </div>
         <HowItWorks/>
-        <Footer/>
+
     </div>
     );
 };

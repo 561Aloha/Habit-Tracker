@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../client';
 import googleIcon from '../assets/google.png';
-import '../css/HowItWorks.css';
+import '../css/auth.css';
 
 const SignInModal = ({ open, onClose }) => {
   const [mode, setMode] = useState('login');

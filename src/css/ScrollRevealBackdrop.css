@@ -13,9 +13,10 @@
 .sr-stage {
   position: sticky;
   top: 0;
-  height: 120vh;
+  height: 100vh;
   width: 100%;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .sr-layer {
@@ -25,7 +26,7 @@
   transform: translate(-50%, calc(-50% + var(--offsetY)))
              translateY(calc(var(--p) * 8vh))
              scale(calc(0.7 + var(--p) * 0.3));
-  aspect-ratio: 16/9; /* Changed back to 16/9 for wider, less tall shape */
+  aspect-ratio: 16/9;
   max-width: 1100px;
   width: min(86vw, 1100px);
   border-radius: var(--radius);
@@ -44,7 +45,6 @@
   overflow: hidden;
 }
 
-/* Increased padding between layers */
 .l1  { padding:   0px; opacity: calc(0.10 + 0.90 * var(--p)); filter: saturate(1)    hue-rotate(0deg); }
 .l2  { padding:  36px; opacity: calc(0.10 + 0.80 * var(--p)); filter: saturate(.98)  hue-rotate(-4deg); }
 .l3  { padding:  72px; opacity: calc(0.10 + 0.70 * var(--p)); filter: saturate(.96)  hue-rotate(-8deg); }
@@ -52,11 +52,10 @@
 .l5  { padding: 144px; opacity: calc(0.10 + 0.50 * var(--p)); filter: saturate(.92)  hue-rotate(-16deg); }
 .l6  { padding: 180px; opacity: calc(0.10 + 0.40 * var(--p)); filter: saturate(.86)  hue-rotate(-20deg); }
 .l7  { padding: 216px; opacity: calc(0.10 + 0.32 * var(--p)); filter: saturate(.82)  hue-rotate(-24deg); }
-.l8  { padding: 252px; opacity: calc(0.10 + 0.24 * var(--p)); filter: saturate(.78)  hue-rotate(-28deg); }
+.l8  { padding: 252px; opacity: calc(0.0 + 0.24 * var(--p)); filter: saturate(.78)  hue-rotate(-28deg); }
 .l9  { padding: 288px; opacity: calc(0.10 + 0.18 * var(--p)); filter: saturate(.74)  hue-rotate(-32deg); }
 .l10 { padding: 324px; opacity: calc(0.10 + 0.12 * var(--p)); filter: saturate(.70)  hue-rotate(-36deg); }
 
-/* Hero inside l10 */
 .sr-hero {
   width: 100%;
   height: 100%;
@@ -73,7 +72,6 @@
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-/* Mobile adjustments with increased padding */
 @media (max-width: 640px) {
   :root { --radius: 36px; --offsetY: 80px; }
   .sr-layer { width: 94vw; }
@@ -89,7 +87,7 @@
 }
 
 .l10 {
-  padding: 0; /* remove padding for hero */
+  padding: 0;
   opacity: calc(0.10 + 0.90 * var(--p));
   filter: saturate(.82) hue-rotate(-36deg);
   overflow: hidden;

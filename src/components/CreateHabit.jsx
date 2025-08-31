@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { supabase } from '../client';
 import { Link } from 'react-router-dom';
-import './createhabit.css';
+import '../css/createhabit.css';
 import closeIcon from '../assets/close.svg';
 import Select from 'react-select';
 
@@ -28,6 +28,12 @@ const CreateHabit = () => {
         { key: 'fitness', label: 'Fitness', imgSrc: './src/assets/25.png' },
         { key: 'spiritual', label: 'Spiritual', imgSrc: './src/assets/pray.png' },
         { key: 'financial', label: 'Financial', imgSrc: './src/assets/26.png' },
+        { key: 'beauty', label: 'Beauty', imgSrc: './src/assets/beauty.png' },
+        { key: 'Career', label: 'Career', imgSrc: './src/assets/career.png' },
+
+   
+   
+   
     ];
     const repetitionOptions = [
         { value: 'every week', label: 'Every week' },
@@ -139,7 +145,6 @@ const customStyles = {
                         </div>
                     )}
                     <div className="form-group">
-
                     </div>
                     <div className="form-group-freq">
                         <label>Frequency</label><br />

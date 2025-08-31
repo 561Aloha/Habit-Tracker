@@ -1,5 +1,4 @@
-// src/App.js (updated)
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useRoutes } from 'react-router-dom';
 import './App.css';
 import { supabase } from './client';
@@ -21,8 +20,7 @@ import Authen from './components/authen';
 import WalkthroughPage from './pages/Onboarding/WalkthroughPage.jsx';
 import OnboardRoute from './pages/Onboarding/onboard';
 import FeaturesPage from './pages/Features.jsx';
-
-
+import  Footer from './components/Footer';
 function App() {
   const [posts, setPosts] = useState([]);
   const location = useLocation()
@@ -198,8 +196,6 @@ const [showProfileMenu, setShowProfileMenu] = useState(false);
         )}
 
         {element}
-
-
       </div>
       
   );

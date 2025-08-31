@@ -6,7 +6,6 @@
 }
 
 tbody td:first-child {
-  width: 175px;
   text-align: left;
   padding-left: 0px;
   font-weight: normal;
@@ -21,7 +20,7 @@ tbody td:first-child {
   margin: 0 auto;
   margin-top: 0;
   width: 85%;
-  max-width: 600px;
+  max-width: 700px;
   height: 30%;
   padding: 20px;
   background-color: #ffffff;
@@ -31,26 +30,46 @@ tbody td:first-child {
   -ms-overflow-style: none;     
   scrollbar-width: none;  
 }
+
 .planner-modern::-webkit-scrollbar {
-  display: none;                 /* Chrome, Safari, Opera */
+  display: none;
+}
+
+.planner-modern h3 {
+  margin: 0 0 16px 0;
+  color: #222;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.planner-modern table {
+  width: 90%;
+  border-collapse: collapse;
 }
 
 .planner-modern th,
 .planner-modern td {
-  padding: 12px 16px;
+  padding: 4px 10px; 
   text-align: center;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .planner-modern th {
   font-size: 1.2rem;
   color: #222;
   background: #fff;
+  font-weight: 600;
 }
 
 .planner-modern tr td:first-child {
   font-weight: 300;
 }
 
+.planner-modern tbody tr {
+  height: 48px; /* Consistent row height for closer spacing */
+}
+
+/* Habit cell styles */
 .habit-cell {
   display: inline-block;
   width: 32px;
@@ -63,21 +82,72 @@ tbody td:first-child {
   font-size: 1.3rem;
   color: #222;
   transition: background 0.2s, border 0.2s;
+  cursor: pointer;
+}
+
+.habit-cell:hover {
+  background: #e8f5e8;
+  border-color: #2a7c2a;
 }
 
 .habit-cell.checked {
   background: #e4faea;
   color: #27a464;
+  border-color: #27a464;
 }
 
 .habit-cell.failed {
   background: #fce3e3;
   color: #e13b3b;
+  border-color: #e13b3b;
 }
 
-/* ===================
-   Responsive Design
-   =================== */
+/* Clickable habit cells */
+.planner-modern tbody td {
+  cursor: pointer;
+}
+
+.planner-modern tbody td:first-child {
+  cursor: default;
+}
+
+/* No habits message */
+.no-habits-message {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* Expand/Collapse functionality */
+.expand-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.expand-toggle:hover {
+  color: #333;
+}
+
+.expand-chevron {
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+  fill: currentColor;
+}
+
+.expand-chevron.expanded {
+  transform: rotate(180deg);
+}
+
 @media (max-width: 700px) {
   .plannertable th.day-label[data-full="Monday"]::before { content: "MON"; }
   .plannertable th.day-label[data-full="Tuesday"]::before { content: "TUE"; }
@@ -91,24 +161,30 @@ tbody td:first-child {
     font-size: 12px;
   }
 
-  .planner-modern th{
+  .planner-modern th {
     font-size: 1rem;
   }
+  
   .planner-modern th:first-child {  
     text-align: left;
   }
-tbody td:first-child {
-  width: 175px;
-  text-align: left;
-  padding-left: 0px;
-  font-weight: normal;
-}
 
   .planner-modern th,
   .planner-modern td {
-  padding: 2px 2px;
+    padding: 4px 6px; /* Even more compact on mobile */
+  }
 
-}
+  .planner-modern tbody tr {
+    height: 40px; /* Smaller row height on mobile */
+  }
+
+  tbody td:first-child {
+    width: 175px;
+    text-align: left;
+    padding-left: 0px;
+    font-weight: normal;
+  }
+
   .habit_name td:first-child {
     font-size: 0.5rem;
     text-align: left;
@@ -120,6 +196,13 @@ tbody td:first-child {
 
   .planner-modern {
     width: 90%;
-    
+  }
+
+  .habit-cell {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 1.1rem;
   }
 }
+
