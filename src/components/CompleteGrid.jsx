@@ -74,11 +74,6 @@ export default function CompleteGrid({
                   const completionClass = getCompletionClass(percentage);
                   const backgroundColor = getBackgroundColor(percentage);
 
-                  // Debug: Log a few date keys to verify format
-                  if (m === 0 && i < 3) {
-                    console.log(`Date key for ${label} ${i + 1}:`, dateKey, "Percentage:", percentage);
-                  }
-
                   return (
                     <div
                       key={i}

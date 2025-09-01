@@ -87,36 +87,87 @@ function Goals() {
   useEffect(() => { updateChartData(); }, [habits, completionData, currentWeek]);
   useEffect(() => { updateWeek(calendarOffset); }, [calendarOffset]);
 
+// Add this useEffect to your Goals component to handle week highlighting
 
-
-  const handleHabitCompletion = async (habitId, dateKey) => {
-    if (!user) return;
-    try {
-      const existing = completionData.find(
-        c => c.habit_id === habitId && c.completion_date === dateKey
+useEffect(() => {
+  if (!openDatePicker) return;
+  
+  const addWeekHighlighting = () => {
+    const dayElements = document.querySelectorAll('.MuiPickersDay-root');
+    const weekRows = document.querySelectorAll('[role="row"]');
+    
+    // Remove existing hover listeners
+    dayElements.forEach(day => {
+      const clonedDay = day.cloneNode(true);
+      day.parentNode.replaceChild(clonedDay, day);
+    });
+    
+    // Add new hover listeners
+    document.querySelectorAll('.MuiPickersDay-root').forEach((day, index) => {
+      day.addEventListener('mouseenter', () => {
+        // Calculate which week row this day belongs to
+        const weekRowIndex = Math.floor(index / 7);
+        const weekRow = weekRows[weekRowIndex + 1]; // +1 to skip header row
+        
+        if (weekRow) {
+          weekRow.classList.add('week-highlighted');
+        }
+      });
+      
+      day.addEventListener('mouseleave', () => {
+        weekRows.forEach(row => row.classList.remove('week-highlighted'));
+      });
+    });
+  };
+  
+  const timer = setTimeout(addWeekHighlighting, 100);
+  
+  return () => clearTimeout(timer);
+}, [openDatePicker]);
+const handleHabitCompletion = async (habitId, dateKey, completionState) => {
+  if (!user) return;
+  
+  try {
+    if (completionState === 'delete') {
+      // Delete the completion record (back to blank state)
+      const { error } = await supabase
+        .from('Habit_Completion')
+        .delete()
+        .eq('habit_id', habitId)
+        .eq('completion_date', dateKey)
+        .eq('user_id', user.id);
+      
+      if (error) throw error;
+      
+      setCompletionData(prev => 
+        prev.filter(c => !(c.habit_id === habitId && c.completion_date === dateKey))
       );
-      const isCompleted = existing ? !existing.is_completed : true;
-
+    } else {
+      // Update or create completion record
       const { error } = await supabase
         .from('Habit_Completion')
         .upsert(
-          { habit_id: habitId, completion_date: dateKey, is_completed: isCompleted, user_id: user.id },
+          { habit_id: habitId, completion_date: dateKey, is_completed: completionState, user_id: user.id },
           { onConflict: ['habit_id','completion_date','user_id'] }
         );
+      
       if (error) throw error;
 
       setCompletionData(prev => {
         const copy = [...prev];
         const idx = copy.findIndex(c => c.habit_id === habitId && c.completion_date === dateKey);
-        if (idx >= 0) copy[idx] = { ...copy[idx], is_completed: isCompleted };
-        else copy.push({ habit_id: habitId, completion_date: dateKey, is_completed: isCompleted, user_id: user.id });
+        if (idx >= 0) {
+          copy[idx] = { ...copy[idx], is_completed: completionState };
+        } else {
+          copy.push({ habit_id: habitId, completion_date: dateKey, is_completed: completionState, user_id: user.id });
+        }
         return copy;
       });
-    } catch (error) {
-      console.error('Error updating habit completion:', error.message);
     }
-  };
-
+  } catch (error) {
+    console.error('Error updating habit completion:', error.message);
+  }
+};
   const handleRemoveHabit = async () => {
     if (!user || !selectedHabitId) return;
     const habit = habits.find(h => h.habit_id === selectedHabitId);
@@ -286,6 +337,7 @@ function Goals() {
     setCurrentWeek(getWeekForDate(base));
     setSelectedDate(getWeekForDate(base)[0].fullDate);
   }
+  
 
   const filteredHabitsForSelectedDay = habits.filter(habit => {
   const dayName = format(selectedDate, 'EEEE');
@@ -324,12 +376,18 @@ function Goals() {
               setCurrentWeek(getWeekForDate(newDate));
             }
           }}
+          views={['year', 'month', 'day']} // Enable all three views
+          openTo="month"
           slotProps={{
-            textField: { style: { display: 'none' } },   // 👈 inline style that hid the default text field
+            textField: { style: { display: 'none' } },
             popper: {
               placement: 'bottom-start',
               anchorEl: () => headerAnchorRef.current,
               modifiers: [{ name: 'offset', options: { offset: [0, 8] } }],
+            },
+
+            calendarHeader: {
+              format: 'MMMM yyyy',
             },
           }}
         />
@@ -447,7 +505,7 @@ function Goals() {
             onHabitCompletion={handleHabitCompletion}
             currentWeek={currentWeek}
           />
-          <div className="chart-container">
+          {/* <div className="chart-container">
             <MyChart
               chartData={chartData}
               onWeekChange={setCurrentWeek}
@@ -458,7 +516,7 @@ function Goals() {
               onPrevWeek={handlePrevClick}
               onNextWeek={handleNextClick}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

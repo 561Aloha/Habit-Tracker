@@ -252,24 +252,9 @@
 .profile-menu .signout-btn:hover {
   background-color: #f0f0f0;
 }
-/* .footer{
-  font-size: 14px;
-  display: flex;
-  width:80%;
-  max-width: 50px;
-  margin:0;
-  flex-direction: column;
-} */
-/* .footer p{
-  text-align: center;
-  padding: 2px;
-  margin:0;
-} */
 
 @media (max-width: 768px) {
-  .footer{
-    background-color: #4400ff;
-  }
+
   .menu-items {
     display: none;
   }
@@ -314,21 +299,4 @@
 
 @media (max-width: 768px) {
   .menu-overlay { width: 80vw; }
-}
-
-
-.footer {
-  font-size: 14px;
-  display: flex;
-  width: 100%;
-  max-width: 1200px;
-  margin: 20px auto 0;
-  flex-direction: column;
-  padding: 20px;
-}
-
-.footer p {
-  text-align: center;
-  padding: 2px;
-  margin: 0;
 }

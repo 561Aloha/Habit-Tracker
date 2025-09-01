@@ -1,3 +1,4 @@
+/* ===== SCROLL REVEAL STYLES ===== */
 :root {
   --radius: 56px;
   --p: 0;
@@ -13,10 +14,9 @@
 .sr-stage {
   position: sticky;
   top: 0;
-  height: 100vh;
+  height: 120vh;
   width: 100%;
   overflow: hidden;
-  margin: 0 auto;
 }
 
 .sr-layer {
@@ -45,6 +45,7 @@
   overflow: hidden;
 }
 
+/* Increased padding between layers */
 .l1  { padding:   0px; opacity: calc(0.10 + 0.90 * var(--p)); filter: saturate(1)    hue-rotate(0deg); }
 .l2  { padding:  36px; opacity: calc(0.10 + 0.80 * var(--p)); filter: saturate(.98)  hue-rotate(-4deg); }
 .l3  { padding:  72px; opacity: calc(0.10 + 0.70 * var(--p)); filter: saturate(.96)  hue-rotate(-8deg); }
@@ -52,10 +53,11 @@
 .l5  { padding: 144px; opacity: calc(0.10 + 0.50 * var(--p)); filter: saturate(.92)  hue-rotate(-16deg); }
 .l6  { padding: 180px; opacity: calc(0.10 + 0.40 * var(--p)); filter: saturate(.86)  hue-rotate(-20deg); }
 .l7  { padding: 216px; opacity: calc(0.10 + 0.32 * var(--p)); filter: saturate(.82)  hue-rotate(-24deg); }
-.l8  { padding: 252px; opacity: calc(0.0 + 0.24 * var(--p)); filter: saturate(.78)  hue-rotate(-28deg); }
+.l8  { padding: 252px; opacity: calc(0.10 + 0.24 * var(--p)); filter: saturate(.78)  hue-rotate(-28deg); }
 .l9  { padding: 288px; opacity: calc(0.10 + 0.18 * var(--p)); filter: saturate(.74)  hue-rotate(-32deg); }
-.l10 { padding: 324px; opacity: calc(0.10 + 0.12 * var(--p)); filter: saturate(.70)  hue-rotate(-36deg); }
+.l10 { padding:   0px; opacity: calc(0.10 + 0.90 * var(--p)); filter: saturate(.82)  hue-rotate(-36deg); overflow: hidden; }
 
+/* Hero inside l10 */
 .sr-hero {
   width: 100%;
   height: 100%;
@@ -72,23 +74,46 @@
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-@media (max-width: 640px) {
-  :root { --radius: 36px; --offsetY: 80px; }
-  .sr-layer { width: 94vw; }
-  .l2  { padding: 24px; }
-  .l3  { padding: 48px; }
-  .l4  { padding: 72px; }
-  .l5  { padding: 96px; }
-  .l6  { padding: 120px; }
-  .l7  { padding: 144px; }
-  .l8  { padding: 168px; }
-  .l9  { padding: 192px; }
-  .l10 { padding: 216px; }
+/* ===== MOBILE RESPONSIVE STYLES ===== */
+@media (max-width: 768px) {
+  /* Scroll reveal adjustments */
+  :root { 
+    --radius: 24px; 
+    --offsetY: 60px; 
+  }
+  
+  .sr-layer { 
+    width: 95vw;
+    aspect-ratio: 4/3;
+  }
+  
+  .l2  { padding: 16px; }
+  .l3  { padding: 32px; }
+  .l4  { padding: 48px; }
+  .l5  { padding: 64px; }
+  .l6  { padding: 80px; }
+  .l7  { padding: 96px; }
+  .l8  { padding: 112px; }
+  .l9  { padding: 128px; }
+  .l10 { padding: 0px; }
+  
+  .sr-wrap {
+    height: 200vh;
+  }
+  
+  .sr-stage {
+    height: 100vh;
+  }
 }
 
-.l10 {
-  padding: 0;
-  opacity: calc(0.10 + 0.90 * var(--p));
-  filter: saturate(.82) hue-rotate(-36deg);
-  overflow: hidden;
+@media (max-width: 480px) {
+  /* Extra small screens */
+  :root { 
+    --radius: 20px; 
+    --offsetY: 40px; 
+  }
+  
+  .sr-layer {
+    aspect-ratio: 1/1;
+  }
 }

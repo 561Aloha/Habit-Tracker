@@ -196,6 +196,7 @@ const [showProfileMenu, setShowProfileMenu] = useState(false);
         )}
 
         {element}
+        <Footer/>
       </div>
       
   );

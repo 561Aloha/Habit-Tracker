@@ -5,22 +5,24 @@ import { format } from 'date-fns';
 const Planner = ({ habits = [], completionData = [], onHabitCompletion, currentWeek = [] }) => {
   const [showAllHabits, setShowAllHabits] = useState(false);
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const INITIAL_DISPLAY_COUNT = 5;
+  const fullDayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-  // Get status for a specific habit and day
+  const INITIAL_DISPLAY_COUNT = 5;
   const getStatus = (habitId, dateKey) => {
-    const completion = completionData.find(
-      c => c.habit_id === habitId && c.completion_date === dateKey
-    );
-    
-    if (!completion) return '';
-    return completion.is_completed ? 'checked' : 'failed';
+      const completion = completionData.find(
+        c => c.habit_id === habitId && c.completion_date === dateKey
+      );
+      
+      if (!completion) return 'blank';
+      return completion.is_completed ? 'checked' : 'failed';
+    };
+   const isHabitScheduledForDay = (habit, dayIndex) => {
+    const dayName = fullDayNames[dayIndex];
+    return habit.frequency && habit.frequency.includes(dayName);
   };
 
-  // Generate date keys for the current week
-  const getWeekDateKeys = () => {
+ const getWeekDateKeys = () => {
     if (currentWeek.length === 0) {
-      // Fallback to current week if currentWeek is not provided
       const today = new Date();
       const weekStart = new Date(today.setDate(today.getDate() - today.getDay()));
       return Array.from({ length: 7 }, (_, i) => {
@@ -32,10 +34,38 @@ const Planner = ({ habits = [], completionData = [], onHabitCompletion, currentW
     
     return currentWeek.map(day => format(day.fullDate, 'yyyy-MM-dd'));
   };
-
   const weekDateKeys = getWeekDateKeys();
 
-  // Determine which habits to display
+const handleCellClick = (habit, dateKey, dayIndex) => {
+    // Only allow interaction if habit is scheduled for this day
+    if (!isHabitScheduledForDay(habit, dayIndex)) {
+      return;
+    }
+
+    const currentStatus = getStatus(habit.habit_id, dateKey);
+    
+    let newCompletionState;
+    switch (currentStatus) {
+      case 'blank':
+        newCompletionState = true;
+        break;
+      case 'checked':
+        newCompletionState = false;
+        break;
+      case 'failed':
+        newCompletionState = null; // back to blank (delete record)
+        break;
+      default:
+        newCompletionState = true;
+    }
+
+    // Call the parent function with special handling for blank state
+    if (newCompletionState === null) {
+      onHabitCompletion && onHabitCompletion(habit.habit_id, dateKey, 'delete');
+    } else {
+      onHabitCompletion && onHabitCompletion(habit.habit_id, dateKey, newCompletionState);
+    }
+  };
   const displayedHabits = showAllHabits 
     ? habits 
     : habits.slice(0, INITIAL_DISPLAY_COUNT);
@@ -45,7 +75,6 @@ const Planner = ({ habits = [], completionData = [], onHabitCompletion, currentW
   const toggleShowAllHabits = () => {
     setShowAllHabits(!showAllHabits);
   };
-
   return (
     <div className="planner-modern">
       <h3>Weekly Habit Grid</h3>
@@ -64,15 +93,20 @@ const Planner = ({ habits = [], completionData = [], onHabitCompletion, currentW
               <tr key={habit.habit_id}>
                 <td><strong>{habit.habit_name}</strong></td>
                 {weekDateKeys.map((dateKey, dayIndex) => {
-                  const status = getStatus(habit.habit_id, dateKey);
+                 const status = getStatus(habit.habit_id, dateKey);
+                const isScheduled = isHabitScheduledForDay(habit, dayIndex);
                   
                   return (
                     <td 
                       key={dayIndex} 
-                      onClick={() => onHabitCompletion && onHabitCompletion(habit.habit_id, dateKey)}
+                      onClick={() => handleCellClick(habit, dateKey, dayIndex)}
+                      className={!isScheduled ? 'disabled-cell' : ''}
                     >
-                      <span className={`habit-cell ${status}`}>
-                        {status === 'checked' ? '✓' : status === 'failed' ? '✗' : '○'}
+                      <span className={`habit-cell ${status} ${!isScheduled ? 'not-scheduled' : ''}`}>
+                        {!isScheduled ? ' ' : (
+                          status === 'checked' ? '✓' : 
+                          status === 'failed' ? '✗' : '○'
+                        )}
                       </span>
                     </td>
                   );

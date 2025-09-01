@@ -1,16 +1,56 @@
+.goals-page {
+    width: 100vw;
+    margin: 0 auto ;
+    padding-top: 20px;
+  }
+.goals-page h2{
+    font-size: 30px;
+  }
 
-.modal-input
-.habit .habit-row.selected .login-btn {
-    border-radius: 8px;
+.habits-container{
+    padding: 20px;
+    border-radius: 10px;
+    height: 600px;
+    overflow-y: auto; 
+    color: black;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    position: sticky;
+    
+    top: 0;
+    align-self: flex-start; /* In flex layouts, this ensures sticky works as expected */
+    z-index: 2;  
+    flex: 1;    
+    background-color: rgb(255, 255, 255);
 }
-
-.modal-input .habit {
-  padding: 10px;
-}
-
-.day-item .modal-actions .no-habits-today, .habit
-{
-  display: flex;
+.chart-container {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    color: black;
+    display: flex;
+    width: 85%;
+    max-width: 600px;
+    padding: 20px;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: space-between; 
+    margin-top: 30px;
+  }
+.goals-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; 
+    width: 90%;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    margin: 0 auto;
+    flex-direction: row;
+    flex: 1;
+    padding:0;
+    height: 80vh; 
+    min-height: 500px;
 }
 
 .habit button {
@@ -19,15 +59,23 @@
     font-size: 1.5rem;
     cursor: pointer;
     color: black;
-}
+  }
 
+.habits-container button:hover{
+    background-color: rgba(34, 34, 34, 0.573);
+}
+.habit-buttons button {
+    margin-right: 10px;
+}
 .habit {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    border: 2px solid transparent;
+    border: 2px solid black;
+    padding: 10px;
     width: 80%;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    border-radius: 5px;
     color: black;
     margin: 0 auto;
     margin-bottom: 10px;
@@ -45,13 +93,28 @@
     margin-left: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
 .habit p{
   font-size: 1.2rem;
 } 
 
+.list {
+  flex-grow: 1;
+  margin-bottom: 10px;
+  height: 400px;
+}
+
 .remove {
     width: 150px;
+  }
+  
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap:8px;
+  position: relative;
+  margin: 0 auto;
+  padding-bottom: 30px;
   }
 
 .arrow {
@@ -77,6 +140,124 @@
   width: 175px;
   color: white;
 }
+.goals-page {
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+}
+
+.right-container {
+  flex: 1;
+}
+.right-container, .habits-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.habits-container h2{
+  font-size: 18px;
+}
+
+.day-label{
+  margin-top: 12px;
+  border-radius: 14px;
+  text-align: center;
+  font-weight:400;
+  padding: 10px;
+  background-color: #9783ef;
+}
+
+.habit-buttons{
+  margin:0 auto;
+}
+.habits-container{
+  max-width: 500px;
+}
+
+@media (max-width: 900px){
+  .goals-container {
+    flex-direction: column;
+  }
+  .habits-container{
+    position:relative;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .habits-container{
+    margin:0 auto;
+    margin-bottom: 20px;
+    width: 90%;
+    max-width: 500px;
+    position:relative;
+  }
+  .habits-container h2 {
+    font-size: 25px;
+    margin: 0 auto;
+  }
+  .habit-buttons button{
+    font-size: 15px;
+    width: 175px;
+    height: 40px;
+  }
+  .goals-page{
+    width: 100%;
+    margin:0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .goals-container{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .right-container{
+    width: 100%;
+    padding:0;
+    margin:0 auto;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .habits-container{
+    position: relative;
+    width:90%;
+    border: 2px solid seashell;
+    padding: 20px;
+  }
+  .goals-container{
+    position: relative;
+  }
+  .chart-container {
+    background-color: rgb(255, 255, 255);
+    margin-top: 20px;
+  }
+}
+
+.goal-header{
+  font-size: 24px;
+  margin: 0 auto;
+  width:80%;
+  padding-top: 48px;
+  margin-top: 24px;
+}
+
+.goals-container{
+  max-width: 1200px;;
+}
+
+.habit {
+  border: 2px solid transparent;
+  border-radius: 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
 .habit.selectable { cursor: pointer; }
 
 .habit.selectable:hover {
@@ -94,16 +275,70 @@ button.remove:disabled {
   cursor: not-allowed;
 }
 
+.habits-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .chevron-icon {
   width: 18px;
   height: 18px;
   cursor: pointer;
 }
 .date-text {
+  margin-left: 20px;
   text-decoration: underline;
   text-decoration-thickness: 2px;  /* makes underline solid & bold */
   text-underline-offset: 4px;      /* pushes line slightly away from text */
 }
+
+.day-label.selected {
+  background-color: #5a47cf;
+  color:white;
+}
+
+.edit-icon{
+  height: 24px;
+  width: 24px;
+}
+/* Make habit rows flex containers */
+.habit-row {
+  display: flex;
+  justify-content: space-between; /* habit on left, icon on right */
+  align-items: center;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  position: relative;
+}
+
+/* Edit icon hidden by default */
+.edit-icon {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* Reveal the icon when hovering the row */
+.habit-row:hover .edit-icon {
+  opacity: 1;
+  pointer-events: auto;
+}
+.habit-content{
+  margin:0 auto;
+  background-color: #9783ef;
+  width: 85%;
+  padding: 10px;
+  margin-left: 24px;
+  display: flex;;
+  border-radius: 12px;;
+  flex-direction: row;
+}
+
 
 .habit-content button{
   width: 75px;
@@ -111,28 +346,51 @@ button.remove:disabled {
   border: 2px solid black;
 }
 
-.habit-row:hover  {
-  background-color: transparent
+.habit-row:hover .habit-content {
+  background-color: #5a47cf;
 }
 
-.habit-row.selected {
+.habit-row.selected .habit-content {
   background-color: #5a47cf;
 }
 
 .habit-row.selected {
   background-color: #5a47cf;
+}
+
+.habit-row.selected {
   color:white;
   background-color: transparent;
+  border-radius: 8px;
+}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
+.modal {
+  background: #fff;
+  color: #000;
+  border-radius: 12px;
+  padding: 20px;
+  width: 420px;
+  max-width: 92vw;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
 
 .modal h3 {
   margin-top: 0;
 }
 
-
 .modal-input {
   width: 100%;
+  padding: 10px;
+  border-radius: 8px;
   border: 1px solid #e5e7eb;
   margin-bottom: 10px;
 }
@@ -140,86 +398,23 @@ button.remove:disabled {
 .days-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6px;
+  gap: 8px;
   margin-top: 8px;
 }
 
 .day-item {
+  display: flex;
   align-items: center;
   gap: 6px;
 }
 
 .modal-actions {
-  gap: 6px;
+  display: flex;
+  gap: 10px;
   margin-top: 16px;
   justify-content: flex-end;
 }
 
 .delete-btn {
   color: #b91c1c;
-}
-
-.blurred {
-  filter: blur(5px);   /* light blur */
-  pointer-events: none; /* disable clicking */
-}
-
-.login-btn {
-  background: #8884d8;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  cursor: pointer;
-  margin-top: 12px;
-  font-weight: 500;
-}
-
-.login-btn:hover {
-  background: #6c63b5;
-}
-
-/* Mobile specific adjustments */
-@media (max-width: 768px) {
-  
-  /* Adjust habit buttons on mobile when no habits */
-  .mobile-no-habits + .habit-buttons {
-    margin-top: 20px;
-  }
-  
-  /* Make the "Add a new Habit" button more prominent when no habits */
-  .mobile-no-habits ~ .habit-buttons .organize {
-    background-color: #4400ff;
-    font-weight: 600;
-    font-size: 16px;
-    padding: 14px 24px;
-    animation: subtle-pulse 2s ease-in-out infinite;
-  }
-}
-
-/* Subtle animation for the add habit button when no habits exist */
-@keyframes subtle-pulse {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(68, 0, 255, 0.3);
-  }
-  50% {
-    transform: scale(1.02);
-    box-shadow: 0 0 0 5px rgba(68, 0, 255, 0.1);
-  }
-}
-/* Mobile - 768px and below */
-@media (max-width: 768px) {
-  /* Adjust habit buttons on mobile when no habits */
-  .mobile-no-habits + .habit-buttons {
-    margin-top: 20px;
-  }
-  
-  /* Make the "Add a new Habit" button more prominent when no habits */
-  .mobile-no-habits ~ .habit-buttons .organize {
-    background-color: #4400ff;
-    font-weight: 600;
-    font-size: 16px;
-    padding: 14px 24px;
-    animation: subtle-pulse 2s ease-in-out infinite;
-  }
 }
