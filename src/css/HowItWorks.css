@@ -356,7 +356,7 @@
 }
 
 .quick-intro p {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
   color: #444;
   margin-bottom: 8px;
@@ -479,10 +479,10 @@
 /* ===== MOBILE RESPONSIVE STYLES ===== */
 @media (max-width: 768px) {
   .quick-intro h2 {
-  font-size: 14px;
+  font-size: 18px;
 }
 .quick-intro p{
-  font-size: 12px;
+  font-size: 16px;
 }
   .left-panel {
     padding: 30px 20px;
@@ -516,7 +516,7 @@
   }
   
   .zeno-btn {
-    font-size: 13px;
+    font-size: 14px;
     padding: 10px 16px;
   }
   .howitworks-div img {
@@ -525,7 +525,6 @@
   .hiw-main {
     padding: 15px;
     width: 87%;
-
     margin: 10px auto;
   }
   
@@ -533,20 +532,15 @@
     text-align: left;
     margin-bottom: 16px;
     padding:0;
-    width: 95%;
-
-    font-size: 14px;
-
-
+    width: 90%;
+    font-size: 18px;
   }
   
-
 .hiw-row {
   display: flex;
   flex-direction: column;
-
   margin: 0 auto;
-  width: 100%;
+  width: 90%;
   padding: 0;
 }
 
@@ -560,7 +554,7 @@
   }
   
   .hiw-step-nav {
-    font-size: 12px;
+    font-size: 14px;
     text-align: left;
   }
   
@@ -574,23 +568,21 @@
     margin: 0 auto;
     padding: 0;
   }
-  
 
   .hiw-details-col {
     width: 95%;
     min-width: auto;
     max-width: none;
-
     margin:0 auto;
     padding: 0;
     padding-bottom: 14px;
     text-align: center;
   }
   .hiw-step-title{
-    font-size: 14px;
+    font-size: 16px;
   }
   .hiw-step-desc {
-    font-size: 12px;
+    font-size: 14px;
   }
   .howitworks-div {
     flex-direction: column;
@@ -609,7 +601,6 @@
 }
 
 @media (max-width: 480px) {
-
     .modal-layout {
     flex-direction: column;
     width: 95%;
@@ -633,10 +624,7 @@
   .zeno-modal {
     padding: 20px 15px;
   }
-  
 
-
-  
   .hiw-image {
     height: 160px;
   }

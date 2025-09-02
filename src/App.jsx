@@ -107,7 +107,7 @@ const [showProfileMenu, setShowProfileMenu] = useState(false);
         <div className='nav-bar'>
           <div className='logo-title-container'>
             <Link to="/"><img src={logo} alt="Logo" /></Link>
-            <h3 className='logo-title'>Zeno</h3>
+  
           </div>
 
           <SignInModal open={showSignInModal} onClose={() => setShowSignInModal(false)} />
