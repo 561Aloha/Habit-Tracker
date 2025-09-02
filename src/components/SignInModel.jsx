@@ -46,14 +46,14 @@ const SignInModal = ({ open, onClose }) => {
           setMessage(error.message);
         }
       } else {
-        // For email signups, create UserData profile immediately since we have the user data
+  
         if (data.user) {
           const { error: insertError } = await supabase
             .from("UserData")
             .insert({
               user_uuid: data.user.id,
               email: data.user.email,
-              full_name: null, // Email signups don't have full name initially
+              full_name: null, 
               avatar_url: null,
               onboarding_completed: false,
               created_at: new Date().toISOString(),

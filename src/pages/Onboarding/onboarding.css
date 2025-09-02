@@ -93,6 +93,7 @@
   font-weight: 800;
   color: #111827;
   margin: 18px 12px 16px;
+    text-align: center;
 }
 
 /* Options: big rounded white tiles stacked vertically */
@@ -148,7 +149,7 @@
 
 .back-btn:disabled { opacity: .5; cursor: not-allowed; }
 .back-icon { width: 16px; height: 16px; object-fit: contain; }
-.hint { font-size: 12px; color: #6b7280; }
+.hint { font-size: 12px; color: #6b7280; text-align: left;; }
 /* src/pages/Onboarding/onboarding.css (update) */
 
 
@@ -248,7 +249,7 @@
 
 /* Fix card size */
 .qa-card {
-  width: 90%;
+  width: 90;
   max-width: 700px;
   min-height: 500px;           /* <- fixed height */
   display: flex;
@@ -258,6 +259,7 @@
   background: #f5f3ff;
   border-radius: 28px;
   padding: 20px;
+
   box-sizing: border-box;
 }
 
@@ -278,5 +280,329 @@
     flex-direction: column;
     gap: 12px;
     align-items: stretch;
+  }
+}
+
+/* Add these styles to your onboarding.css */
+
+.habits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px 0;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.habit-card {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.habit-card:hover {
+  border-color: #5d4ff4;
+  box-shadow: 0 4px 12px rgba(93, 79, 244, 0.1);
+}
+
+.habit-name-input {
+  width: 50%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background: #f8f9fa;
+  color:black;
+  transition: all 0.3s ease;
+}
+
+.habit-name-input:focus {
+  outline: none;
+  border-color: #5d4ff4;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(93, 79, 244, 0.1);
+}
+
+.frequency-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.frequency-selector label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.frequency-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.frequency-btn {
+  padding: 8px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 20px;
+  background: white;
+  color: #666;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.frequency-btn:hover {
+  border-color: #5d4ff4;
+  color: #5d4ff4;
+}
+
+.frequency-btn.selected {
+  background: #5d4ff4;
+  border-color: #5d4ff4;
+  color: white;
+}
+
+.frequency-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .habits-list {
+    max-height: 300px;
+  }
+  
+  .habit-card {
+    padding: 15px;
+  }
+  
+  .frequency-options {
+    gap: 6px;
+  }
+  
+  .frequency-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .habit-name-input {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* Update existing option tiles for better goal selection */
+.option-tile {
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background: white;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.option-tile:hover {
+  border-color: #5d4ff4;
+  background: #f8f9ff;
+}
+
+.option-tile.selected {
+  border-color: #5d4ff4;
+  background: #5d4ff4;
+  color: white;
+}
+
+.option-tile.selected:hover {
+  background: #4c3ee0;
+}
+
+/* Improve hint text styling */
+.hint {
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* Update next button to show dynamic count */
+.next-btn {
+  background: #5d4ff4;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.next-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.next-btn:hover:not(:disabled) {
+  background: #4c3ee0;
+  transform: translateY(-1px);
+}
+.category-icon-small {
+  width: 48px;
+  height: 48px;
+}
+.habit-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.action-btn {
+  width:60px;
+  background-color: #a2a9f6;
+}
+.habit-actions{
+  display: flex;
+  justify-content: flex-end;
+  width: 40%;
+  background-color: tomato;
+  gap: 10px;
+}
+/* Add these styles to your existing onboarding.css file */
+
+.habit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.habit-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-icon-small {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.category-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.habit-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.shuffle-btn:hover {
+  background-color: #e3f2fd;
+}
+
+.delete-btn:hover {
+  background-color: #ffebee;
+}
+
+.action-btn img {
+  width: 16px;
+  height: 16px;
+}
+
+/* Update goal content styles for category display */
+.goal-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.goal-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.goal-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.category-label {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.option-tile.selected .category-label {
+  opacity: 1;
+}
+
+/* Mobile responsiveness for new elements */
+@media (max-width: 768px) {
+  .goal-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .goal-category {
+    align-self: flex-end;
+  }
+
+  .action-btn {
+    width: 28px;
+    height: 28px;
+    padding: 6px;
+  }
+
+  .action-btn img {
+    width: 14px;
+    height: 14px;
   }
 }

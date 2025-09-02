@@ -30,10 +30,6 @@ const CreateHabit = () => {
         { key: 'financial', label: 'Financial', imgSrc: './src/assets/26.png' },
         { key: 'beauty', label: 'Beauty', imgSrc: './src/assets/beauty.png' },
         { key: 'Career', label: 'Career', imgSrc: './src/assets/career.png' },
-
-   
-   
-   
     ];
     const repetitionOptions = [
         { value: 'every week', label: 'Every week' },

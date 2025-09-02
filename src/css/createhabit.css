@@ -12,13 +12,13 @@
 }
 
 .create-habit{
-  padding: 40px;
   padding-top: 40px;
+  padding-bottom: 40px;
   max-width: 100%; /* Changed from 720px */
   margin: 0; /* Remove margin since wrapper handles it */
   border-radius: 20px;
   width: 90%;
-
+  margin-bottom: 24px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.95); /* Made slightly more opaque */
 }

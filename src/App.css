@@ -1,6 +1,6 @@
 .nav-bar {
   width: 100%;
-  height: 50px;
+  height: 48px;
   position: fixed;
   top: 0;
   left: 0;
@@ -14,22 +14,18 @@
   border-bottom: 1px solid #ddd;
 }
 
+
+
 .logo-title-container {
   display: flex;
   align-items: center;
-  padding: 1px;
-  margin-left: 40px;
-  margin-right: 10%;
-}
-
-.logo-title-container h2 {
-  margin-left: 10px;
-  font-size: 1.5rem;
+  color:black;
+  font-size:1.5rem;
+  flex: 1;
 }
 
 .logo-title-container img {
   height: 32px;
-  width: auto;
   margin-right: 14px;
 }
 
@@ -37,7 +33,8 @@
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin: 0 auto;
+  flex: 1;
+    margin: 0 auto;
 }
 
 .menu-items a {
@@ -102,12 +99,6 @@
   font-weight: 500;
   color: #1a237e;
 }
-
-.hiw-main {
-  background-color: seashell;
-  width: 80px;
-}
-
 .hamburger-container {
   display: none;
   cursor: pointer;
@@ -200,13 +191,13 @@
 }
 
 .auth-actions {
-  margin-left: auto;
   display: flex;
   align-items: center;
+  flex: 1; /* Takes 1/3 of space */
+  justify-content: flex-end; /* Align profile to right */
 }
 
 .profile-wrapper {
-  margin-right: 48px;
   position: relative;
   display: inline-block;
 }
@@ -253,6 +244,25 @@
   background-color: #f0f0f0;
 }
 
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu-overlay {
+  width: 50vw;
+  max-width: 320px;
+  height: 100%;
+  background: rgba(241, 233, 255, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideIn 0.25s ease;
+}
 @media (max-width: 768px) {
 
   .menu-items {
@@ -272,31 +282,14 @@
     width: 100%;
   }
 
-}.menu-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 999;
-  display: flex;
-  justify-content: flex-end;
 }
 
-.menu-overlay {
-  width: 50vw;
-  max-width: 320px;
-  height: 100%;
-  background: rgba(241, 233, 255, 0.95);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: slideIn 0.25s ease;
-}
 
 @keyframes slideIn {
   from { transform: translateX(100%); opacity: 0.5; }
   to   { transform: translateX(0);     opacity: 1; }
 }
 
-@media (max-width: 768px) {
-  .menu-overlay { width: 80vw; }
-}
+
+
+
