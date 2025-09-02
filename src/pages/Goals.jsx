@@ -1,5 +1,4 @@
 import './../css/goals.css';
-import './../css/goals-layout.css';
 import Footer from '../components/Footer.jsx';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -15,6 +14,7 @@ import chevronDown from './../assets/chevron-down.svg';
 import Planner from "../components/planner.jsx";
 import EditHabitModal from '../components/EditHabit.jsx';
 import AuthRequiredOverlay from '../components/AuthRequiredOver.jsx';
+import CompleteGrid from '../components/CompleteGrid.jsx';
 
 const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 function Goals() {
@@ -505,7 +505,7 @@ const handleHabitCompletion = async (habitId, dateKey, completionState) => {
             onHabitCompletion={handleHabitCompletion}
             currentWeek={currentWeek}
           />
-          {/* <div className="chart-container">
+          <div className="chart-container">
             <MyChart
               chartData={chartData}
               onWeekChange={setCurrentWeek}
@@ -516,7 +516,8 @@ const handleHabitCompletion = async (habitId, dateKey, completionState) => {
               onPrevWeek={handlePrevClick}
               onNextWeek={handleNextClick}
             />
-          </div> */}
+          </div>
+
         </div>
       </div>
     </div>

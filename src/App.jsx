@@ -52,7 +52,7 @@ const [showProfileMenu, setShowProfileMenu] = useState(false);
     { path: "/post/:id", element: <PostPage /> },
     { path: "/edit/:id", element: <EditPosts data={posts} /> },
     { path: "/create-post", element: <CreatePost data={posts} /> },
-    { path: "/about-us", element: <AboutUs /> },
+    // { path: "/about-us", element: <AboutUs /> },
     { path: "/habit", element: <CreateHabit /> },
     { path: "/blog", element: <Blog /> },
     { path: "/goal", element: <Goal /> },
@@ -116,7 +116,6 @@ const [showProfileMenu, setShowProfileMenu] = useState(false);
             <Link to="/">Home</Link>
             <Link to="/goal">Goals</Link>
             <Link to="/blog">Blog</Link>
-            <Link to="/about-us">About Us</Link>
           </div>
         <div className="auth-actions desktop-only">
           {user ? (

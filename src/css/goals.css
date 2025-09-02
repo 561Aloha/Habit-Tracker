@@ -175,71 +175,6 @@
   max-width: 500px;
 }
 
-@media (max-width: 900px){
-  .goals-container {
-    flex-direction: column;
-  }
-  .habits-container{
-    position:relative;
-    margin-bottom: 20px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .habits-container{
-    margin:0 auto;
-    margin-bottom: 20px;
-    width: 90%;
-    max-width: 500px;
-    position:relative;
-  }
-  .habits-container h2 {
-    font-size: 25px;
-    margin: 0 auto;
-  }
-  .habit-buttons button{
-    font-size: 15px;
-    width: 175px;
-    height: 40px;
-  }
-  .goals-page{
-    width: 100%;
-    margin:0;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-  .goals-container{
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    margin: 0 auto;
-    padding: 0;
-  }
-  .right-container{
-    width: 100%;
-    padding:0;
-    margin:0 auto;
-  }
-}
-
-
-@media (max-width: 700px) {
-  .habits-container{
-    position: relative;
-    width:90%;
-    border: 2px solid seashell;
-    padding: 20px;
-  }
-  .goals-container{
-    position: relative;
-  }
-  .chart-container {
-    background-color: rgb(255, 255, 255);
-    margin-top: 20px;
-  }
-}
-
 .goal-header{
   font-size: 24px;
   margin: 0 auto;
@@ -339,7 +274,6 @@ button.remove:disabled {
   flex-direction: row;
 }
 
-
 .habit-content button{
   width: 75px;
   background-color: transparent;;
@@ -417,4 +351,73 @@ button.remove:disabled {
 
 .delete-btn {
   color: #b91c1c;
+}
+
+@media (max-width: 1200px) {
+  .habits-container{
+    margin:0 auto;
+    margin-bottom: 20px;
+    width: 90%;
+    max-width: 500px;
+    position:relative;
+  }
+  .habits-container h2 {
+    font-size: 25px;
+    margin: 0 auto;
+  }
+  .habit-buttons button{
+    font-size: 15px;
+    width: 175px;
+    height: 40px;
+  }
+  .goals-page{
+    width: 100%;
+    margin:0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .goals-container{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .right-container{
+    width: 100%;
+    padding:0;
+    margin:0 auto;
+  }
+}
+
+@media (max-width: 900px){
+  .goals-container {
+    flex-direction: column;
+  }
+  .habits-container{
+    position:relative;
+    margin-bottom: 20px;
+    
+  }
+  .chart-container{
+    width:90%;
+
+  }
+}
+
+@media (max-width: 700px) {
+  .habits-container{
+    position: relative;
+    width:90%;
+    border: 2px solid seashell;
+    padding: 20px;
+  }
+  .goals-container{
+    position: relative;
+  }
+  .chart-container {
+    background-color: rgb(255, 255, 255);
+    margin-top: 20px;
+  }
 }

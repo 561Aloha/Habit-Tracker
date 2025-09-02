@@ -1,5 +1,3 @@
-// CompleteGrid.jsx
-import React from "react";
 import "../css/todo.css";
 
 const monthNames = [

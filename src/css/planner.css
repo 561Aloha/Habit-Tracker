@@ -148,6 +148,22 @@ tbody td:first-child {
   transform: rotate(180deg);
 }
 
+
+@media (max-width: 900px){
+  .goals-container {
+    flex-direction: column;
+  }
+  .habits-container{
+    position:relative;
+    margin-bottom: 20px;
+    
+  }
+  .planner-modern {
+    width: 90%;
+  }
+}
+
+
 @media (max-width: 700px) {
   .plannertable th.day-label[data-full="Monday"]::before { content: "MON"; }
   .plannertable th.day-label[data-full="Tuesday"]::before { content: "TUE"; }
@@ -204,5 +220,8 @@ tbody td:first-child {
     line-height: 28px;
     font-size: 1.1rem;
   }
-}
 
+  .planner-modern{
+    width:90%;
+  }
+}
