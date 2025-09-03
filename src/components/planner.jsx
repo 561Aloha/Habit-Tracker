@@ -37,7 +37,6 @@ const Planner = ({ habits = [], completionData = [], onHabitCompletion, currentW
   const weekDateKeys = getWeekDateKeys();
 
 const handleCellClick = (habit, dateKey, dayIndex) => {
-    // Only allow interaction if habit is scheduled for this day
     if (!isHabitScheduledForDay(habit, dayIndex)) {
       return;
     }
@@ -58,8 +57,6 @@ const handleCellClick = (habit, dateKey, dayIndex) => {
       default:
         newCompletionState = true;
     }
-
-    // Call the parent function with special handling for blank state
     if (newCompletionState === null) {
       onHabitCompletion && onHabitCompletion(habit.habit_id, dateKey, 'delete');
     } else {

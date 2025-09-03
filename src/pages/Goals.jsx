@@ -14,7 +14,6 @@ import chevronDown from './../assets/chevron-down.svg';
 import Planner from "../components/planner.jsx";
 import EditHabitModal from '../components/EditHabit.jsx';
 import AuthRequiredOverlay from '../components/AuthRequiredOver.jsx';
-import CompleteGrid from '../components/CompleteGrid.jsx';
 
 const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 function Goals() {
@@ -87,27 +86,21 @@ function Goals() {
   useEffect(() => { updateChartData(); }, [habits, completionData, currentWeek]);
   useEffect(() => { updateWeek(calendarOffset); }, [calendarOffset]);
 
-// Add this useEffect to your Goals component to handle week highlighting
-
 useEffect(() => {
   if (!openDatePicker) return;
   
   const addWeekHighlighting = () => {
     const dayElements = document.querySelectorAll('.MuiPickersDay-root');
     const weekRows = document.querySelectorAll('[role="row"]');
-    
-    // Remove existing hover listeners
+   
     dayElements.forEach(day => {
       const clonedDay = day.cloneNode(true);
       day.parentNode.replaceChild(clonedDay, day);
     });
-    
-    // Add new hover listeners
     document.querySelectorAll('.MuiPickersDay-root').forEach((day, index) => {
       day.addEventListener('mouseenter', () => {
-        // Calculate which week row this day belongs to
         const weekRowIndex = Math.floor(index / 7);
-        const weekRow = weekRows[weekRowIndex + 1]; // +1 to skip header row
+        const weekRow = weekRows[weekRowIndex + 1];
         
         if (weekRow) {
           weekRow.classList.add('week-highlighted');
@@ -245,7 +238,6 @@ const handleHabitCompletion = async (habitId, dateKey, completionState) => {
       datasets: [{ label: 'Habits Completed (%)', data: weeklyCompletionPercentages, backgroundColor: '#8884d8', borderWidth: 1 }],
     });
   };
-
   const handlePrevClick = () => setCalendarOffset(calendarOffset - 1);
   const handleNextClick = () => setCalendarOffset(calendarOffset + 1);
 
@@ -337,7 +329,6 @@ const handleHabitCompletion = async (habitId, dateKey, completionState) => {
     setCurrentWeek(getWeekForDate(base));
     setSelectedDate(getWeekForDate(base)[0].fullDate);
   }
-  
 
   const filteredHabitsForSelectedDay = habits.filter(habit => {
   const dayName = format(selectedDate, 'EEEE');
@@ -376,7 +367,7 @@ const handleHabitCompletion = async (habitId, dateKey, completionState) => {
               setCurrentWeek(getWeekForDate(newDate));
             }
           }}
-          views={['year', 'month', 'day']} // Enable all three views
+          views={['year', 'month', 'day']} 
           openTo="month"
           slotProps={{
             textField: { style: { display: 'none' } },
@@ -419,12 +410,11 @@ const handleHabitCompletion = async (habitId, dateKey, completionState) => {
               <p>Create your first habit to get started!</p>
             </div>
           ) : !hasHabitsForToday && hasAnyHabits ? (
-            // Show no habits for selected day (desktop and mobile)
             <div className="no-habits-today">
               <p>No habits scheduled for {format(selectedDate, 'EEEE')}.</p>
             </div>
           ) : (
-            // Show habit list - removed the extra brace and added parentheses
+
             filteredHabitsForSelectedDay.map(habit => {
               const habitDateKey = format(selectedDate, 'yyyy-MM-dd');
               const isCompleted = isHabitCompleted(habit.habit_id, selectedDate);
@@ -451,11 +441,12 @@ const handleHabitCompletion = async (habitId, dateKey, completionState) => {
                         className={`habit-toggle ${isCompleted ? 'completed' : ''}`}
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleHabitCompletion(habit.habit_id, habitDateKey);
+                          handleHabitCompletion(habit.habit_id, habitDateKey, !isCompleted);
                         }}
                       >
-                        {isCompleted ? 'Done ✓' : '○'}
+                        {isCompleted ? ' ✓' : '○'}
                       </button>
+       
                     </div>
 
                     <button
@@ -505,6 +496,7 @@ const handleHabitCompletion = async (habitId, dateKey, completionState) => {
             onHabitCompletion={handleHabitCompletion}
             currentWeek={currentWeek}
           />
+
           <div className="chart-container">
             <MyChart
               chartData={chartData}

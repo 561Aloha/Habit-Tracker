@@ -1,3 +1,4 @@
+/* Main wrapper and form layout */
 .habit-form-wrapper {
   background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
   padding: 20px;
@@ -7,61 +8,142 @@
   width: 100%;
   box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
   position: relative;
-  top: 30px; 
+  top: 30px;
 }
 
-.create-habit{
-  padding-top: 40px;
-  padding-bottom: 40px;
-  max-width: 850px;
-  margin: 0; 
+.create-habit {
+  padding: 40px;
+  width: 85%;
+  margin: 0 auto;
   border-radius: 20px;
-  margin-bottom: 24px;
+  margin-bottom: 100px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.95);
-}
-.habitname{
-    margin-bottom: 10px;
-    height: 30px;
-    font-size: 16px;
-    color: rgb(0, 0, 0);
-    border-radius: 12px;
-    padding: 0 20px;
-    padding-left:20px;
-    border: 1px solid #ccc;
-    width:50%;
+  height: auto;
 }
 
-.check:checked + label::before {
-  opacity: 1;
+.create-habit h2 {
+  font-size: 32px;
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 0;
+  color: #442fe4;
+  margin: 0;
+}
+
+.create-habit h3 {
+  color: #442fe4;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+/* Form groups and inputs */
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-group-freq {
+  color: black;
+}
+
+.form-group-freq > label {
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.form-group-freq h2 {
+  background-color: #8b5cf6;
+}
+
+.form-Freq {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 24px;
+  text-align: center;
+}
+
+/* Header with habit name and dropdown - HORIZONTAL BY DEFAULT */
+.header-habit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-direction: row;
+}
+
+.header-habit .habitname,
+.header-habit .select-menu {
+  flex: 1;
+  width: 50%;
+  max-width: 50%;
+  min-width: 0;
+}
+
+.habitname {
+  height: 45px;
+  font-size: 16px;
+  color: #222;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.habitname::placeholder {
+  color: #000000;
+  font-size: 16px;
+}
+
+.select-menu {
+  border-radius: 8px;
+  color: black;
+}
+
+.header-habit .select-menu .react-select__control {
+  width: 100%;
+  height: 45px;
+  min-height: 45px;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+/* Category selection grid */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .category-button {
   border: 2px solid #ccc;
-  padding: 10px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 175px;
-  cursor: pointer;
-  margin: 5px;
-  border: none;
-  height: 175px;
   justify-content: center;
-  text-align: center;
+  width: 175px;
+  height: 175px;
+  cursor: pointer;
   background-color: white;
   transition: background-color 0.3s;
-  padding: 10px 20px;
-  margin: 5px;
+  text-align: center;
   font-size: 14px;
-  cursor: pointer;
-  transition: 0.3s;
+}
+
+.category-button:hover {
+  background-color: #d9d9d9;
 }
 
 .category-button.selected {
-  background-color: #e4ffde; 
-  
+  background-color: #cdb5ff;
 }
 
 .category-button span {
@@ -75,16 +157,8 @@
   margin-bottom: 10px;
 }
 
-.category-button:hover {
-  background-color: #d9d9d9;
-}
-
-.category-button.selected {
-  background-color: #cdb5ff;
-}
-
 .more-button {
-    grid-column: 1 / -1;
+  grid-column: 1 / -1;
   text-align: center;
   background-color: #9a8bff;
   color: white;
@@ -93,85 +167,18 @@
   cursor: pointer;
   font-size: 16px;
   margin-top: 10px;
+  padding: 12px;
 }
 
-.categories {
+/* Frequency selection (days of week) */
+.wrap {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  margin: 0 auto;
-  max-width: 625px;
-  margin: 0 auto;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: 75%;
+  margin: 12px auto 20px;
 }
 
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content{
-  display:flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.modal-content {
-  position: relative;
-    height: 650px;
-    background: rgb(165, 114, 114);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    max-width: 600px;
-    margin-top: 50px;
-    overflow-y: auto;
-}
-.modal-content {
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-
- justify-content: center;
-}
-.close {
-    position:absolute;
-    right: 10px;
-    top: 0px;
-    font-size: 24px;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.check {
-    margin-right: 5px;
-}
-
-
-.createhabit-btn {
-    background-color: #442fe4;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-}
-
-@media (max-width: 1000px) {
-  .categories{
-    gap: 1%;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-  }
-}
 .wrap div {
   padding: 15px;
   display: flex;
@@ -188,207 +195,238 @@
   height: 20px;
   line-height: 50px;
   font-size: 14px;
-  position: relative;
-  cursor: pointer;
 }
 
 .wrap div:hover {
   background-color: #e1ffe2;
 }
 
-.wrap {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap:8px;
-  width: 75%;
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
-
 .wrap input[type="checkbox"] {
   opacity: 0;
   position: absolute;
   width: 100%;
-  padding:0;
   height: 100%;
+  padding: 0;
   cursor: pointer;
 }
 
+.create-habit{
+  margin:0;
+}
+
 .wrap input[type="checkbox"]:checked + label {
   background-color: #b9f3bb;
   border-radius: 12px;
   font-weight: bold;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  color: #222;
 }
 
-.form-group-freq > label {
-  font-weight: 600;
-  margin-bottom: 10px;
-  display: inline-block;
+/* Modal for category selection - FIXED AND CENTERED */
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.wrap input[type="checkbox"]:checked + label {
-  background-color: #b9f3bb;
-  border-radius: 25px;
-  font-weight: bold;
+.modal-content {
+  position: relative;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 90vw;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+/* When categories are inside modal */
+.modal-content .categories {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 24px;
+  padding: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #666;
+  line-height: 1;
+}
+
+.close:hover {
+  color: #333;
+}
+
+/* Form elements */
+.check {
+  margin-right: 5px;
+}
+
+.createhabit-btn {
+  background-color: #442fe4;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.createhabit-btn:hover {
+  background-color: #3420c4;
+}
+
 .nav-btns {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 20px;
-    gap:12px;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  gap: 12px;
 }
-
-
-@media (max-width: 768px) {
-  .wrap {
+@media (max-width: 700px) {
+    .categories,
+    .modal-content .categories {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .wrap {
     grid-template-columns: repeat(3, 1fr);
   }
-}
-@media (max-width: 500px) {
-  .wrap {
-    grid-template-columns: repeat(2, 1fr);
+  .header-habit {
+    flex-direction: column;
+    gap: 15px;
   }
-}
 
-.form-group {
-  margin-bottom: 30px;
-}
-
-.header-habit{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  margin: 0 auto;
-  flex-direction: row;
-}
-.header-habit {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 30px;
-}
-.select-menu {
-  width: 50%;
-  border-radius: 8px;
-  color:black;
-}
-
-.habitname {
-  width: 40%;
-  height: 30px;
-  font-size: 16px;
-  min-width: 200px;
-  color: #222;
-  border: 1px solid #ccc;
-  padding: 0 20px;
-  height: 15px;
-  font-size: 16px;
-  width: 40%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.habitname::placeholder {
-  color: #000000; 
-  font-size: 16px;
-}
-
-.header-habit {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 30px;
-}
-
-.header-habit .habitname ,.select-menu {
-  flex: 1;
-  max-width: 48%;
-}
-
-.header-habit .select-menu .react-select__control {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.create-habit h3{
-  color: #442fe4;
-  padding-bottom: 0;
-  margin: 0;
-}
-.create-habit h2{
-  font-size:32px;
-  text-align: center;
-  font-weight: 600;
-  padding-bottom: 0;
-  color:#442fe4;
-}
-
-.wrap input[type="checkbox"]:checked + label {
-  background-color: #b9f3bb;
-  font-weight: bold;
-  width: 100%;
-  padding:0;
-  margin:0;
-  border-radius: 12px;
-  color: #222;
-}
-  .form-Freq{
+  .header-habit .habitname,
+  .header-habit .select-menu {
     width: 100%;
-    margin: 0 auto;
-    font-size: 24px;
-    text-align: center;
-  }
-
-    .form-group-freq{
-  color: black;
-}
-@media (max-width: 600px) {
-  .background-habit{
-    background-color: #d32525;
-    padding: 0;
-    width: 100vw;
-    
-    border-radius: 0;
-    
-  }
-  .habit-form-wrapper{
-    width: 90%;
-    margin: 0 auto;
-    padding:0;
-    justify-content: center;
+    max-width: 100%;
+    flex: none;
   }
 
   .create-habit{
-    width: 100%;
-    margin: 0 auto;
-    margin-top: 36px;
+    padding: 40px;
+
   }
   .category-button{
+    width: 125px;
+    height: 125px;
+  }
+  .habit-form-wrapper{
+    width: 100%;
+    padding: px;
+  }
+@media (max-width: 700px) {
+  .habit-form-wrapper {
+    width: 80%;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .background-habit{
+    width: 100vw;
+    padding-bottom: 48px;
+  }
+  
+  .create-habit {
+    padding: 20px; /* Reduced padding for mobile */
+    width: 100%;
+    margin: 0;
+  }
+  
+  .more-button{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 24px;
+  }
+  .wrap {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .header-habit {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .header-habit .habitname,
+  .header-habit .select-menu {
+    width: 100%;
+    max-width: 100%;
+    flex: none;
+  }
+  
+  .category-button {
     width: 150px;
     height: 150px;
   }
-
-  .nav-btns {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 0px;
-    gap:4px;
+  
 }
-.createhabit-btn {
-    padding: 10px;
-    font-size: 14px;
 }
 
+/* Modal for category selection - PROPER LIGHTBOX POSITIONING */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
-
-.form-group-freq h2{
-  background-color: #8b5cf6;
+.modal-content {
+  position: relative;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  width: 85%;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+  transform: translateY(0);
 }
 
-.wrap{
-  margin-top: 12px;
+/* When categories are inside modal */
+.modal-content .categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.category-button{
+  width: 125px;
+  height: 125px;
+}
+
+.habit-form-wrapper {
+  border-radius: 30px;
+  max-width: 600px;
+  padding:10px;
+  top: 30px;
 }

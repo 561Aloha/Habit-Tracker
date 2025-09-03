@@ -66,10 +66,9 @@ tbody td:first-child {
 }
 
 .planner-modern tbody tr {
-  height: 48px; /* Consistent row height for closer spacing */
+  height: 48px;
 }
 
-/* Habit cell styles */
 .habit-cell {
   display: inline-block;
   width: 32px;
@@ -102,7 +101,6 @@ tbody td:first-child {
   border-color: #e13b3b;
 }
 
-/* Clickable habit cells */
 .planner-modern tbody td {
   cursor: pointer;
 }
@@ -111,14 +109,12 @@ tbody td:first-child {
   cursor: default;
 }
 
-/* No habits message */
 .no-habits-message {
   text-align: center;
   color: #666;
   font-style: italic;
 }
 
-/* Expand/Collapse functionality */
 .expand-toggle {
   display: flex;
   justify-content: center;
@@ -148,7 +144,6 @@ tbody td:first-child {
   transform: rotate(180deg);
 }
 
-
 @media (max-width: 900px){
   .goals-container {
     flex-direction: column;
@@ -161,7 +156,6 @@ tbody td:first-child {
     width: 90%;
   }
 }
-
 
 @media (max-width: 700px) {
   .plannertable th.day-label[data-full="Monday"]::before { content: "MON"; }
@@ -186,11 +180,11 @@ tbody td:first-child {
 
   .planner-modern th,
   .planner-modern td {
-    padding: 4px 6px; /* Even more compact on mobile */
+    padding: 4px 6px;
   }
 
   .planner-modern tbody tr {
-    height: 40px; /* Smaller row height on mobile */
+    height: 40px;
   }
 
   tbody td:first-child {
@@ -224,4 +218,137 @@ tbody td:first-child {
   font-weight: 300;
   font-size: 14px;
 }
+}
+
+.planner-modern td {
+  padding: 0;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  height: 48px;
+  position: relative;
+}
+
+.planner-modern td:first-child {
+  text-align: left;
+  padding: 8px 16px;
+  font-weight: 300;
+}
+
+.planner-modern td:not(:first-child) {
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.habit-cell {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #3c3c3c;
+  border-radius: 6px;
+  background: #f7fdf8;
+  line-height: 32px;
+  text-align: center;
+  font-size: 1.3rem;
+  color: #222;
+  transition: background 0.2s, border 0.2s;
+  cursor: pointer;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.planner-modern table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.planner-modern th:first-child,
+.planner-modern td:first-child {
+  width: 30%;
+  text-align: left;
+  padding: 8px 16px;
+}
+
+.planner-modern th:nth-child(2),
+.planner-modern th:nth-child(3),
+.planner-modern th:nth-child(4),
+.planner-modern th:nth-child(5),
+.planner-modern th:nth-child(6),
+.planner-modern th:nth-child(7),
+.planner-modern th:nth-child(8),
+.planner-modern td:nth-child(2),
+.planner-modern td:nth-child(3),
+.planner-modern td:nth-child(4),
+.planner-modern td:nth-child(5),
+.planner-modern td:nth-child(6),
+.planner-modern td:nth-child(7),
+.planner-modern td:nth-child(8) {
+  width: 10%;
+}
+
+.planner-modern td:not(:first-child) {
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+@media (max-width: 700px) {
+  .planner-modern{
+    width: 85%;
+  }
+  .planner-modern table {
+    width: 90%;
+    table-layout: fixed;
+  }
+
+  .planner-modern th,
+  .planner-modern td {
+    padding: 2px;
+  }
+
+  .planner-modern th:first-child,
+  .planner-modern td:first-child {
+    width: 35%; 
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+
+  .planner-modern th:nth-child(2),
+  .planner-modern th:nth-child(3),
+  .planner-modern th:nth-child(4),
+  .planner-modern th:nth-child(5),
+  .planner-modern th:nth-child(6),
+  .planner-modern th:nth-child(7),
+  .planner-modern th:nth-child(8),
+  .planner-modern td:nth-child(2),
+  .planner-modern td:nth-child(3),
+  .planner-modern td:nth-child(4),
+  .planner-modern td:nth-child(5),
+  .planner-modern td:nth-child(6),
+  .planner-modern td:nth-child(7),
+  .planner-modern td:nth-child(8) {
+    width: calc(65% / 7);
+  }
+
+  .habit-cell {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 1rem;
+    border-radius: 4px;
+  }
+
+  .planner-modern tbody tr {
+    height: 32px;
+  }
+
+  .planner-modern th {
+    font-size: 0.9rem;
+    padding: 4px 2px;
+  }
+  .planner-modern td:not(:first-child) {
+    padding: 0;
+  }
 }

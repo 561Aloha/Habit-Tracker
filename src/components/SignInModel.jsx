@@ -131,7 +131,6 @@ const SignInModal = ({ open, onClose }) => {
         </div>
 
         {message && <div className="zeno-error">{message}</div>}
-
         {mode === 'login' ? (
           <a className="zeno-login-link" onClick={() => setMode('signup')}>
             Don't have an account? Sign up

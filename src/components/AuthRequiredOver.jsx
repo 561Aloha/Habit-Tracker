@@ -1,4 +1,3 @@
-// src/components/AuthRequiredOverlay.jsx
 import React, { useState } from "react";
 import { supabase } from "../client";
 import "../css/auth.css";
@@ -15,7 +14,6 @@ export default function AuthRequiredOverlay({ open, onClose }) {
     if (onClose) {
       onClose();
     } else {
-      // Fallback if no onClose prop
       window.history.back();
     }
   };

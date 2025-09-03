@@ -8,7 +8,7 @@ import Select from 'react-select';
 const CreateHabit = () => {
     const [newHabit, setNewHabit] = useState({ category: '', habit_name: '', frequency: [], repetition: '' });
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [showModal, setShowModal] = useState(false);
+    const [showAllCategories, setShowAllCategories] = useState(false);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -31,20 +31,19 @@ const CreateHabit = () => {
         { key: 'beauty', label: 'Beauty', imgSrc: './src/assets/beauty.png' },
         { key: 'Career', label: 'Career', imgSrc: './src/assets/career.png' },
     ];
+    
     const repetitionOptions = [
         { value: 'every week', label: 'Every week' },
         { value: 'every other week', label: 'Every other week' }
     ];
 
-    const displayedCategories = categories.slice(0, 6); // Initially display only 6 categories
-
-    const toggleModal = () => setShowModal(!showModal);
+    const displayedCategories = showAllCategories ? categories : categories.slice(0, 6);
+    const toggleShowAll = () => setShowAllCategories(!showAllCategories);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setNewHabit(prev => ({ ...prev, [name]: value }));
     };
-
 
     const handleRepetitionChange = (selectedOption) => {
         setNewHabit(prev => ({ ...prev, repetition: selectedOption ? selectedOption.value : '' }));
@@ -67,7 +66,7 @@ const CreateHabit = () => {
             frequency: newHabit.frequency,
             repetition: newHabit.repetition,
         };
-        console.log('Creating habit with data:', habitData); // Debug log
+        console.log('Creating habit with data:', habitData);
         try {
             const { data, error } = await supabase.from('Habits').insert([habitData]);
             if (error) throw error;
@@ -78,94 +77,90 @@ const CreateHabit = () => {
             alert('Error creating habit. Please try again.');
         }
     };
-        const customStyles = {
+    
+    const customStyles = {
         placeholder: (provided) => ({
             ...provided,
             color: 'black',
             borderRadius: 12,
             fontSize: '14px',
         })
-        };
+    };
+    
     return (
         <div className='background-habit'>
             <div className="habit-form-wrapper">
-            <div className="create-habit">
-                <Link to="/goals" className="close-link" src={closeIcon}></Link>
-                <h2>Create Habit</h2>
-                    <span className="close" onClick={toggleModal}></span>
-                <form onSubmit={createHabit}>
-                    <div className="header-habit">
-                        <input className='habitname' placeholder='Habit Name' type="text" id="habit_name" name="habit_name" onChange={handleChange} />
-                        <Select
-                            className="select-menu"
-                            options={repetitionOptions}
-                            placeholder="Select Repetition"
-                            onChange={handleRepetitionChange}
-                            isClearable
-                            styles={customStyles}
-                            isSearchable={false}
-                            value={repetitionOptions.find(option => option.value === newHabit.repetition) || null}
-                        />
-                    </div>
-                    <div className="form-group categories">
-                        {displayedCategories.map(category => (
-                            <button
-                                key={category.key}
-                                type="button"
-                                className={`category-button ${selectedCategory === category.key ? 'selected' : ''}`}
-                                onClick={() => setSelectedCategory(category.key)}
-                            >
-                                <img src={category.imgSrc} alt={category.label} />
-                                <span>{category.label}</span>
+                <div className="create-habit">
+                    <Link to="/goals" className="close-link" src={closeIcon}></Link>
+                    <h2>Create Habit</h2>
+                    <form onSubmit={createHabit}>
+                        <div className="header-habit">
+                            <input 
+                                className='habitname' 
+                                placeholder='Habit Name' 
+                                type="text" 
+                                id="habit_name" 
+                                name="habit_name" 
+                                onChange={handleChange} 
+                            />
+                            <Select
+                                className="select-menu"
+                                options={repetitionOptions}
+                                placeholder="Select Repetition"
+                                onChange={handleRepetitionChange}
+                                isClearable
+                                styles={customStyles}
+                                isSearchable={false}
+                                value={repetitionOptions.find(option => option.value === newHabit.repetition) || null}
+                            />
+                        </div>
+                        
+                        <div className="form-group categories">
+                            {displayedCategories.map(category => (
+                                <button
+                                    key={category.key}
+                                    type="button"
+                                    className={`category-button ${selectedCategory === category.key ? 'selected' : ''}`}
+                                    onClick={() => setSelectedCategory(category.key)}
+                                >
+                                    <img src={category.imgSrc} alt={category.label} />
+                                    <span>{category.label}</span>
+                                </button>
+                            ))}
+                            <button type="button" onClick={toggleShowAll} className="more-button">
+                                {showAllCategories ? 'Show Less' : 'More...'}
                             </button>
-                        ))}
-                        <button type="button" onClick={toggleModal} className="more-button">More...</button>
-                    </div>
-                    {showModal && (
-                        <div className="modal">
-                            <div className="modal-content">
-                                <span className="close" onClick={toggleModal}>&times;</span>
-                                {categories.map(category => (
-                                    <button
-                                        key={category.key}
-                                        type="button"
-                                        className={`category-button ${selectedCategory === category.key ? 'selected' : ''}`}
-                                        onClick={() => { setSelectedCategory(category.key); toggleModal(); }}
-                                    >
-                                        <img src={category.imgSrc} alt={category.label} />
-                                        <span>{category.label}</span>
-                                    </button>
+                        </div>
+                        
+                        <div className="form-group">
+                        </div>
+                        
+                        <div className="form-group-freq">
+                            <label className="form-Freq">Frequency</label><br />
+                            <div className='wrap'>
+                                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(day => (
+                                    <div key={day}>
+                                        <input 
+                                            className='check'
+                                            type="checkbox" 
+                                            id={day} 
+                                            name="frequency" 
+                                            value={day} 
+                                            onChange={handleFrequencyChange} 
+                                        />
+                                        <label htmlFor={day}>{day}</label>
+                                    </div>
                                 ))}
                             </div>
                         </div>
-                    )}
-                    <div className="form-group">
-                    </div>
-                    <div className="form-group-freq">
-                        <label className="form-Freq">Frequency</label><br />
-                        <div className='wrap'>
-                            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(day => (
-                                <div key={day}>
-                                    <input 
-                                        className='check'
-                                        type="checkbox" 
-                                        id={day} 
-                                        name="frequency" 
-                                        value={day} 
-                                        onChange={handleFrequencyChange} 
-                                    />
-                                    <label htmlFor={day}>{day}</label>
-                                </div>
-                            ))}
+                        
+                        <div className='nav-btns'>
+                            <button type="submit" className='createhabit-btn'>Create Habit</button>
+                            <Link to="/goals"><button type="button" className='createhabit-btn'>Go back</button></Link>
                         </div>
-                    </div>
-                    <div className='nav-btns'>
-                        <button type="submit" className='createhabit-btn'>Create Habit</button>
-                        <Link to="/goals"><button type="button" className='createhabit-btn'>Go back</button></Link>
-                    </div>
-                </form>
-            </div>
-                 </div> 
+                    </form>
+                </div>
+            </div> 
         </div>
     );
 };
