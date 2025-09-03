@@ -409,15 +409,30 @@ button.remove:disabled {
 @media (max-width: 700px) {
   .habits-container{
     position: relative;
-    width:90%;
     border: 2px solid seashell;
-    padding: 20px;
+    padding: 16px;
+    border-radius: 12px;
   }
   .goals-container{
     position: relative;
+    width: 95%;
+    overflow: hidden;
   }
   .chart-container {
     background-color: rgb(255, 255, 255);
     margin-top: 20px;
+    padding:0;
+    width: 95%;
+  }
+
+  .habits-header-span{
+    font-size: 18px;
+  }
+  .day-label{
+    padding: 10px;
+    background-color: #e8ef83;
+  }
+  .selected-d{
+    font-size: 12px;
   }
 }

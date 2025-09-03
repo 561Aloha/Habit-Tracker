@@ -156,7 +156,6 @@ tbody td:first-child {
   .habits-container{
     position:relative;
     margin-bottom: 20px;
-    
   }
   .planner-modern {
     width: 90%;
@@ -218,10 +217,11 @@ tbody td:first-child {
     width: 28px;
     height: 28px;
     line-height: 28px;
-    font-size: 1.1rem;
+    font-size: 1.0rem;
   }
 
-  .planner-modern{
-    width:90%;
-  }
+  .planner-modern tr td:first-child {
+  font-weight: 300;
+  font-size: 14px;
+}
 }

@@ -1,31 +1,24 @@
-/* Add this new wrapper class */
 .habit-form-wrapper {
   background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
   padding: 20px;
   border-radius: 30px;
   margin: 50px auto;
   max-width: 800px;
-  width: 90%;
+  width: 100%;
   box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
   position: relative;
-  top: 30px; /* This shifts it down without exposing the background */
+  top: 30px; 
 }
 
 .create-habit{
   padding-top: 40px;
   padding-bottom: 40px;
-  max-width: 100%; /* Changed from 720px */
-  margin: 0; /* Remove margin since wrapper handles it */
+  max-width: 850px;
+  margin: 0; 
   border-radius: 20px;
-  width: 90%;
   margin-bottom: 24px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 255, 255, 0.95); /* Made slightly more opaque */
-}
-
-button{
-  width:250px;
-  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.95);
 }
 .habitname{
     margin-bottom: 10px;
@@ -68,14 +61,11 @@ button{
 
 .category-button.selected {
   background-color: #e4ffde; 
-}
-
-.category-button.selected {
-  border-color: blue;
+  
 }
 
 .category-button span {
-  font-size: 15px;
+  font-size: 16px;
   color: #333;
 }
 
@@ -94,7 +84,7 @@ button{
 }
 
 .more-button {
-  grid-column: 1 / -1;
+    grid-column: 1 / -1;
   text-align: center;
   background-color: #9a8bff;
   color: white;
@@ -150,7 +140,7 @@ button{
 .modal-content {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  background-color: #bababa;
+
  justify-content: center;
 }
 .close {
@@ -210,6 +200,9 @@ button{
   display: grid;
   grid-template-columns: repeat(4,1fr);
   gap:8px;
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .wrap input[type="checkbox"] {
@@ -240,16 +233,11 @@ button{
 }
 .nav-btns {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-top: 20px;
     gap:12px;
 }
 
-.nav-btns {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
-}
 
 @media (max-width: 768px) {
   .wrap {
@@ -338,7 +326,6 @@ button{
   color:#442fe4;
 }
 
-
 .wrap input[type="checkbox"]:checked + label {
   background-color: #b9f3bb;
   font-weight: bold;
@@ -347,4 +334,61 @@ button{
   margin:0;
   border-radius: 12px;
   color: #222;
+}
+  .form-Freq{
+    width: 100%;
+    margin: 0 auto;
+    font-size: 24px;
+    text-align: center;
+  }
+
+    .form-group-freq{
+  color: black;
+}
+@media (max-width: 600px) {
+  .background-habit{
+    background-color: #d32525;
+    padding: 0;
+    width: 100vw;
+    
+    border-radius: 0;
+    
+  }
+  .habit-form-wrapper{
+    width: 90%;
+    margin: 0 auto;
+    padding:0;
+    justify-content: center;
+  }
+
+  .create-habit{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 36px;
+  }
+  .category-button{
+    width: 150px;
+    height: 150px;
+  }
+
+  .nav-btns {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 0px;
+    gap:4px;
+}
+.createhabit-btn {
+    padding: 10px;
+    font-size: 14px;
+}
+
+}
+
+
+.form-group-freq h2{
+  background-color: #8b5cf6;
+}
+
+.wrap{
+  margin-top: 12px;
 }

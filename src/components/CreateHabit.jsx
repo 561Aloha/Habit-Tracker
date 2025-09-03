@@ -78,21 +78,21 @@ const CreateHabit = () => {
             alert('Error creating habit. Please try again.');
         }
     };
-const customStyles = {
-  placeholder: (provided) => ({
-    ...provided,
-    color: 'black',
-    borderRadius: 12,
-    fontSize: '14px',
-  })
-};
+        const customStyles = {
+        placeholder: (provided) => ({
+            ...provided,
+            color: 'black',
+            borderRadius: 12,
+            fontSize: '14px',
+        })
+        };
     return (
         <div className='background-habit'>
-            <div className="habit-form-wrapper"> {/* Add this wrapper */}
+            <div className="habit-form-wrapper">
             <div className="create-habit">
                 <Link to="/goals" className="close-link" src={closeIcon}></Link>
                 <h2>Create Habit</h2>
-                                                <span className="close" onClick={toggleModal}></span>
+                    <span className="close" onClick={toggleModal}></span>
                 <form onSubmit={createHabit}>
                     <div className="header-habit">
                         <input className='habitname' placeholder='Habit Name' type="text" id="habit_name" name="habit_name" onChange={handleChange} />
@@ -107,7 +107,6 @@ const customStyles = {
                             value={repetitionOptions.find(option => option.value === newHabit.repetition) || null}
                         />
                     </div>
-                    <h3>Select Category</h3>
                     <div className="form-group categories">
                         {displayedCategories.map(category => (
                             <button
@@ -143,7 +142,7 @@ const customStyles = {
                     <div className="form-group">
                     </div>
                     <div className="form-group-freq">
-                        <label>Frequency</label><br />
+                        <label className="form-Freq">Frequency</label><br />
                         <div className='wrap'>
                             {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(day => (
                                 <div key={day}>
@@ -162,7 +161,7 @@ const customStyles = {
                     </div>
                     <div className='nav-btns'>
                         <button type="submit" className='createhabit-btn'>Create Habit</button>
-                        <Link to="/goals"><button type="button">Go back</button></Link>
+                        <Link to="/goals"><button type="button" className='createhabit-btn'>Go back</button></Link>
                     </div>
                 </form>
             </div>

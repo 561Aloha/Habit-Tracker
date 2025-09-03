@@ -250,10 +250,17 @@
     flex-direction: column;
     align-items: flex-start;
   }
+  .completegrid-header{
+    width: 85%;
+  }
   .day-wrap {
-  display: grid;
-  grid-template-columns: repeat(18, 14px); /* fixed column count */
-  grid-template-rows: repeat(3, 14px);
-  gap: 2px;
-}
+    display: grid;
+    grid-template-columns: repeat(14, 14px); /* fixed column count */
+    grid-template-rows: repeat(3, 14px);
+    gap: 4px;
+  }
+  .chart-container-wrapper h2{
+    font-size: 24px;
+    text-align: center;
+  }
 }

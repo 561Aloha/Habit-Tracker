@@ -110,8 +110,8 @@ const MyChart = () => {
   }, [user]);
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Habit Completion Chart</h2>
+    <div className="chart-container-wrapper">
+      <h2>Habit Completion Chart</h2>
       <CompleteGrid completedDays={completedDays} />
     </div>
   );

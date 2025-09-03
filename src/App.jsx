@@ -107,7 +107,6 @@ const [showProfileMenu, setShowProfileMenu] = useState(false);
         <div className='nav-bar'>
           <div className='logo-title-container'>
             <Link to="/"><img src={logo} alt="Logo" /></Link>
-  
           </div>
 
           <SignInModal open={showSignInModal} onClose={() => setShowSignInModal(false)} />
