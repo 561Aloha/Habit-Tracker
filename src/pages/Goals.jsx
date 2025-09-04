@@ -9,11 +9,19 @@ import MyChart from '../components/MyChart.jsx';
 import { supabase } from '../client';
 import { Link } from 'react-router-dom';
 import arrow from './../assets/arrow.svg';
-import { format, startOfWeek, endOfWeek } from 'date-fns';
+import { format, startOfWeek, endOfWeek, subDays } from 'date-fns';
 import chevronDown from './../assets/chevron-down.svg';
 import Planner from "../components/planner.jsx";
 import EditHabitModal from '../components/EditHabit.jsx';
 import AuthRequiredOverlay from '../components/AuthRequiredOver.jsx';
+
+function yyyymmddLocal(dateLike) {
+  const d = new Date(dateLike);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
 
 const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 function Goals() {
@@ -23,6 +31,7 @@ function Goals() {
   const year = new Date().getFullYear();
   const [habits, setHabits] = useState([]);
   const [completionData, setCompletionData] = useState([]);
+  const [habitStreaks, setHabitStreaks] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [chartData, setChartData] = useState({
     labels: DAYS,
@@ -31,6 +40,40 @@ function Goals() {
   const hasAnyHabits = habits.length > 0;
   const showMobileNoHabitsMessage = isMobile() && !hasAnyHabits;
   const [view, setView] = useState('Week');
+  
+  // Calculate current streak for a habit
+  const calculateCurrentStreak = (habitId, habitsData, completionData) => {
+    const habit = habitsData.find(h => h.habit_id === habitId);
+    if (!habit || !habit.frequency) return 0;
+    
+    const today = new Date();
+    let streak = 0;
+    
+    // Check backwards from today
+    for (let i = 0; i < 90; i++) {
+      const checkDate = subDays(today, i);
+      const dateKey = yyyymmddLocal(checkDate);
+      const dayName = format(checkDate, 'EEEE');
+      
+      // Only count days this habit is scheduled
+      if (habit.frequency.includes(dayName)) {
+        const completion = completionData.find(c => 
+          c.habit_id === habitId && 
+          yyyymmddLocal(c.completion_date) === dateKey && 
+          c.is_completed
+        );
+        
+        if (completion) {
+          streak++;
+        } else {
+          break; // Streak broken
+        }
+      }
+    }
+    
+    return streak;
+  };
+
   function getWeekForDate(date) {
     const start = startOfWeek(date, { weekStartsOn: 0 });
     const week = [];
@@ -85,6 +128,17 @@ function Goals() {
   useEffect(() => { if (user) fetchAllData(); }, [user]);
   useEffect(() => { updateChartData(); }, [habits, completionData, currentWeek]);
   useEffect(() => { updateWeek(calendarOffset); }, [calendarOffset]);
+
+  // Update streaks whenever habits or completion data changes
+  useEffect(() => {
+    if (habits.length > 0 && completionData.length >= 0) {
+      const streaks = {};
+      habits.forEach(habit => {
+        streaks[habit.habit_id] = calculateCurrentStreak(habit.habit_id, habits, completionData);
+      });
+      setHabitStreaks(streaks);
+    }
+  }, [habits, completionData]);
 
 useEffect(() => {
   if (!openDatePicker) return;
@@ -275,7 +329,7 @@ const handleHabitCompletion = async (habitId, dateKey, completionState) => {
           habit_name: updated.habit_name,   // 👈 match your column name
           frequency: updated.frequency,
           repetition: updated.repetition ?? null, // 👈 include repetition if editing
-          user_id: user.id,                      // 👈 match your schema’s column
+          user_id: user.id,                      // 👈 match your schema's column
         })
         .eq('habit_id', updated.habit_id)
         .eq('user_id', user.id); // 👈 make sure update is scoped to user
@@ -420,6 +474,7 @@ const handleHabitCompletion = async (habitId, dateKey, completionState) => {
               const isCompleted = isHabitCompleted(habit.habit_id, selectedDate);
               const selectedForRemoval = selectedHabitId === habit.habit_id;
               const isEditing = habitToEdit?.habit_id === habit.habit_id;
+              const currentStreak = habitStreaks[habit.habit_id] || 0;
 
               return (
                 <React.Fragment key={`${habit.habit_id}-${habitDateKey}`}>
@@ -435,7 +490,14 @@ const handleHabitCompletion = async (habitId, dateKey, completionState) => {
                     }}
                   >
                     <div className="habit-content">
-                      <p>{habit.habit_name}</p>
+                      <div className="habit-text-container">
+                        <p className="habit-name">{habit.habit_name}</p>
+                        {currentStreak > 0 && (
+                          <div className="habit-streak">
+                            🔥 {currentStreak} streak
+                          </div>
+                        )}
+                      </div>
                       <button
                         type="button"
                         className={`habit-toggle ${isCompleted ? 'completed' : ''}`}

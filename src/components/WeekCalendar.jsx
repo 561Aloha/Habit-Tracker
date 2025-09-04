@@ -1,4 +1,3 @@
-// src/components/WeekCalendar.jsx
 import React, { useMemo, useState } from 'react';
 import {
   startOfWeek,

@@ -261,7 +261,7 @@
   align-items: center;
   animation: slideIn 0.25s ease;
 }
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .menu-items {
     display: none;
   }

@@ -1,6 +1,4 @@
-/* ===================
-   Streaks Tracker
-   =================== */
+
 .streaks-tracker-container {
   display: flex;
   justify-content: space-around;
@@ -65,9 +63,7 @@
   background-color: rgba(34, 34, 34, 0.573);
 }
 
-/* ===================
-   Chart Section
-   =================== */
+
 .chart {
   display: flex;
   flex-direction: column;
@@ -86,9 +82,7 @@
   height: 15px;
 }
 
-/* ===================
-   Responsive Styles
-   =================== */
+
 @media (max-width: 1200px) {
   .btn-bar {
     width: 90%;
@@ -138,10 +132,7 @@
 }
 
 @media (max-width: 700px) {
-  .chart-container {
-    padding: 20px;
-    width: 90%;
-  }
+
 
   .new {
     width: 100%;
@@ -152,5 +143,45 @@
     width: 650px;
     margin-top: 20px;
   }
+
+
+  .streaks-tracker {
+    width: 100%; 
+    max-width: none; 
+    margin: 5px 0;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+  .streaks-tracker-container {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+    
+  .chart {
+    width: 100%; 
+    margin-top: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+
+
 }
 
+
+.chart-nav button{
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(53, 53, 53);
+  border-radius: 10px;
+  padding: 10px 15px;
+  cursor: pointer;
+  gap: 5px;
+  font-size: 0.9rem;
+
+  margin-left: 5px;
+  margin-right: 5px;
+  color: black;
+}

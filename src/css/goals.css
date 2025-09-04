@@ -14,7 +14,6 @@
 .goal-header {
   font-size: 24px;
   margin: 0 auto;
-  width: 80%;
   padding-top: 48px;
   margin-top: 24px;
 }
@@ -26,6 +25,7 @@
   align-items: stretch;
   width: 90%;
   max-width: 1200px;
+  overflow: hidden;
   box-sizing: border-box;
   color: rgb(0, 0, 0);
   margin: 0 auto;
@@ -68,15 +68,14 @@
   color: black;
   display: flex;
   width: 85%;
-  max-width: 600px;
   padding: 20px;
+    max-width: 500px;
   margin: 0 auto;
   flex-direction: column;
   justify-content: space-between;
   margin-top: 30px;
 }
 
-/* Habit styles */
 .habit {
   display: flex;
   justify-content: space-between;
@@ -108,6 +107,15 @@
   background-color: #ef4444;
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
 }
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  position: relative;
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
 
 .habit span {
   flex-grow: 1;
@@ -122,7 +130,6 @@
   font-size: 1.2rem;
 }
 
-/* Habit buttons */
 .habit button {
   background: none;
   border: none;
@@ -174,7 +181,8 @@ button.remove:disabled {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
+  padding: 4px;
+  margin-left: 26px;
   border-radius: 6px;
   transition: background 0.2s;
   position: relative;
@@ -197,6 +205,31 @@ button.remove:disabled {
   align-items: center;
 }
 
+/* New styles for habit text container and streak */
+.habit-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex: 1;
+}
+
+.habit-name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: medium;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  line-height: 1.2;
+}
+
+.habit-streak {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 6px;
+  font-weight: 600;
+  line-height: 1;
+}
+
 .habit-content button {
   width: 48px;
   height: 48px;
@@ -207,6 +240,7 @@ button.remove:disabled {
   align-items: center;
   justify-content: center;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .habit-row:hover .habit-content {
@@ -217,7 +251,6 @@ button.remove:disabled {
   background-color: #5a47cf;
 }
 
-/* Edit icon */
 .edit-icon {
   opacity: 0;
   pointer-events: none;
@@ -232,15 +265,6 @@ button.remove:disabled {
   pointer-events: auto;
 }
 
-.calendar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  position: relative;
-  margin: 0 auto;
-  padding-bottom: 30px;
-}
 
 .arrow {
   cursor: pointer;
@@ -267,7 +291,7 @@ button.remove:disabled {
 }
 
 .date-text {
-  margin-left: 20px;
+  margin-left: 8px;
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
@@ -276,11 +300,13 @@ button.remove:disabled {
 .habits-header {
   display: flex;
   align-items: center;
+  width: 83%;
   gap: 8px;
 }
 
 .habits-container h2 {
   font-size: 18px;
+  
 }
 
 .chevron-icon {
@@ -355,99 +381,33 @@ button.remove:disabled {
   color: #b91c1c;
 }
 
+.goal-header{
+  text-align: left;
+  width: 84%;
+}
+
 @media (max-width: 1200px) {
-  .habits-container {
-    margin: 0 auto 20px;
-    width: 90%;
-    max-width: 500px;
-    position: relative;
-  }
-  
-  .habits-container h2 {
-    font-size: 25px;
-    margin: 0 auto;
-  }
-  
-  .habit-buttons button {
-    font-size: 15px;
-    width: 175px;
-    height: 40px;
-  }
-  
-  .goals-page {
-    width: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-  
+
   .goals-container {
-    display: flex;
     flex-direction: column;
-    width: 90%;
-    margin: 0 auto;
-    padding: 0;
-  }
-  
-  .right-container {
     width: 100%;
     padding: 0;
     margin: 0 auto;
   }
-}
 
-@media (max-width: 900px) {
-  .goals-container {
-    flex-direction: column;
-  }
-  
-  .habits-container {
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .chart-container {
-    width: 90%;
-  }
-}
 
-@media (max-width: 700px) {
-  .habits-container {
-    position: relative;
-    border: 2px solid seashell;
-    padding: 16px;
-    border-radius: 12px;
-  }
-  
-  .goals-container {
-    position: relative;
-    width: 95%;
-    overflow: hidden;
-  }
-  
-  .chart-container {
-    background-color: rgb(255, 255, 255);
-    margin-top: 20px;
+  .right-container{
+    flex:none;
+    width: 100%;
     padding: 0;
-    width: 95%;
+    margin: 0 auto;
+  }
+  .habits-container {
+    margin:0 auto;
+    padding: 20px;
+    max-width:  auto;
+    margin-bottom: 20px;;
+    width: 85%;
   }
 
-  .habits-header-span {
-    font-size: 18px;
-  }
-  
-  .day-label {
-    padding: 10px;
-  }
-  
-  .selected-d {
-    font-size: 12px;
-  }
-
-  .modal {
-    width: 95vw;
-    max-width: 400px;
-    margin: 20px;
-  }
 }

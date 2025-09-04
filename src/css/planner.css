@@ -20,7 +20,6 @@ tbody td:first-child {
   margin: 0 auto;
   margin-top: 0;
   width: 85%;
-  max-width: 700px;
   height: 30%;
   padding: 20px;
   background-color: #ffffff;
@@ -28,6 +27,7 @@ tbody td:first-child {
   box-shadow: 0 2px 24px 0 rgba(30, 34, 90, 0.07);
   overflow-x: auto;
   -ms-overflow-style: none;     
+    max-width: 500px;
   scrollbar-width: none;  
 }
 
@@ -144,82 +144,6 @@ tbody td:first-child {
   transform: rotate(180deg);
 }
 
-@media (max-width: 900px){
-  .goals-container {
-    flex-direction: column;
-  }
-  .habits-container{
-    position:relative;
-    margin-bottom: 20px;
-  }
-  .planner-modern {
-    width: 90%;
-  }
-}
-
-@media (max-width: 700px) {
-  .plannertable th.day-label[data-full="Monday"]::before { content: "MON"; }
-  .plannertable th.day-label[data-full="Tuesday"]::before { content: "TUE"; }
-  .plannertable th.day-label[data-full="Wednesday"]::before { content: "WED"; }
-  .plannertable th.day-label[data-full="Thursday"]::before { content: "THU"; }
-  .plannertable th.day-label[data-full="Friday"]::before { content: "FRI"; }
-  .plannertable th.day-label[data-full="Saturday"]::before { content: "SAT"; }
-  .plannertable th.day-label[data-full="Sunday"]::before { content: "SUN"; }
-
-  .day-label {
-    font-size: 12px;
-  }
-
-  .planner-modern th {
-    font-size: 1rem;
-  }
-  
-  .planner-modern th:first-child {  
-    text-align: left;
-  }
-
-  .planner-modern th,
-  .planner-modern td {
-    padding: 4px 6px;
-  }
-
-  .planner-modern tbody tr {
-    height: 40px;
-  }
-
-  tbody td:first-child {
-    width: 175px;
-    text-align: left;
-    padding-left: 0px;
-    font-weight: normal;
-  }
-
-  .habit_name td:first-child {
-    font-size: 0.5rem;
-    text-align: left;
-    width: auto;
-    background-color: white;
-    flex-grow: 1;
-    white-space: nowrap;
-  }
-
-  .planner-modern {
-    width: 90%;
-  }
-
-  .habit-cell {
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
-    font-size: 1.0rem;
-  }
-
-  .planner-modern tr td:first-child {
-  font-weight: 300;
-  font-size: 14px;
-}
-}
-
 .planner-modern td {
   padding: 0;
   text-align: center;
@@ -294,9 +218,74 @@ tbody td:first-child {
   vertical-align: middle;
 }
 
-@media (max-width: 700px) {
-  .planner-modern{
+
+@media (max-width: 800px) {
+  .plannertable th.day-label[data-full="Monday"]::before { content: "MON"; }
+  .plannertable th.day-label[data-full="Tuesday"]::before { content: "TUE"; }
+  .plannertable th.day-label[data-full="Wednesday"]::before { content: "WED"; }
+  .plannertable th.day-label[data-full="Thursday"]::before { content: "THU"; }
+  .plannertable th.day-label[data-full="Friday"]::before { content: "FRI"; }
+  .plannertable th.day-label[data-full="Saturday"]::before { content: "SAT"; }
+  .plannertable th.day-label[data-full="Sunday"]::before { content: "SUN"; }
+
+  .day-label {
+    font-size: 12px;
+  }
+
+  .planner-modern th {
+    font-size: 1rem;
+  }
+  
+  .planner-modern th:first-child {  
+    text-align: left;
+  }
+
+  .planner-modern th,
+  .planner-modern td {
+    padding: 4px 6px;
+  }
+
+  .planner-modern tbody tr {
+    height: 40px;
+  }
+
+  tbody td:first-child {
+    width: 175px;
+    text-align: left;
+    padding-left: 0px;
+    font-weight: normal;
+  }
+
+  .habit_name td:first-child {
+    font-size: 0.5rem;
+    text-align: left;
+    width: auto;
+    background-color: white;
+    flex-grow: 1;
+    white-space: nowrap;
+  }
+
+  .planner-modern {
     width: 85%;
+  }
+
+  .habit-cell {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 1.0rem;
+  }
+
+  .planner-modern tr td:first-child {
+  font-weight: 300;
+  font-size: 14px;
+
+
+  .planner-modern{
+    padding:20px;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 90%;
   }
   .planner-modern table {
     width: 90%;
@@ -352,3 +341,4 @@ tbody td:first-child {
     padding: 0;
   }
 }
+} 
