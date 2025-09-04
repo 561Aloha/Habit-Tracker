@@ -8,12 +8,11 @@ import logoImg from "/src/assets/icon.png";
 import closeIcon from "/src/assets/close.svg";
 import shuffleIcon from "/src/assets/shuffle.svg";
 import trashIcon from "/src/assets/trash.svg";
-
 import './onboarding.css';
 
 const CATEGORIES = {
   'health': { label: 'Health', imgSrc: './src/assets/health.png' },
-  'nutrition': { label: 'Nutrition', imgSrc: './src/assets/nutrition.png' },
+  'nutrition': { label: 'Nutrition', imgSrc: '/src/assets/nutrition.png' },
   'artistic': { label: 'Artistic', imgSrc: './src/assets/artist.png' },
   'academics': { label: 'Academics', imgSrc: './src/assets/academics.png' },
   'skills': { label: 'Skills Development', imgSrc: './src/assets/skiils.png' },
@@ -390,8 +389,6 @@ export default function ZenoOnboarding({ onComplete }) {
                       <div className="goal-content">
                         <span className="goal-label">{goal.label}</span>
                         <div className="goal-category">
-                          <img src={category.imgSrc} alt={category.label} className="category-icon" />
-                          <span className="category-label">{category.label}</span>
                         </div>
                       </div>
                     </button>
@@ -444,7 +441,9 @@ export default function ZenoOnboarding({ onComplete }) {
                           <img src={category.imgSrc} alt={category.label} className="category-icon-small" />
                           <span className="category-name">{category.label}</span>
                         </div>
-                        <div className="habit-actions">
+
+                      </div>
+                                 <div className="habit-actions">
                           <button 
                             type="h-button"
                             className="action-btn shuffle-btn"
@@ -462,8 +461,6 @@ export default function ZenoOnboarding({ onComplete }) {
                             <img src={trashIcon} alt="Delete" />
                           </button>
                         </div>
-                      </div>
-
                       <input
                         type="text"
                         className="habit-name-input"
@@ -471,7 +468,10 @@ export default function ZenoOnboarding({ onComplete }) {
                         onChange={(e) => updateHabitName(index, e.target.value)}
                         placeholder="Habit name"
                       />
-                      
+             
+           
+                        
+                
                       <div className="frequency-selector">
                         <label>Frequency:</label>
                         <div className="frequency-options">

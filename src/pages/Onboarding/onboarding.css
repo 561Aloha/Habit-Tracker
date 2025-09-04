@@ -309,7 +309,7 @@
 }
 
 .habit-name-input {
-  width: 50%;
+  width: 60%;
   padding: 12px;
   font-size: 16px;
   font-weight: 500;
@@ -481,8 +481,7 @@
 .habit-actions{
   display: flex;
   justify-content: flex-end;
-  width: 40%;
-  background-color: tomato;
+  width: 100%;
   gap: 10px;
 }
 /* Add these styles to your existing onboarding.css file */
@@ -568,8 +567,8 @@
 }
 
 .category-icon {
-  width: 24px;
-  height: 24px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
 }
 
@@ -602,7 +601,7 @@
   }
 
   .action-btn img {
-    width: 14px;
-    height: 14px;
+    width: 24px;
+    height: 24px;
   }
 }
