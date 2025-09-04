@@ -18,13 +18,12 @@
   margin-top: 24px;
 }
 
-/* Container layouts */
 .goals-container {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   width: 90%;
-  max-width: 1200px;
+  max-width: 1140px;
   overflow: hidden;
   box-sizing: border-box;
   color: rgb(0, 0, 0);
@@ -69,7 +68,7 @@
   display: flex;
   width: 85%;
   padding: 20px;
-    max-width: 500px;
+  max-width: 500px;
   margin: 0 auto;
   flex-direction: column;
   justify-content: space-between;
@@ -393,8 +392,10 @@ button.remove:disabled {
     width: 100%;
     padding: 0;
     margin: 0 auto;
-  }
 
+    height: auto;
+    min-height: auto;
+  }
 
   .right-container{
     flex:none;
@@ -406,8 +407,16 @@ button.remove:disabled {
     margin:0 auto;
     padding: 20px;
     max-width:  auto;
-    margin-bottom: 20px;;
+    margin-bottom: 20px;
     width: 85%;
+    height: auto; 
+    min-height: 400px;
+    max-height: none;
   }
-
+  .list {
+    height: auto;
+    min-height: 300px;
+    max-height: 60vh; 
+  }
 }
+
