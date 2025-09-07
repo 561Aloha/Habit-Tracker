@@ -2,13 +2,12 @@
 import '../../css/goals.css'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { supabase } from '../../client' // Adjust path as needed
+import { supabase } from '../../client' 
 import MyChart from '../../components/MyChart.jsx'
 import Planner from '../../components/planner.jsx'
 import { format } from 'date-fns'
 import arrow from '../../assets/arrow.svg'
 import './walkthrough.css'
-
 
 export async function markOnboardingComplete() {
   const { data, error: getErr } = await supabase.auth.getUser();

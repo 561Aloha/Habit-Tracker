@@ -16,7 +16,7 @@
   margin: 0 auto;
   max-width: 700px;
   width: 75%;
-  padding-top: 100px;
+  padding-top: 90px;
   border-radius: 20px;
 }
 
@@ -25,7 +25,8 @@
   width: 100%;
   margin-bottom: 16px;
   line-height: 1.2;
-  margin-top: 100px;
+  margin-top: 32px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .cta-buttons {

@@ -1,9 +1,6 @@
-
 import '../css/welcome.css';
-import myImage from '../assets/wellness.jpeg';
 import iconImg from '../assets/We.png'
 import HowItWorks from '../components/HowItWorks';
-import Footer from './../components/Footer';
 import { Link } from 'react-router-dom';
 import ScrollRevealBackdrop from '../components/ScrollReveal';
 
@@ -34,7 +31,6 @@ const Welcome = () => {
 
         </div>
         <HowItWorks/>
-
     </div>
     );
 };

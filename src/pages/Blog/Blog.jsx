@@ -3,7 +3,6 @@ import BlogCard from './BlogCard';
 import './blog.css';
 import { supabase } from './../../client';
 import { Link } from 'react-router-dom';
-import Footer from '../../components/Footer';
 const Blog = () => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -77,7 +76,6 @@ const Blog = () => {
         ) : (
           <h2>No Blog posts found 😞</h2>
         )}</div></div>
-        <Footer/>
     </div>
   );
 };

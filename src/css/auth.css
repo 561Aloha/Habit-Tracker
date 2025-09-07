@@ -1,6 +1,3 @@
-/* ===== AUTHENTICATION STYLES ===== */
-
-/* Base overlay and backdrop */
 .auth-overlay,
 .zeno-modal-backdrop {
   position: fixed;
@@ -25,9 +22,6 @@
   cursor: pointer;
 }
 
-/* ===== MODAL CONTAINERS ===== */
-
-/* Standard auth card */
 .auth-card {
   position: relative;
   z-index: 1;
@@ -42,7 +36,6 @@
   outline: none;
 }
 
-/* Zeno modal (SignInModal) */
 .zeno-modal {
   position: relative;
   z-index: 1;
@@ -57,8 +50,6 @@
   outline: none;
   cursor: default;
 }
-
-/* ===== HEADERS AND TEXT ===== */
 
 .auth-card h3 { 
   margin: 0 0 8px; 
@@ -90,8 +81,6 @@
   line-height: 1.4;
 }
 
-/* ===== FORM LAYOUTS ===== */
-
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -99,8 +88,6 @@
   width: 100%;
   align-items: center;
 }
-
-/* ===== INPUT STYLES ===== */
 
 .auth-input,
 .zeno-input {
@@ -132,9 +119,6 @@
   box-shadow: 0 0 0 3px rgba(90,71,207,0.15);  
 }
 
-/* ===== BUTTON STYLES ===== */
-
-/* Standard auth buttons */
 .auth-btn {
   flex: 1;
   padding: 10px 16px;
@@ -163,7 +147,6 @@
   background: #4338ca;
 }
 
-/* Zeno buttons */
 .zeno-btn.primary {
   width: 100%;
   max-width: 350px;
@@ -184,7 +167,6 @@
   border-color: #4338ca;
 }
 
-/* Navigation auth button */
 .auth-btn {
   padding: 8px 16px;
   font-size: 0.9rem;
@@ -193,7 +175,6 @@
   cursor: pointer;
 }
 
-/* Sign out button */
 .signout-btn {
   background: none;
   color: #000;
@@ -207,9 +188,6 @@
 .signout-btn:hover {
   background-color: #f0f0f0;
 }
-
-/* ===== OAUTH BUTTONS ===== */
-
 .auth-oauth,
 .zeno-btn.white {
   display: flex;
@@ -226,6 +204,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  margin: 0 auto;
   margin-bottom: 4px;
 }
 
@@ -246,8 +225,6 @@
   height: 20px;
 }
 
-/* ===== BUTTON ROWS ===== */
-
 .auth-row { 
   display: flex; 
   justify-content: center; 
@@ -258,16 +235,12 @@
   margin-top: 8px;
 }
 
-/* ===== DIVIDERS ===== */
-
 .auth-divider,
 .zeno-divider { 
   margin: 16px 0 12px; 
   color: #6b7280; 
   font-size: 12px; 
 }
-
-/* ===== ERROR MESSAGES ===== */
 
 .zeno-error {
   background: #fee2e2;
@@ -280,7 +253,6 @@
   border: 1px solid #fca5a5;
 }
 
-/* ===== LINKS ===== */
 
 .zeno-login-link {
   color: #5a47cf;
@@ -296,8 +268,6 @@
   color: #4338ca;
 }
 
-/* ===== NAVIGATION AUTH COMPONENTS ===== */
-
 .auth-actions {
   margin-left: auto;
   display: flex;
@@ -308,8 +278,6 @@
   display: flex;
   align-items: flex-start;
 }
-
-/* ===== USER PROFILE ===== */
 
 .profile-wrapper {
   margin-right: 48px;
@@ -359,8 +327,6 @@
   background-color: #f0f0f0;
 }
 
-/* ===== USER INFO ===== */
-
 .user-info {
   display: flex;
   flex-direction: column;
@@ -381,10 +347,6 @@
   font-weight: 500;
   color: #1a237e;
 }
-
-/* ===== SPECIAL MODAL VARIANTS ===== */
-
-/* Exit confirmation modal */
 .auth-card.exit-confirm {
   max-width: 400px;
 }
@@ -402,8 +364,6 @@
 .exit-confirm .auth-row {
   margin-top: 0;
 }
-
-/* ===== MOBILE RESPONSIVENESS ===== */
 
 @media (max-width: 768px) {
   .auth-actions {
@@ -438,4 +398,34 @@
   .auth-input {
     max-width: 100%;
   }
+}
+
+.auth-btn,
+.signout-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 48px;
+}
+
+.signout-btn {
+  background: none;
+  color: #000;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.signout-btn:hover {
+  background-color: #f0f0f0;
+}
+.hidden {
+  display: none;
+}
+
+.signin-container {
+  display: flex;
+  align-items: flex-start;
 }

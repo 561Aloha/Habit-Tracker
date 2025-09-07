@@ -9,7 +9,6 @@ function daysInMonth(year, monthIndex) {
   return new Date(year, monthIndex + 1, 0).getDate();
 }
 
-// Function to get CSS class based on completion percentage
 function getCompletionClass(percentage) {
   if (percentage === undefined || percentage === null) return "empty";
   if (percentage === 0) return "empty";
