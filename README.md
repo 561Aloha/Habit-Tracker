@@ -4,13 +4,14 @@ This is a full-featured habit tracker application built with React. It allows us
 Additionally, the app has a blog component for users to share their thoughts, progress, and tips. 
 Users can create 
 
-Visit the app at HabitTrack.netlify.app
+Interact with the app at Habittrack.netlify.app
 
 View a walkthrough here: https://www.loom.com/share/c8c0efafb54a45c5ba03567767df6c1d?sid=a3c7837f-cc70-
 
-[![Watch the video](https://cdn.loom.com/sessions/thumbnails/c8c0efafb54a45c5ba03567767df6c1d-881a84adb50d9880-full-play.gif)](https://www.loom.com/share/c8c0efafb54a45c5ba03567767df6c1d)
 
 ## Features
+- **Habit Tracking**: Add habits, view them on a weekly calendar, and check off tasks as you complete them.
+- **User Management ** User 
 - **Habit Tracking**: Add habits, view them on a weekly calendar, and check off tasks as you complete them.
 - **Onboarding Processing**: After users sign in through Google or Email/Password creation, they are prompted into a onboarding process and product tour walkthrough
 - **Blog Component**: Users can create, edit, sort, and filter posts. Perfect for documenting your habit progress or sharing insights.
@@ -20,6 +21,9 @@ View a walkthrough here: https://www.loom.com/share/c8c0efafb54a45c5ba03567767df
 
 ## Tech Stack
 - **Frontend**: React, HTML, CSS, JavaScript
+- **Styling**: CSS Modules (10 stylesheets)
+- **Data Visualization**React Charts
+- **Architecture** 20+ modular React components
 - **Backend**: SQL, Supabase
 - **Charts**: react-charts, mui-calendar
 - **Calendar Component**: Custom weekly calendar view
