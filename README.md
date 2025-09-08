@@ -4,7 +4,11 @@ This is a full-featured habit tracker application built with React. It allows us
 Additionally, the app has a blog component for users to share their thoughts, progress, and tips. 
 Users can create 
 
+Visit the app at HabitTrack.netlify.app
 
+View a walkthrough here: https://www.loom.com/share/c8c0efafb54a45c5ba03567767df6c1d?sid=a3c7837f-cc70-
+
+[![Watch the video](https://cdn.loom.com/sessions/thumbnails/c8c0efafb54a45c5ba03567767df6c1d-881a84adb50d9880-full-play.gif)](https://www.loom.com/share/c8c0efafb54a45c5ba03567767df6c1d)
 
 ## Features
 - **Habit Tracking**: Add habits, view them on a weekly calendar, and check off tasks as you complete them.
